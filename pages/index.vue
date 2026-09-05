@@ -9,22 +9,31 @@
     <section class="section" id="kategorite">
       <h2>Kategoritë</h2>
       <div class="categories">
-        <NuxtLink to="/collection" class="category-card">
-          <span>Koleksione</span>
-        </NuxtLink>
-        <NuxtLink to="/courses" class="category-card">
-          <span>Kurse</span>
-        </NuxtLink>
-        <NuxtLink to="/stylists" class="category-card">
-          <span>Stiliste</span>
-        </NuxtLink>
-        <NuxtLink to="/news" class="category-card">
-          <span>Njoftime</span>
+        <NuxtLink
+          v-for="category in categories"
+          :key="category.slug"
+          :to="`/collection/${category.slug}`"
+          class="category-card"
+        >
+          <img
+            :src="getCategoryCover(category.slug)"
+            :alt="category.title"
+            class="category-image"
+          />
+          <span>{{ category.title }}</span>
         </NuxtLink>
       </div>
     </section>
   </div>
 </template>
+
+<script setup>
+import { categories, getProductsByCategory } from '~/data/collection'
+
+function getCategoryCover(slug) {
+  return getProductsByCategory(slug)[0]?.image || '/images/dress-1.jpg'
+}
+</script>
 
 <style scoped>
 .hero {
@@ -68,9 +77,10 @@
 }
 .category-card {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 120px;
+  flex-direction: column;
+  align-items: stretch;
+  overflow: hidden;
+  height: auto;
   background: var(--white);
   border: 1px solid var(--blush);
   text-decoration: none;
@@ -80,6 +90,21 @@
   font-weight: 400;
   transition: all 0.2s;
   border-radius: 2px;
+}
+
+.category-image {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+}
+
+.category-card span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 72px;
+  padding: 0 1rem;
 }
 .category-card:hover {
   background: var(--deep);
