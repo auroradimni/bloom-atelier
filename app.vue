@@ -1,6 +1,8 @@
 <template>
   <div>
+    <AppPromoBar />
     <AppHeader />
+    <CategoryScroll />
     <main>
       <NuxtPage />
     </main>

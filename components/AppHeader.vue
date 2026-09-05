@@ -1,35 +1,36 @@
 <template>
   <header class="site-header">
-    <nav class="nav-left">
-      <NuxtLink to="/collection" @click="closeMenu">Koleksioni</NuxtLink>
-      <NuxtLink to="/courses" @click="closeMenu">Kurse</NuxtLink>
+    <div class="header-left">
+      <button
+        class="menu-toggle"
+        aria-label="Hap menunë"
+        :aria-expanded="menuOpen"
+        @click="toggleMenu"
+      >
+        <span></span>
+      </button>
+      <nav class="desktop-nav">
+        <NuxtLink to="/collection">Koleksioni</NuxtLink>
+        <NuxtLink to="/courses">Kurse</NuxtLink>
+      </nav>
+    </div>
+
+    <NuxtLink to="/" class="brand" @click="closeMenu">Bloom Atelier</NuxtLink>
+
+    <nav class="header-right">
+      <NuxtLink to="/stylists">Stiliste</NuxtLink>
+      <NuxtLink to="/contact" class="header-cta">Porosit</NuxtLink>
     </nav>
-
-    <NuxtLink to="/" class="brand" @click="closeMenu">
-      Bloom <span>Atelier</span>
-    </NuxtLink>
-
-    <nav class="nav-right">
-      <NuxtLink to="/stylists" @click="closeMenu">Stiliste</NuxtLink>
-      <NuxtLink to="/contact" @click="closeMenu">Kontakt</NuxtLink>
-    </nav>
-
-    <button
-      class="menu-toggle"
-      aria-label="Hap menunë"
-      :aria-expanded="menuOpen"
-      @click="toggleMenu"
-    >
-      <span></span>
-    </button>
 
     <div class="menu-overlay" :class="{ open: menuOpen }" @click="closeMenu"></div>
 
     <nav class="mobile-nav" :class="{ open: menuOpen }">
       <NuxtLink to="/collection" @click="closeMenu">Koleksioni</NuxtLink>
+      <NuxtLink to="/collection/dress" @click="closeMenu">Dress</NuxtLink>
+      <NuxtLink to="/collection/skirt" @click="closeMenu">Skirt</NuxtLink>
+      <NuxtLink to="/collection/coats" @click="closeMenu">Coats</NuxtLink>
       <NuxtLink to="/courses" @click="closeMenu">Kurse</NuxtLink>
       <NuxtLink to="/stylists" @click="closeMenu">Stiliste</NuxtLink>
-      <NuxtLink to="/news" @click="closeMenu">Njoftime</NuxtLink>
       <NuxtLink to="/contact" @click="closeMenu">Kontakt</NuxtLink>
     </nav>
   </header>
@@ -54,69 +55,77 @@ function closeMenu() {
   align-items: center;
 }
 
+.header-left,
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.header-left {
+  justify-self: start;
+}
+
+.header-right {
+  justify-self: end;
+}
+
 .brand {
-  font-family: var(--font-display);
-  font-size: 1.5rem;
-  font-weight: 400;
-  letter-spacing: 0.06em;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
   text-decoration: none;
   color: var(--ink);
   text-align: center;
 }
 
-.brand span {
-  font-style: italic;
-  font-weight: 300;
-}
-
-.nav-left,
-.nav-right,
-.mobile-nav {
+.desktop-nav,
+.header-right {
   display: flex;
-  gap: 2rem;
 }
 
-.nav-left {
-  justify-self: start;
-}
-
-.nav-right {
-  justify-self: end;
-}
-
-.nav-left :deep(a),
-.nav-right :deep(a),
-.mobile-nav :deep(a) {
+.desktop-nav :deep(a),
+.header-right :deep(a) {
   text-decoration: none;
-  font-size: 0.68rem;
+  font-size: 0.62rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--stone);
   transition: color 0.3s var(--ease);
 }
 
-.nav-left :deep(a:hover),
-.nav-right :deep(a:hover),
-.mobile-nav :deep(a:hover),
-.nav-left :deep(a.router-link-active),
-.nav-right :deep(a.router-link-active),
-.mobile-nav :deep(a.router-link-active) {
+.desktop-nav :deep(a:hover),
+.header-right :deep(a:hover),
+.desktop-nav :deep(a.router-link-active),
+.header-right :deep(a.router-link-active) {
   color: var(--ink);
+}
+
+.header-cta {
+  color: var(--ink) !important;
+}
+
+.menu-toggle {
+  display: none;
 }
 
 .mobile-nav {
   display: none;
 }
 
-.menu-toggle {
-  display: none;
-  justify-self: end;
-  grid-column: 3;
+.mobile-nav :deep(a) {
+  text-decoration: none;
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--stone);
 }
 
 @media (max-width: 900px) {
-  .nav-left,
-  .nav-right {
+  .desktop-nav,
+  .header-right {
     display: none;
   }
 
@@ -129,11 +138,11 @@ function closeMenu() {
     display: flex;
     flex-direction: column;
     position: fixed;
-    top: 0;
+    top: var(--promo-h);
     right: 0;
     width: min(280px, 85vw);
-    height: 100vh;
-    padding: calc(var(--header-h) + 1.5rem) 2rem;
+    height: calc(100vh - var(--promo-h));
+    padding: calc(var(--header-h) + 1rem) 2rem 2rem;
     background: var(--bg);
     border-left: 1px solid var(--line);
     z-index: 95;

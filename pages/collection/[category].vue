@@ -47,7 +47,7 @@ useHead(() => ({
 
 <style scoped>
 .category-page {
-  padding: calc(var(--header-h) + 2.5rem) 0 4rem;
+  padding: calc(var(--nav-stack) + 1.5rem) 0 4rem;
 }
 
 .back {

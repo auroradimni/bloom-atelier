@@ -13,10 +13,14 @@
   --line: rgba(20, 18, 16, 0.08);
   --accent: #b07a66;
   --accent-soft: #ead9cf;
+  --wine: #4a1f24;
   --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-script: 'Pinyon Script', 'Cormorant Garamond', cursive;
   --font-body: 'Outfit', system-ui, sans-serif;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
-  --header-h: 72px;
+  --promo-h: 32px;
+  --header-h: 64px;
+  --nav-stack: calc(var(--promo-h) + var(--header-h) + 52px);
 }
 
 html {
@@ -200,12 +204,13 @@ main {
 
 /* Header */
 .site-header {
-  position: fixed;
+  position: sticky;
+  top: var(--promo-h);
   inset: 0 0 auto;
   z-index: 100;
   height: var(--header-h);
   padding: 0 clamp(1.25rem, 4vw, 3rem);
-  background: rgba(247, 244, 239, 0.85);
+  background: rgba(247, 244, 239, 0.92);
   backdrop-filter: blur(18px);
   border-bottom: 1px solid var(--line);
 }
