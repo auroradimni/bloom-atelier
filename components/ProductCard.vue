@@ -1,7 +1,10 @@
 <template>
   <article
     class="product-card"
-    :class="{ compact, 'product-card--rail': layout === 'rail' }"
+    :class="{
+      compact,
+      'product-card--featured': layout === 'featured'
+    }"
   >
     <div class="product-media">
       <NuxtLink v-if="to" :to="to" class="product-image-link" :aria-label="`View ${product.name}`">
@@ -233,48 +236,28 @@ function toggleWish() {
   font-size: 0.88rem;
 }
 
-.product-card--rail {
-  flex: 0 0 168px;
-  width: 168px;
+.product-card--featured {
+  width: 100%;
 }
 
-.product-card--rail .product-media {
-  aspect-ratio: 3 / 4;
-  height: auto;
-  margin-bottom: 0.65rem;
+.product-card--featured .product-media {
+  aspect-ratio: 2 / 1;
+  max-height: min(420px, 52vh);
+  margin-bottom: 1rem;
 }
 
-.product-card--rail .product-meta {
-  min-height: 4.75rem;
+.product-card--featured .product-meta h3 {
+  font-size: clamp(1.35rem, 3vw, 2rem);
 }
 
-.product-card--rail .product-meta h3 {
-  font-size: 0.82rem;
-  line-height: 1.35;
-  margin-bottom: 0.3rem;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  min-height: 2.2em;
+.product-card--featured .price {
+  font-size: 0.95rem;
 }
 
-.product-card--rail .price {
-  font-size: 0.72rem;
-  margin-bottom: 0.4rem;
-}
-
-.product-card--rail .swatches span {
-  width: 11px;
-  height: 11px;
-  min-width: 11px;
-  min-height: 11px;
-}
-
-@media (max-width: 640px) {
-  .product-card--rail {
-    flex: 0 0 148px;
-    width: 148px;
+@media (max-width: 720px) {
+  .product-card--featured .product-media {
+    aspect-ratio: 4 / 3;
+    max-height: none;
   }
 }
 
