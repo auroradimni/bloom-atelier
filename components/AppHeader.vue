@@ -1,14 +1,16 @@
 <template>
   <header class="site-nav">
     <div class="site-nav-top page-shell">
-      <button
-        class="menu-toggle"
-        aria-label="Open menu"
-        :aria-expanded="menuOpen"
-        @click="toggleMenu"
-      >
-        <span></span>
-      </button>
+      <div class="nav-left">
+        <button
+          class="menu-toggle"
+          aria-label="Open menu"
+          :aria-expanded="menuOpen"
+          @click="toggleMenu"
+        >
+          <span></span>
+        </button>
+      </div>
 
       <NuxtLink to="/" class="brand" @click="closeMenu">Bloom Atelier</NuxtLink>
 
@@ -144,13 +146,23 @@ function onSearch() {
 }
 
 .site-nav-top {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  position: relative;
+  display: flex;
   align-items: center;
+  justify-content: space-between;
   min-height: var(--header-h);
 }
 
+.nav-left {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
 .brand {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   font-family: var(--font-body);
   font-size: clamp(0.72rem, 2vw, 0.88rem);
   font-weight: 600;
@@ -159,16 +171,19 @@ function onSearch() {
   text-decoration: none;
   color: var(--ink);
   text-align: center;
+  white-space: nowrap;
+  pointer-events: auto;
 }
 
 .menu-toggle {
-  justify-self: start;
+  flex-shrink: 0;
 }
 
 .header-actions {
-  justify-self: end;
+  flex: 1;
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   gap: 0.15rem;
 }
 
