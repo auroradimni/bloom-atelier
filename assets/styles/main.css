@@ -156,6 +156,48 @@ main {
   }
 }
 
+/* Scroll reveal */
+.scroll-reveal {
+  opacity: 0;
+  will-change: opacity, transform;
+  transition:
+    opacity 0.85s var(--ease),
+    transform 0.85s var(--ease);
+}
+
+.scroll-reveal--up {
+  transform: translateY(36px);
+}
+
+.scroll-reveal--down {
+  transform: translateY(-24px);
+}
+
+.scroll-reveal--left {
+  transform: translateX(-28px);
+}
+
+.scroll-reveal--right {
+  transform: translateX(28px);
+}
+
+.scroll-reveal--scale {
+  transform: scale(0.94);
+}
+
+.scroll-reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 /* Header */
 .site-header {
   position: fixed;

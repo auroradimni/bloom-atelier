@@ -1,25 +1,35 @@
 <template>
   <div class="home">
     <section class="hero">
-      <img src="/images/dress-1.jpg" alt="" class="hero-bg" />
+      <img
+        ref="heroBg"
+        src="/images/dress-1.jpg"
+        alt=""
+        class="hero-bg"
+      />
       <div class="hero-content page-shell">
-        <p class="eyebrow">Pranverë 2025</p>
-        <h1>Stil modern<br />për çdo ditë</h1>
-        <p class="hero-lead">Pjesë të përjetshme, të dizajnuara me kujdes në Tiranë.</p>
-        <NuxtLink to="/collection" class="btn-solid">Shiko Koleksionin</NuxtLink>
+        <p class="eyebrow hero-enter hero-enter-1">Pranverë 2025</p>
+        <h1 class="hero-enter hero-enter-2">Stil modern<br />për çdo ditë</h1>
+        <p class="hero-enter hero-enter-3 hero-lead">
+          Pjesë të përjetshme, të dizajnuara me kujdes në Tiranë.
+        </p>
+        <NuxtLink to="/collection" class="btn-solid hero-enter hero-enter-4">
+          Shiko Koleksionin
+        </NuxtLink>
       </div>
     </section>
 
-    <section class="section-block page-shell">
-      <div class="section-top">
+    <section v-scroll-reveal class="section-block page-shell">
+      <div v-scroll-reveal="{ delay: 80 }" class="section-top">
         <h2>Kategoritë</h2>
         <NuxtLink to="/collection" class="text-link">Shiko të gjitha</NuxtLink>
       </div>
 
       <div class="category-grid">
         <NuxtLink
-          v-for="category in categories"
+          v-for="(category, index) in categories"
           :key="category.slug"
+          v-scroll-reveal="{ delay: index * 120 }"
           :to="`/collection/${category.slug}`"
           class="category-tile"
         >
@@ -29,15 +39,16 @@
       </div>
     </section>
 
-    <section class="section-block page-shell">
-      <div class="section-top">
+    <section v-scroll-reveal class="section-block page-shell">
+      <div v-scroll-reveal="{ delay: 80 }" class="section-top">
         <h2>Të rejat</h2>
       </div>
 
       <div class="product-row">
         <NuxtLink
-          v-for="item in products"
+          v-for="(item, index) in products"
           :key="item.id"
+          v-scroll-reveal="{ delay: index * 90, variant: 'scale' }"
           :to="`/collection/${item.category}`"
           class="product-card"
         >
@@ -54,9 +65,33 @@ import { categories, getProductsByCategory, products } from '~/data/collection'
 
 useHead({ title: 'Bloom Atelier' })
 
+const heroBg = ref(null)
+let onScroll = null
+
 function getCategoryCover(slug) {
   return getProductsByCategory(slug)[0]?.image || '/images/dress-1.jpg'
 }
+
+onMounted(() => {
+  const bg = heroBg.value
+  if (!bg || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    return
+  }
+
+  onScroll = () => {
+    const offset = window.scrollY * 0.28
+    bg.style.transform = `translate3d(0, ${offset}px, 0) scale(1.08)`
+  }
+
+  onScroll()
+  window.addEventListener('scroll', onScroll, { passive: true })
+})
+
+onUnmounted(() => {
+  if (onScroll) {
+    window.removeEventListener('scroll', onScroll)
+  }
+})
 </script>
 
 <style scoped>
@@ -68,15 +103,17 @@ function getCategoryCover(slug) {
   padding-bottom: clamp(3rem, 8vw, 5rem);
   margin-top: calc(var(--header-h) * -1);
   padding-top: var(--header-h);
+  overflow: hidden;
 }
 
 .hero-bg {
   position: absolute;
   inset: 0;
   width: 100%;
-  height: 100%;
+  height: 110%;
   object-fit: cover;
   object-position: center 20%;
+  will-change: transform;
 }
 
 .hero::after {
@@ -116,6 +153,24 @@ function getCategoryCover(slug) {
   color: rgba(255, 255, 255, 0.75);
 }
 
+.hero-enter {
+  opacity: 0;
+  transform: translateY(28px);
+  animation: heroIn 1s var(--ease) forwards;
+}
+
+.hero-enter-1 { animation-delay: 0.1s; }
+.hero-enter-2 { animation-delay: 0.22s; }
+.hero-enter-3 { animation-delay: 0.34s; }
+.hero-enter-4 { animation-delay: 0.46s; }
+
+@keyframes heroIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .section-block {
   padding: clamp(3rem, 7vw, 5rem) 0;
 }
@@ -151,11 +206,12 @@ function getCategoryCover(slug) {
   aspect-ratio: 3 / 4;
   object-fit: cover;
   margin-bottom: 0.85rem;
-  transition: opacity 0.35s var(--ease);
+  transition: opacity 0.35s var(--ease), transform 0.5s var(--ease);
 }
 
 .category-tile:hover img {
   opacity: 0.88;
+  transform: scale(1.02);
 }
 
 .category-tile span {
@@ -181,6 +237,11 @@ function getCategoryCover(slug) {
   object-fit: cover;
   margin-bottom: 0.75rem;
   background: var(--surface);
+  transition: transform 0.5s var(--ease);
+}
+
+.product-card:hover img {
+  transform: scale(1.02);
 }
 
 .product-card h3 {
@@ -203,6 +264,18 @@ function getCategoryCover(slug) {
 @media (max-width: 540px) {
   .product-row {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-enter {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+
+  .hero-bg {
+    transform: none !important;
   }
 }
 </style>

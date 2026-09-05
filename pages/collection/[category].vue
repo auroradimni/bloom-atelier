@@ -1,21 +1,32 @@
 <template>
   <div class="category-page page-shell">
-    <NuxtLink to="/collection" class="text-link back">Kthehu</NuxtLink>
+    <NuxtLink
+      v-scroll-reveal
+      to="/collection"
+      class="text-link back"
+    >
+      Kthehu
+    </NuxtLink>
 
-    <header v-if="category" class="page-head">
+    <header v-if="category" v-scroll-reveal="{ delay: 80 }" class="page-head">
       <h1>{{ category.title }}</h1>
       <p>{{ category.subtitle }}</p>
     </header>
 
     <div v-if="items.length" class="product-grid">
-      <article v-for="item in items" :key="item.id" class="product-item">
+      <article
+        v-for="(item, index) in items"
+        :key="item.id"
+        v-scroll-reveal="{ delay: index * 100 }"
+        class="product-item"
+      >
         <img :src="item.image" :alt="item.name" />
         <h2>{{ item.name }}</h2>
         <p>{{ item.description }}</p>
       </article>
     </div>
 
-    <p v-else class="empty">Nuk ka produkte në këtë kategori.</p>
+    <p v-else v-scroll-reveal class="empty">Nuk ka produkte në këtë kategori.</p>
   </div>
 </template>
 
@@ -74,6 +85,11 @@ useHead(() => ({
   aspect-ratio: 3 / 4;
   object-fit: cover;
   margin-bottom: 0.85rem;
+  transition: transform 0.5s var(--ease);
+}
+
+.product-item:hover img {
+  transform: scale(1.02);
 }
 
 .product-item h2 {

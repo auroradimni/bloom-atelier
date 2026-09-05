@@ -1,14 +1,15 @@
 <template>
   <div class="collection-page page-shell">
-    <header class="page-head">
+    <header v-scroll-reveal class="page-head">
       <h1>Koleksioni</h1>
       <p>Tre kategori. Linja të pastra. Zero zhurmë.</p>
     </header>
 
     <div class="category-grid">
       <NuxtLink
-        v-for="category in categories"
+        v-for="(category, index) in categories"
         :key="category.slug"
+        v-scroll-reveal="{ delay: index * 120 }"
         :to="`/collection/${category.slug}`"
         class="category-tile"
       >
@@ -72,6 +73,11 @@ function getCategoryCover(slug) {
   aspect-ratio: 4 / 5;
   object-fit: cover;
   margin-bottom: 1rem;
+  transition: transform 0.5s var(--ease);
+}
+
+.category-tile:hover img {
+  transform: scale(1.02);
 }
 
 .category-tile h2 {

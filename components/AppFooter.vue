@@ -1,6 +1,6 @@
 <template>
   <footer class="site-footer">
-    <div class="footer-inner page-shell">
+    <div v-scroll-reveal class="footer-inner page-shell">
       <div class="newsletter">
         <p class="eyebrow">Newsletter</p>
         <h2>Bashkohu me Bloom</h2>
