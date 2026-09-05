@@ -2,7 +2,6 @@
   <article
     class="product-card"
     :class="{ compact, 'product-card--rail': layout === 'rail' }"
-    :style="railStyle"
   >
     <div class="product-media">
       <NuxtLink v-if="to" :to="to" class="product-image-link" :aria-label="`View ${product.name}`">
@@ -63,13 +62,8 @@ const props = defineProps({
   product: { type: Object, required: true },
   to: { type: String, default: '' },
   compact: { type: Boolean, default: false },
-  layout: { type: String, default: 'grid' },
-  railWidth: { type: Number, default: 160 }
+  layout: { type: String, default: 'grid' }
 })
-
-const railStyle = computed(() =>
-  props.layout === 'rail' ? { '--rail-width': `${props.railWidth}px` } : {}
-)
 
 const { toggle, isSaved } = useWishlist()
 
@@ -240,25 +234,34 @@ function toggleWish() {
 }
 
 .product-card--rail {
-  width: var(--rail-width, 160px);
-  flex-shrink: 0;
+  flex: 0 0 168px;
+  width: 168px;
 }
 
 .product-card--rail .product-media {
-  aspect-ratio: unset;
-  height: clamp(188px, 26vh, 228px);
-  width: 100%;
+  aspect-ratio: 3 / 4;
+  height: auto;
+  margin-bottom: 0.65rem;
+}
+
+.product-card--rail .product-meta {
+  min-height: 4.75rem;
 }
 
 .product-card--rail .product-meta h3 {
-  font-size: 0.78rem;
-  line-height: 1.3;
-  margin-bottom: 0.25rem;
+  font-size: 0.82rem;
+  line-height: 1.35;
+  margin-bottom: 0.3rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 2.2em;
 }
 
 .product-card--rail .price {
-  font-size: 0.68rem;
-  margin-bottom: 0.45rem;
+  font-size: 0.72rem;
+  margin-bottom: 0.4rem;
 }
 
 .product-card--rail .swatches span {
@@ -266,6 +269,13 @@ function toggleWish() {
   height: 11px;
   min-width: 11px;
   min-height: 11px;
+}
+
+@media (max-width: 640px) {
+  .product-card--rail {
+    flex: 0 0 148px;
+    width: 148px;
+  }
 }
 
 @media (hover: none) {

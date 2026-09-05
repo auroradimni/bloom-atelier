@@ -44,16 +44,17 @@
       <div class="section-head page-shell">
         <h2>New Arrivals</h2>
       </div>
-      <div class="product-rail page-shell">
-        <ProductCard
-          v-for="(item, index) in newArrivals"
-          :key="item.id"
-          v-scroll-reveal="{ delay: index * 70, variant: 'scale' }"
-          :product="item"
-          :to="`/product/${item.id}`"
-          layout="rail"
-          :rail-width="railWidths[index % railWidths.length]"
-        />
+      <div class="product-rail-shell page-shell">
+        <div class="product-rail">
+          <ProductCard
+            v-for="(item, index) in newArrivals"
+            :key="item.id"
+            v-scroll-reveal="{ delay: index * 70, variant: 'scale' }"
+            :product="item"
+            :to="`/product/${item.id}`"
+            layout="rail"
+          />
+        </div>
       </div>
     </section>
 
@@ -72,16 +73,17 @@
       <div class="section-head">
         <h2>Most Loved</h2>
       </div>
-      <div class="product-rail">
-        <ProductCard
-          v-for="(item, index) in loved"
-          :key="item.id"
-          v-scroll-reveal="{ delay: index * 80 }"
-          :product="item"
-          :to="`/product/${item.id}`"
-          layout="rail"
-          :rail-width="railWidths[index % railWidths.length]"
-        />
+      <div class="product-rail-shell">
+        <div class="product-rail">
+          <ProductCard
+            v-for="(item, index) in loved"
+            :key="item.id"
+            v-scroll-reveal="{ delay: index * 80 }"
+            :product="item"
+            :to="`/product/${item.id}`"
+            layout="rail"
+          />
+        </div>
       </div>
     </section>
   </div>
@@ -94,7 +96,6 @@ useHead({ title: 'Bloom Atelier — Minimalist Fashion' })
 
 const newArrivals = products.filter((item) => item.isNew)
 const loved = [...products].reverse()
-const railWidths = [148, 176, 132, 168, 156, 184, 140, 172]
 
 function getCover(slug) {
   return getProductsByCategory(slug)[0]?.image || '/images/skirt-2.jpg'
@@ -245,15 +246,21 @@ function getCover(slug) {
   text-transform: uppercase;
 }
 
+.product-rail-shell {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  padding: 1rem 1rem 0.85rem;
+}
+
 .product-rail {
   display: flex;
-  align-items: flex-end;
-  gap: 0.75rem;
+  align-items: flex-start;
+  gap: 1rem;
   overflow-x: auto;
   overflow-y: hidden;
   overscroll-behavior-x: contain;
   scroll-snap-type: x mandatory;
-  padding: 0.15rem 0 0.85rem;
+  padding-bottom: 0.25rem;
   scrollbar-width: thin;
 }
 
