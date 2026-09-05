@@ -7,10 +7,14 @@
     }"
   >
     <div class="product-media">
-      <NuxtLink v-if="to" :to="to" class="product-image-link" :aria-label="`View ${product.name}`">
+      <component
+        :is="to ? 'NuxtLink' : 'div'"
+        :to="to || undefined"
+        class="product-image-link"
+        :aria-label="to ? `View ${product.name}` : undefined"
+      >
         <img :src="product.image" :alt="product.name" loading="lazy" />
-      </NuxtLink>
-      <img v-else :src="product.image" :alt="product.name" loading="lazy" />
+      </component>
 
       <span v-if="product.isNew" class="badge">New</span>
 
@@ -92,7 +96,8 @@ function toggleWish() {
   background: var(--surface);
   margin-bottom: 0.75rem;
   width: 100%;
-  aspect-ratio: 3 / 4;
+  height: 0;
+  padding-top: 133.333%;
   flex-shrink: 0;
 }
 
@@ -100,6 +105,8 @@ function toggleWish() {
   position: absolute;
   inset: 0;
   display: block;
+  text-decoration: none;
+  color: inherit;
 }
 
 .product-media img {
@@ -107,8 +114,9 @@ function toggleWish() {
   inset: 0;
   width: 100%;
   height: 100%;
+  max-width: none;
   object-fit: cover;
-  object-position: center top;
+  object-position: center center;
   transition: transform 0.65s var(--ease);
 }
 
@@ -203,10 +211,15 @@ function toggleWish() {
 
 .product-meta h3 {
   font-family: var(--font-display);
-  font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+  font-size: clamp(1rem, 1.8vw, 1.2rem);
   font-weight: 400;
   line-height: 1.35;
   margin-bottom: 0.35rem;
+  min-height: 2.7em;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .price {
@@ -241,6 +254,8 @@ function toggleWish() {
 }
 
 .product-card--featured .product-media {
+  height: auto;
+  padding-top: 0;
   aspect-ratio: 2 / 1;
   max-height: min(420px, 52vh);
   margin-bottom: 1rem;
@@ -258,6 +273,7 @@ function toggleWish() {
   .product-card--featured .product-media {
     aspect-ratio: 4 / 3;
     max-height: none;
+    padding-top: 0;
   }
 }
 

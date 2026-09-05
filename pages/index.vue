@@ -318,7 +318,11 @@ function getCover(slug) {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1.25rem;
-  align-items: stretch;
+  align-items: start;
+}
+
+.product-grid :deep(.product-card) {
+  width: 100%;
 }
 
 .most-loved {
