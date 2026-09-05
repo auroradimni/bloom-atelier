@@ -1,29 +1,67 @@
 <template>
-  <header class="site-header">
-    <button
-      class="menu-toggle"
-      aria-label="Open menu"
-      :aria-expanded="menuOpen"
-      @click="toggleMenu"
-    >
-      <span></span>
-    </button>
+  <header class="site-nav">
+    <div class="site-nav-top page-shell">
+      <button
+        class="menu-toggle"
+        aria-label="Open menu"
+        :aria-expanded="menuOpen"
+        @click="toggleMenu"
+      >
+        <span></span>
+      </button>
 
-    <NuxtLink to="/" class="brand" @click="closeMenu">Bloom Atelier</NuxtLink>
+      <NuxtLink to="/" class="brand" @click="closeMenu">Bloom Atelier</NuxtLink>
 
-    <div class="header-icons">
-      <NuxtLink to="/collection" class="icon-btn" aria-label="Wishlist">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path fill="none" stroke="currentColor" stroke-width="1.5" d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9z" />
-        </svg>
-      </NuxtLink>
-      <NuxtLink to="/contact" class="icon-btn bag" aria-label="Shopping bag">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path fill="none" stroke="currentColor" stroke-width="1.5" d="M6 7h12l-1 13H7L6 7zm3-3h6l1 3H8l1-3z" />
-        </svg>
-        <span class="bag-count">0</span>
-      </NuxtLink>
+      <div class="header-actions">
+        <button
+          type="button"
+          class="icon-btn"
+          aria-label="Search"
+          :aria-expanded="searchOpen"
+          @click="toggleSearch"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <path d="M16 16l5 5" fill="none" stroke="currentColor" stroke-width="1.5" />
+          </svg>
+        </button>
+        <NuxtLink to="/collection" class="icon-btn" aria-label="Wishlist">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="none" stroke="currentColor" stroke-width="1.5" d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9z" />
+          </svg>
+        </NuxtLink>
+        <NuxtLink to="/contact" class="icon-btn bag" aria-label="Shopping bag">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="none" stroke="currentColor" stroke-width="1.5" d="M6 7h12l-1 13H7L6 7zm3-3h6l1 3H8l1-3z" />
+          </svg>
+          <span class="bag-count">0</span>
+        </NuxtLink>
+      </div>
     </div>
+
+    <div v-if="searchOpen" class="site-nav-search page-shell">
+      <form class="search-form" @submit.prevent="onSearch">
+        <input
+          ref="searchInput"
+          v-model="query"
+          type="search"
+          placeholder="Search dresses, skirts, coats..."
+          aria-label="Search products"
+        />
+        <button type="submit" class="search-submit">Go</button>
+      </form>
+    </div>
+
+    <nav class="site-nav-categories" aria-label="Shop categories">
+      <NuxtLink
+        v-for="item in navItems"
+        :key="item.to"
+        :to="item.to"
+        class="category-pill"
+      >
+        {{ item.label }}
+      </NuxtLink>
+    </nav>
 
     <div class="menu-overlay" :class="{ open: menuOpen }" @click="closeMenu"></div>
 
@@ -41,21 +79,75 @@
 
 <script setup>
 const menuOpen = ref(false)
+const searchOpen = ref(false)
+const query = ref('')
+const searchInput = ref(null)
+const router = useRouter()
+
+const navItems = [
+  { label: 'New Arrivals', to: '/collection' },
+  { label: 'Dress', to: '/collection/dress' },
+  { label: 'Skirt', to: '/collection/skirt' },
+  { label: 'Coats', to: '/collection/coats' },
+  { label: 'Most Loved', to: '/collection/dress' },
+  { label: 'Shop Now', to: '/contact' }
+]
 
 function toggleMenu() {
   menuOpen.value = !menuOpen.value
+  if (menuOpen.value) searchOpen.value = false
 }
 
 function closeMenu() {
   menuOpen.value = false
 }
+
+function toggleSearch() {
+  searchOpen.value = !searchOpen.value
+  if (searchOpen.value) {
+    menuOpen.value = false
+    nextTick(() => searchInput.value?.focus())
+  }
+}
+
+function onSearch() {
+  const term = query.value.trim().toLowerCase()
+  searchOpen.value = false
+
+  if (!term) {
+    router.push('/collection')
+    return
+  }
+
+  if (term.includes('dress')) {
+    router.push('/collection/dress')
+  } else if (term.includes('skirt')) {
+    router.push('/collection/skirt')
+  } else if (term.includes('coat')) {
+    router.push('/collection/coats')
+  } else {
+    router.push('/collection')
+  }
+
+  query.value = ''
+}
 </script>
 
 <style scoped>
-.site-header {
+.site-nav {
+  position: sticky;
+  top: var(--promo-h);
+  z-index: 100;
+  background: rgba(247, 244, 239, 0.94);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--line);
+}
+
+.site-nav-top {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
+  min-height: var(--header-h);
 }
 
 .brand {
@@ -73,21 +165,24 @@ function closeMenu() {
   justify-self: start;
 }
 
-.header-icons {
+.header-actions {
   justify-self: end;
   display: flex;
   align-items: center;
-  gap: 0.35rem;
+  gap: 0.15rem;
 }
 
 .icon-btn {
   position: relative;
   width: 40px;
   height: 40px;
+  border: 0;
+  background: transparent;
   display: grid;
   place-items: center;
   color: var(--ink);
   text-decoration: none;
+  cursor: pointer;
   transition: opacity 0.3s var(--ease);
 }
 
@@ -115,11 +210,90 @@ function closeMenu() {
   text-align: center;
 }
 
+.site-nav-search {
+  padding: 0 0 0.75rem;
+}
+
+.search-form {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.search-form input {
+  flex: 1;
+  padding: 0.7rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  color: var(--ink);
+  outline: none;
+  transition: border-color 0.3s var(--ease);
+}
+
+.search-form input:focus {
+  border-color: var(--ink);
+}
+
+.search-form input::placeholder {
+  color: var(--stone);
+}
+
+.search-submit {
+  min-height: 40px;
+  padding: 0 1.1rem;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--surface);
+  font-family: var(--font-body);
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.site-nav-categories {
+  display: flex;
+  gap: 0.35rem;
+  overflow-x: auto;
+  padding: 0.55rem clamp(1.25rem, 4vw, 3rem) 0.65rem;
+  scrollbar-width: none;
+  border-top: 1px solid var(--line);
+}
+
+.site-nav-categories::-webkit-scrollbar {
+  display: none;
+}
+
+.category-pill {
+  flex: 0 0 auto;
+  padding: 0.35rem 0.85rem;
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--ink);
+  white-space: nowrap;
+  transition: opacity 0.3s var(--ease);
+}
+
+.category-pill:hover,
+.category-pill.router-link-active {
+  opacity: 0.55;
+}
+
+.category-pill.router-link-active {
+  border-bottom: 1px solid var(--ink);
+  padding-bottom: calc(0.35rem - 1px);
+}
+
 .mobile-nav {
   display: none;
 }
 
-.mobile-nav :deep(a) {
+.mobile-nav a {
   text-decoration: none;
   font-size: 0.72rem;
   letter-spacing: 0.16em;
@@ -141,7 +315,7 @@ function closeMenu() {
     right: 0;
     width: min(280px, 85vw);
     height: calc(100vh - var(--promo-h));
-    padding: calc(var(--header-h) + 1rem) 2rem 2rem;
+    padding: calc(var(--header-h) + var(--nav-cats-h) + 1rem) 2rem 2rem;
     background: var(--bg);
     border-left: 1px solid var(--line);
     z-index: 95;

@@ -19,9 +19,9 @@
   --font-body: 'Outfit', system-ui, sans-serif;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   --promo-h: 32px;
-  --header-h: 64px;
-  --search-h: 54px;
-  --nav-stack: calc(var(--promo-h) + var(--header-h) + var(--search-h) + 48px);
+  --header-h: 56px;
+  --nav-cats-h: 42px;
+  --nav-stack: calc(var(--promo-h) + var(--header-h) + var(--nav-cats-h));
 }
 
 html {
@@ -203,17 +203,9 @@ main {
   }
 }
 
-/* Header */
+/* Header shell (legacy class kept for page spacing helpers) */
 .site-header {
-  position: sticky;
-  top: var(--promo-h);
-  inset: 0 0 auto;
-  z-index: 100;
   height: var(--header-h);
-  padding: 0 clamp(1.25rem, 4vw, 3rem);
-  background: rgba(247, 244, 239, 0.92);
-  backdrop-filter: blur(18px);
-  border-bottom: 1px solid var(--line);
 }
 
 .menu-toggle {

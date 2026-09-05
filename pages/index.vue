@@ -127,7 +127,7 @@ function getCover(slug) {
 
 <style scoped>
 .home {
-  padding-top: 0.35rem;
+  padding-top: 0;
 }
 
 .mosaic {

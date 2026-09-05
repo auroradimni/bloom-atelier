@@ -2,8 +2,6 @@
   <div>
     <AppPromoBar />
     <AppHeader />
-    <StoreSearch />
-    <CategoryScroll />
     <main>
       <NuxtPage />
     </main>
