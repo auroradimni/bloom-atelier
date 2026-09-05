@@ -1,43 +1,31 @@
 <template>
   <section class="section page-shell">
     <p class="eyebrow">Contact</p>
-    <h2>Order our products</h2>
-    <p>Choose the option below to order products or book an appointment.</p>
+    <h2>Get in touch</h2>
+    <p class="intro">
+      For general questions, appointments, or styling inquiries — reach us below.
+      To order a product, choose it from the collection and checkout from your bag.
+    </p>
 
-    <div class="forms-container">
-      <div class="form-column">
-        <h3 class="form-title">Order Products</h3>
-        <form @submit.prevent="submitOrder">
-          <div class="section-title">Contact and order details</div>
-
-          <input type="text" v-model="form.firstName" placeholder="First name" required />
-          <input type="text" v-model="form.lastName" placeholder="Last name" required />
-          <input type="date" v-model="form.date" required />
-          <input type="tel" v-model="form.phone" placeholder="+355..." pattern="^\+355\d{8,9}$" required />
-          <input type="email" v-model="form.email" placeholder="Email" required />
-
-          <select v-model="form.size" required>
-            <option value="">Select size</option>
-            <option value="XS">XS</option>
-            <option value="S">S</option>
-            <option value="M">M</option>
-            <option value="L">L</option>
-            <option value="XL">XL</option>
-          </select>
-
-          <input type="text" v-model="form.productCode" placeholder="Product code" required />
-          <textarea v-model="form.notes" rows="3" placeholder="Additional order notes (optional)"></textarea>
-
-          <div class="form-buttons">
-            <button type="submit">Submit Order</button>
-          </div>
-
-          <p v-if="success" style="color: var(--rose); margin-top:1rem;">
-            Your order was submitted successfully! We will contact you soon.
-          </p>
-        </form>
-      </div>
+    <div class="contact-details">
+      <p><strong>Email</strong><br />info@ateliebloom.al</p>
+      <p><strong>Address</strong><br />Rr. Elbasanit, Tirana</p>
     </div>
+
+    <form @submit.prevent="submitMessage">
+      <label for="name">Name</label>
+      <input id="name" type="text" v-model="form.name" required />
+
+      <label for="email">Email</label>
+      <input id="email" type="email" v-model="form.email" required />
+
+      <label for="message">Message</label>
+      <textarea id="message" v-model="form.message" rows="4" required></textarea>
+
+      <button type="submit">Send message</button>
+
+      <p v-if="success" class="success">Thank you! We will reply soon.</p>
+    </form>
   </section>
 </template>
 
@@ -45,14 +33,45 @@
 useHead({ title: 'Contact - Bloom Atelier' })
 
 const success = ref(false)
-const form = reactive({
-  firstName: '', lastName: '', date: '', phone: '',
-  email: '', size: '', productCode: '', notes: ''
-})
+const form = reactive({ name: '', email: '', message: '' })
 
-function submitOrder() {
+function submitMessage() {
   success.value = true
-  Object.assign(form, { firstName: '', lastName: '', date: '', phone: '', email: '', size: '', productCode: '', notes: '' })
+  Object.assign(form, { name: '', email: '', message: '' })
   setTimeout(() => success.value = false, 4000)
 }
 </script>
+
+<style scoped>
+.intro {
+  max-width: 34rem;
+  margin-bottom: 2rem;
+  color: var(--stone);
+}
+
+.contact-details {
+  display: grid;
+  gap: 1.25rem;
+  margin-bottom: 2.5rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.contact-details p {
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+}
+
+.contact-details strong {
+  display: block;
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--stone);
+  margin-bottom: 0.35rem;
+}
+
+.success {
+  color: var(--accent);
+}
+</style>

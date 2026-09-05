@@ -59,7 +59,7 @@
           :key="item.id"
           v-scroll-reveal="{ delay: index * 70, variant: 'scale' }"
           :product="item"
-          :to="`/collection/${item.category}`"
+          :to="`/product/${item.id}`"
         />
       </div>
     </section>
@@ -85,7 +85,7 @@
           :key="item.id"
           v-scroll-reveal="{ delay: index * 80 }"
           :product="item"
-          :to="`/collection/${item.category}`"
+          :to="`/product/${item.id}`"
         />
       </div>
     </section>

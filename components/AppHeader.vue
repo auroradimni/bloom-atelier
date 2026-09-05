@@ -32,11 +32,11 @@
             <path fill="none" stroke="currentColor" stroke-width="1.5" d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9z" />
           </svg>
         </NuxtLink>
-        <NuxtLink to="/contact" class="icon-btn bag" aria-label="Shopping bag">
+        <NuxtLink to="/checkout" class="icon-btn bag" aria-label="Shopping bag">
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <path fill="none" stroke="currentColor" stroke-width="1.5" d="M6 7h12l-1 13H7L6 7zm3-3h6l1 3H8l1-3z" />
           </svg>
-          <span class="bag-count">0</span>
+          <span v-if="count" class="bag-count">{{ count }}</span>
         </NuxtLink>
       </div>
     </div>
@@ -85,6 +85,7 @@ const searchOpen = ref(false)
 const query = ref('')
 const searchInput = ref(null)
 const router = useRouter()
+const { count } = useCart()
 
 const navItems = [
   { label: 'New Arrivals', to: '/collection' },
@@ -92,7 +93,7 @@ const navItems = [
   { label: 'Skirt', to: '/collection/skirt' },
   { label: 'Coats', to: '/collection/coats' },
   { label: 'Most Loved', to: '/collection/dress' },
-  { label: 'Shop Now', to: '/contact' }
+  { label: 'Shop Now', to: '/collection' }
 ]
 
 function toggleMenu() {

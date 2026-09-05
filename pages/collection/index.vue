@@ -29,7 +29,7 @@
           :key="item.id"
           v-scroll-reveal="{ delay: index * 70 }"
           :product="item"
-          :to="`/collection/${item.category}`"
+          :to="`/product/${item.id}`"
         />
       </div>
     </section>

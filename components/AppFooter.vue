@@ -17,7 +17,7 @@
         <p><NuxtLink to="/collection/skirt">Skirt</NuxtLink></p>
         <p><NuxtLink to="/collection/dress">Dress</NuxtLink></p>
         <p><NuxtLink to="/collection/coats">Coats</NuxtLink></p>
-        <p><NuxtLink to="/contact">Order</NuxtLink></p>
+        <p><NuxtLink to="/checkout">Checkout</NuxtLink></p>
       </div>
     </div>
 
