@@ -22,19 +22,26 @@
         </div>
 
         <form class="purchase-form" @submit.prevent="addToBag">
-          <label for="size">Size</label>
-          <select id="size" v-model="size" required>
-            <option value="">Select size</option>
-            <option value="XS">XS</option>
-            <option value="S">S</option>
-            <option value="M">M</option>
-            <option value="L">L</option>
-            <option value="XL">XL</option>
-          </select>
+          <div class="size-field">
+            <p class="size-label">Size</p>
+            <div class="size-options" role="radiogroup" aria-label="Size">
+              <button
+                v-for="option in sizes"
+                :key="option"
+                type="button"
+                class="size-option"
+                :class="{ active: size === option }"
+                :aria-pressed="size === option"
+                @click="size = option"
+              >
+                {{ option }}
+              </button>
+            </div>
+          </div>
 
           <div class="actions">
-            <button type="submit" class="btn-solid">Add to bag</button>
-            <button type="button" class="btn-ghost" @click="checkoutNow">Checkout</button>
+            <button type="submit" class="btn-solid" :disabled="!size">Add to bag</button>
+            <button type="button" class="btn-ghost purchase-btn" :disabled="!size" @click="checkoutNow">Checkout</button>
           </div>
 
           <p v-if="added" class="added-note">Added to your bag.</p>
@@ -56,6 +63,7 @@ const { addItem } = useCart()
 const product = computed(() => getProduct(String(route.params.id)))
 const size = ref('')
 const added = ref(false)
+const sizes = ['XS', 'S', 'M', 'L', 'XL']
 
 useHead(() => ({
   title: product.value
@@ -142,17 +150,74 @@ function checkoutNow() {
   max-width: 360px;
 }
 
+.size-field {
+  margin-bottom: 1.5rem;
+}
+
+.size-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--stone);
+  margin-bottom: 0.75rem;
+}
+
+.size-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.size-option {
+  min-width: 48px;
+  min-height: 48px;
+  padding: 0 0.85rem;
+  border: 1px solid var(--line);
+  border-radius: 0;
+  background: var(--surface);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: border-color 0.3s var(--ease), background 0.3s var(--ease), color 0.3s var(--ease);
+}
+
+.size-option:hover {
+  border-color: var(--ink);
+}
+
+.size-option.active {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--surface);
+}
+
 .actions {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
-  margin-top: 0.5rem;
+  margin-top: 0.25rem;
 }
 
 .actions .btn-solid,
-.actions .btn-ghost {
+.actions .purchase-btn {
   flex: 1;
   min-width: 140px;
+}
+
+.actions .btn-solid:disabled,
+.actions .purchase-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.purchase-btn {
+  min-height: 48px;
+  padding: 0 1.75rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
 }
 
 .empty {
