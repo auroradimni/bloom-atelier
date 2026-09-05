@@ -1,23 +1,23 @@
 <template>
   <section class="section page-shell">
-    <p class="eyebrow">Kontakt</p>
-    <h2>Porosit produktet tona</h2>
-    <p>Zgjidhni opsionin më poshtë për të porositur produkte ose për të rezervuar një takim.</p>
+    <p class="eyebrow">Contact</p>
+    <h2>Order our products</h2>
+    <p>Choose the option below to order products or book an appointment.</p>
 
     <div class="forms-container">
       <div class="form-column">
-        <h3 class="form-title">Porosit Produkte</h3>
-        <form @submit.prevent="dergoPorosi">
-          <div class="section-title">Të dhënat e kontaktit dhe porosisë</div>
+        <h3 class="form-title">Order Products</h3>
+        <form @submit.prevent="submitOrder">
+          <div class="section-title">Contact and order details</div>
 
-          <input type="text" v-model="forma.emri" placeholder="Emri" required />
-          <input type="text" v-model="forma.mbiemri" placeholder="Mbiemri" required />
-          <input type="date" v-model="forma.data" required />
-          <input type="tel" v-model="forma.telefoni" placeholder="+355..." pattern="^\+355\d{8,9}$" required />
-          <input type="email" v-model="forma.email" placeholder="Email" required />
+          <input type="text" v-model="form.firstName" placeholder="First name" required />
+          <input type="text" v-model="form.lastName" placeholder="Last name" required />
+          <input type="date" v-model="form.date" required />
+          <input type="tel" v-model="form.phone" placeholder="+355..." pattern="^\+355\d{8,9}$" required />
+          <input type="email" v-model="form.email" placeholder="Email" required />
 
-          <select v-model="forma.masa" required>
-            <option value="">Zgjidh masën</option>
+          <select v-model="form.size" required>
+            <option value="">Select size</option>
             <option value="XS">XS</option>
             <option value="S">S</option>
             <option value="M">M</option>
@@ -25,15 +25,15 @@
             <option value="XL">XL</option>
           </select>
 
-          <input type="text" v-model="forma.kodi" placeholder="Kodi i produktit" required />
-          <textarea v-model="forma.shenime" rows="3" placeholder="Shënime shtesë për porosinë (opsionale)"></textarea>
+          <input type="text" v-model="form.productCode" placeholder="Product code" required />
+          <textarea v-model="form.notes" rows="3" placeholder="Additional order notes (optional)"></textarea>
 
           <div class="form-buttons">
-            <button type="submit">Dërgo Porosinë</button>
+            <button type="submit">Submit Order</button>
           </div>
 
-          <p v-if="suksesi" style="color: var(--rose); margin-top:1rem;">
-            Porosia juaj u dërgua me sukses! Do t'ju kontaktojmë së shpejti.
+          <p v-if="success" style="color: var(--rose); margin-top:1rem;">
+            Your order was submitted successfully! We will contact you soon.
           </p>
         </form>
       </div>
@@ -42,17 +42,17 @@
 </template>
 
 <script setup>
-useHead({ title: 'Kontakti - Bloom Atelier' })
+useHead({ title: 'Contact - Bloom Atelier' })
 
-const suksesi = ref(false)
-const forma = reactive({
-  emri: '', mbiemri: '', data: '', telefoni: '',
-  email: '', masa: '', kodi: '', shenime: ''
+const success = ref(false)
+const form = reactive({
+  firstName: '', lastName: '', date: '', phone: '',
+  email: '', size: '', productCode: '', notes: ''
 })
 
-function dergoPorosi() {
-  suksesi.value = true
-  Object.assign(forma, { emri: '', mbiemri: '', data: '', telefoni: '', email: '', masa: '', kodi: '', shenime: '' })
-  setTimeout(() => suksesi.value = false, 4000)
+function submitOrder() {
+  success.value = true
+  Object.assign(form, { firstName: '', lastName: '', date: '', phone: '', email: '', size: '', productCode: '', notes: '' })
+  setTimeout(() => success.value = false, 4000)
 }
 </script>

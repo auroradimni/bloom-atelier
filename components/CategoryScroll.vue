@@ -16,12 +16,12 @@
 
 <script setup>
 const items = [
-  { label: 'Të rejat', to: '/collection' },
+  { label: 'New Arrivals', to: '/collection' },
   { label: 'Dress', to: '/collection/dress' },
   { label: 'Skirt', to: '/collection/skirt' },
   { label: 'Coats', to: '/collection/coats' },
-  { label: 'Më të dashurat', to: '/collection/dress' },
-  { label: 'Porosit', to: '/contact' }
+  { label: 'Most Loved', to: '/collection/dress' },
+  { label: 'Shop Now', to: '/contact' }
 ]
 </script>
 

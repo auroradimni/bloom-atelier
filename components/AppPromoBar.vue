@@ -1,6 +1,6 @@
 <template>
   <div class="promo-bar">
-    <p>Transport falas për porosi mbi €80 — kodi <strong>BLOOM10</strong></p>
+    <p>Free shipping on orders over €80 — use code <strong>BLOOM10</strong></p>
   </div>
 </template>
 

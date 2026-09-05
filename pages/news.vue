@@ -1,39 +1,39 @@
 <template>
-  <section id="eventet" class="section">
-    <h2>Evente dhe Njoftime</h2>
+  <section id="events" class="section">
+    <h2>Events & Announcements</h2>
     <div class="event-list">
       <div class="event">
-        <h3>Sfilata Mode: Koleksioni i Fundit</h3>
+        <h3>Fashion Show: Latest Collection</h3>
         <p>
-          Na bashkohuni në sfilatën tonë të ardhshme ku do të prezantojmë
-          koleksionin më të fundit të fustaneve dhe aksesorëve për sezonin e ri.
+          Join us at our upcoming fashion show where we will present
+          the latest collection of dresses and accessories for the new season.
         </p>
-        <p><strong>Data:</strong> 15 Maj 2025</p>
-        <p><strong>Vendi:</strong> Pallati i Kulturës, Tiranë</p>
-        <p><NuxtLink to="/collection">Më shumë info</NuxtLink></p>
+        <p><strong>Date:</strong> May 15, 2025</p>
+        <p><strong>Location:</strong> Palace of Culture, Tirana</p>
+        <p><NuxtLink to="/collection">More info</NuxtLink></p>
       </div>
       <div class="event">
-        <h3>Thirrje për Stiliste të Reja</h3>
+        <h3>Call for New Stylists</h3>
         <p>
-          Bloom Atelier po kërkon stiliste të reja dhe kreative për t'u
-          bashkuar me ekipin tonë. Aplikoni tani dhe bëhuni pjesë e stilit tonë unik!
+          Bloom Atelier is looking for new and creative stylists to join
+          our team. Apply now and become part of our unique style!
         </p>
-        <p><strong>Afati i aplikimeve:</strong> 30 Prill 2025</p>
-        <p><NuxtLink to="/stylists">Aplikoni këtu</NuxtLink></p>
+        <p><strong>Application deadline:</strong> April 30, 2025</p>
+        <p><NuxtLink to="/stylists">Apply here</NuxtLink></p>
       </div>
       <div class="event">
-        <h3>Kurset për Stilistët e Ardhshëm</h3>
+        <h3>Courses for Future Stylists</h3>
         <p>
-          Ofrojmë mundësi për kurse online për stilistët e ardhshëm.
-          Regjistrohuni për të mësuar teknika të avancuara dhe kreativitet në dizajnin e modës.
+          We offer online courses for aspiring stylists.
+          Register to learn advanced techniques and creativity in fashion design.
         </p>
-        <p><strong>Data e fillimit:</strong> 1 Qershor 2025</p>
-        <p><NuxtLink to="/courses">Më shumë info</NuxtLink></p>
+        <p><strong>Start date:</strong> June 1, 2025</p>
+        <p><NuxtLink to="/courses">More info</NuxtLink></p>
       </div>
     </div>
   </section>
 </template>
 
 <script setup>
-useHead({ title: 'Lajmërime dhe Evente - Bloom Atelier' })
+useHead({ title: 'News & Events - Bloom Atelier' })
 </script>

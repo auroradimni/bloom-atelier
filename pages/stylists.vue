@@ -1,30 +1,30 @@
 <template>
   <article>
-    <h2>Thirrje për Stilistet e Reja</h2>
+    <h2>Call for New Stylists</h2>
     <p>
-      Je kreative dhe pasionante për modën? Bloom Atelier po kërkon stiliste
-      të reja për të sjellë frymëzim të freskët në koleksionet tona.
+      Are you creative and passionate about fashion? Bloom Atelier is looking for
+      new stylists to bring fresh inspiration to our collections.
     </p>
 
     <aside>
-      <strong>Afati i aplikimit:</strong> 30 Prill 2025
+      <strong>Application deadline:</strong> April 30, 2025
       <br />
-      Pranohen: CV, portofol, foto dizajnesh, letër motivimi (pdf, jpg, png).
+      Accepted: CV, portfolio, design photos, cover letter (pdf, jpg, png).
     </aside>
 
-    <form @submit.prevent="dergoBlankin">
-      <h3>Formular Aplikimi</h3>
+    <form @submit.prevent="submitApplication">
+      <h3>Application Form</h3>
 
-      <label for="emri">Emri i plotë</label>
-      <input type="text" id="emri" v-model="forma.emri" required />
+      <label for="name">Full name</label>
+      <input type="text" id="name" v-model="form.name" required />
 
       <label for="email">Email</label>
-      <input type="email" id="email" v-model="forma.email" required />
+      <input type="email" id="email" v-model="form.email" required />
 
-      <label for="mesazhi">Na trego pak për veten</label>
-      <textarea id="mesazhi" v-model="forma.mesazhi" rows="4"></textarea>
+      <label for="message">Tell us a little about yourself</label>
+      <textarea id="message" v-model="form.message" rows="4"></textarea>
 
-      <label>Ngarko dokumentin tënd:</label>
+      <label>Upload your document:</label>
       <div
         class="dropzone"
         :class="{ dragover: dragActive }"
@@ -33,53 +33,53 @@
         @dragleave="dragActive = false"
         @drop.prevent="onDrop"
       >
-        Zvarrit ose kliko për të ngarkuar një dokument
+        Drag or click to upload a document
       </div>
       <input type="file" ref="fileInput" hidden @change="onFileChange" />
       <div class="file-name">{{ fileName }}</div>
 
       <div style="display:flex; gap:1rem; flex-wrap:wrap">
-        <button type="submit">Dërgo Aplikimin</button>
-        <button type="button" @click="fshiDokumentin">Fshi</button>
+        <button type="submit">Submit Application</button>
+        <button type="button" @click="clearDocument">Clear</button>
       </div>
 
-      <p v-if="suksesi" style="color: var(--rose); margin-top:1rem;">
-        Aplikimi u dërgua me sukses! Do t'ju kontaktojmë së shpejti.
+      <p v-if="success" style="color: var(--rose); margin-top:1rem;">
+        Your application was submitted successfully! We will contact you soon.
       </p>
     </form>
   </article>
 </template>
 
 <script setup>
-useHead({ title: 'Thirrje për Stilistet e Reja - Bloom Atelier' })
+useHead({ title: 'Call for New Stylists - Bloom Atelier' })
 
 const fileInput = ref(null)
 const dragActive = ref(false)
-const fileName = ref('Asnjë dokument i ngarkuar')
-const suksesi = ref(false)
+const fileName = ref('No document uploaded')
+const success = ref(false)
 
-const forma = reactive({ emri: '', email: '', mesazhi: '' })
+const form = reactive({ name: '', email: '', message: '' })
 
 function onDrop(e) {
   dragActive.value = false
   const file = e.dataTransfer.files[0]
-  if (file) fileName.value = `Dokument i ngarkuar: ${file.name}`
+  if (file) fileName.value = `Uploaded document: ${file.name}`
 }
 
 function onFileChange(e) {
   const file = e.target.files[0]
-  if (file) fileName.value = `Dokument i ngarkuar: ${file.name}`
+  if (file) fileName.value = `Uploaded document: ${file.name}`
 }
 
-function fshiDokumentin() {
-  fileName.value = 'Asnjë dokument i ngarkuar'
+function clearDocument() {
+  fileName.value = 'No document uploaded'
   if (fileInput.value) fileInput.value.value = ''
 }
 
-function dergoBlankin() {
-  suksesi.value = true
-  Object.assign(forma, { emri: '', email: '', mesazhi: '' })
-  fshiDokumentin()
-  setTimeout(() => suksesi.value = false, 4000)
+function submitApplication() {
+  success.value = true
+  Object.assign(form, { name: '', email: '', message: '' })
+  clearDocument()
+  setTimeout(() => success.value = false, 4000)
 }
 </script>

@@ -3,28 +3,28 @@
     <div v-scroll-reveal class="footer-inner page-shell">
       <div class="newsletter">
         <p class="eyebrow">Newsletter</p>
-        <h2>Bashkohu me Bloom</h2>
+        <h2>Join Bloom</h2>
         <form @submit.prevent="subscribe">
           <input
             v-model="email"
             type="email"
-            placeholder="Email adresa"
+            placeholder="Email address"
             required
           />
-          <button type="submit">Abonohu</button>
+          <button type="submit">Subscribe</button>
         </form>
-        <p v-if="subscribed" class="success">Faleminderit!</p>
+        <p v-if="subscribed" class="success">Thank you!</p>
       </div>
 
       <div class="footer-links">
         <div>
-          <p class="eyebrow">Kontakt</p>
+          <p class="eyebrow">Contact</p>
           <p>info@ateliebloom.al</p>
         </div>
         <div>
-          <p class="eyebrow">Linqe</p>
-          <p><NuxtLink to="/collection">Koleksioni</NuxtLink></p>
-          <p><NuxtLink to="/contact">Porosit</NuxtLink></p>
+          <p class="eyebrow">Links</p>
+          <p><NuxtLink to="/collection">Collection</NuxtLink></p>
+          <p><NuxtLink to="/contact">Order</NuxtLink></p>
         </div>
       </div>
     </div>

@@ -1,6 +1,6 @@
 <template>
   <div class="category-page page-shell">
-    <NuxtLink v-scroll-reveal to="/collection" class="text-link back">Kthehu</NuxtLink>
+    <NuxtLink v-scroll-reveal to="/collection" class="text-link back">Back</NuxtLink>
 
     <header v-if="category" v-scroll-reveal="{ delay: 60 }" class="page-head">
       <h1>{{ category.title }}</h1>
@@ -17,7 +17,7 @@
       />
     </div>
 
-    <p v-else v-scroll-reveal class="empty">Nuk ka produkte në këtë kategori.</p>
+    <p v-else v-scroll-reveal class="empty">No products in this category.</p>
   </div>
 </template>
 
@@ -32,7 +32,7 @@ const items = computed(() => getProductsByCategory(slug.value))
 useHead(() => ({
   title: category.value
     ? `${category.value.title} - Bloom Atelier`
-    : 'Koleksioni - Bloom Atelier'
+    : 'Collection - Bloom Atelier'
 }))
 </script>
 

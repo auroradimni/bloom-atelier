@@ -8,8 +8,8 @@
       <input
         v-model="query"
         type="search"
-        placeholder="Kërko fustane, fundjethe, pallto..."
-        aria-label="Kërko produkte"
+        placeholder="Search dresses, skirts, coats..."
+        aria-label="Search products"
       />
     </form>
   </div>
@@ -26,11 +26,11 @@ function onSearch() {
     return
   }
 
-  if (term.includes('dress') || term.includes('fustan')) {
+  if (term.includes('dress')) {
     router.push('/collection/dress')
-  } else if (term.includes('skirt') || term.includes('fundjeth')) {
+  } else if (term.includes('skirt')) {
     router.push('/collection/skirt')
-  } else if (term.includes('coat') || term.includes('pallto')) {
+  } else if (term.includes('coat')) {
     router.push('/collection/coats')
   } else {
     router.push('/collection')

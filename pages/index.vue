@@ -10,8 +10,8 @@
         to="/collection"
         class="mosaic-item mosaic-promo"
       >
-        <p class="script">Elegancë xo</p>
-        <p class="promo-label">Koleksioni Pranveror 2025 ♥</p>
+        <p class="script">Timeless elegance</p>
+        <p class="promo-label">Spring Collection 2025 ♥</p>
         <span class="promo-link">Shop Now</span>
       </NuxtLink>
 
@@ -71,7 +71,7 @@
     <section v-scroll-reveal class="editorial page-shell">
       <div class="editorial-copy">
         <p class="eyebrow">The Spring Edit</p>
-        <h2>Shtresa të rafinuara për sezonin e ri</h2>
+        <h2>Refined layers for the new season</h2>
         <NuxtLink to="/collection/coats" class="btn-solid">Explore the Edit</NuxtLink>
       </div>
       <NuxtLink v-scroll-reveal="{ delay: 120 }" to="/collection/coats" class="editorial-media">
@@ -109,15 +109,15 @@
 <script setup>
 import { categories, getProductsByCategory, products } from '~/data/collection'
 
-useHead({ title: 'Bloom Atelier — Modë Minimaliste' })
+useHead({ title: 'Bloom Atelier — Minimalist Fashion' })
 
 const newArrivals = products.filter((item) => item.isNew)
 const loved = [...products].reverse()
 
 const reviews = [
-  { name: 'Elira M.', text: 'Cilësi e jashtëzakonshme dhe stil që mbetet.' },
-  { name: 'Sara K.', text: 'Bloom Atelier është adresa ime për elegancë.' },
-  { name: 'Diana R.', text: 'Fustani më i bukur që kam blerë këtë vit.' }
+  { name: 'Elira M.', text: 'Exceptional quality and style that lasts.' },
+  { name: 'Sara K.', text: 'Bloom Atelier is my go-to for elegance.' },
+  { name: 'Diana R.', text: 'The most beautiful dress I bought this year.' }
 ]
 
 function getCover(slug) {

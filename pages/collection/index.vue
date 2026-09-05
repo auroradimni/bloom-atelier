@@ -1,8 +1,8 @@
 <template>
   <div class="collection-page page-shell">
     <header v-scroll-reveal class="page-head">
-      <h1>Koleksioni</h1>
-      <p>Modë minimale. Craft i përkushtuar. Elegancë shqiptare.</p>
+      <h1>Collection</h1>
+      <p>Minimal fashion. Dedicated craft. Albanian elegance.</p>
     </header>
 
     <div class="shop-grid">
@@ -16,13 +16,13 @@
         <img :src="getCategoryCover(category.slug)" :alt="category.title" />
         <div>
           <h2>{{ category.title }}</h2>
-          <p>{{ getProductsByCategory(category.slug).length }} modele</p>
+          <p>{{ getProductsByCategory(category.slug).length }} styles</p>
         </div>
       </NuxtLink>
     </div>
 
     <section class="all-products">
-      <h2 v-scroll-reveal>Të gjitha produktet</h2>
+      <h2 v-scroll-reveal>All Products</h2>
       <div class="product-grid">
         <ProductCard
           v-for="(item, index) in products"
@@ -39,7 +39,7 @@
 <script setup>
 import { categories, getProductsByCategory, products } from '~/data/collection'
 
-useHead({ title: 'Koleksioni - Bloom Atelier' })
+useHead({ title: 'Collection - Bloom Atelier' })
 
 function getCategoryCover(slug) {
   return getProductsByCategory(slug)[0]?.image || '/images/dress-1.jpg'

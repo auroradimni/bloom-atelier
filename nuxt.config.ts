@@ -7,6 +7,7 @@ export default defineNuxtConfig({
   css: ['~/assets/styles/main.css'],
   app: {
     head: {
+      htmlAttrs: { lang: 'en' },
       link: [
         {
           rel: 'stylesheet',

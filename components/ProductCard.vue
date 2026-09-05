@@ -7,11 +7,11 @@
   >
     <div class="product-media">
       <img :src="product.image" :alt="product.name" loading="lazy" />
-      <span v-if="product.isNew" class="badge">E re</span>
+      <span v-if="product.isNew" class="badge">New</span>
       <button
         type="button"
         class="wishlist"
-        aria-label="Shto te të preferuarat"
+        aria-label="Add to wishlist"
         @click.prevent="toggleWish"
       >
         <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -23,7 +23,7 @@
           />
         </svg>
       </button>
-      <span class="quick-view">Shiko</span>
+      <span class="quick-view">View</span>
     </div>
 
     <div class="product-meta">

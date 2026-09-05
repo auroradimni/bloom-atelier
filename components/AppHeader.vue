@@ -2,7 +2,7 @@
   <header class="site-header">
     <button
       class="menu-toggle"
-      aria-label="Hap menunë"
+      aria-label="Open menu"
       :aria-expanded="menuOpen"
       @click="toggleMenu"
     >
@@ -12,12 +12,12 @@
     <NuxtLink to="/" class="brand" @click="closeMenu">Bloom Atelier</NuxtLink>
 
     <div class="header-icons">
-      <NuxtLink to="/collection" class="icon-btn" aria-label="Të preferuarat">
+      <NuxtLink to="/collection" class="icon-btn" aria-label="Wishlist">
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <path fill="none" stroke="currentColor" stroke-width="1.5" d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9z" />
         </svg>
       </NuxtLink>
-      <NuxtLink to="/contact" class="icon-btn bag" aria-label="Shporta">
+      <NuxtLink to="/contact" class="icon-btn bag" aria-label="Shopping bag">
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <path fill="none" stroke="currentColor" stroke-width="1.5" d="M6 7h12l-1 13H7L6 7zm3-3h6l1 3H8l1-3z" />
         </svg>
@@ -28,13 +28,13 @@
     <div class="menu-overlay" :class="{ open: menuOpen }" @click="closeMenu"></div>
 
     <nav class="mobile-nav" :class="{ open: menuOpen }">
-      <NuxtLink to="/collection" @click="closeMenu">Koleksioni</NuxtLink>
+      <NuxtLink to="/collection" @click="closeMenu">Collection</NuxtLink>
       <NuxtLink to="/collection/dress" @click="closeMenu">Dress</NuxtLink>
       <NuxtLink to="/collection/skirt" @click="closeMenu">Skirt</NuxtLink>
       <NuxtLink to="/collection/coats" @click="closeMenu">Coats</NuxtLink>
-      <NuxtLink to="/courses" @click="closeMenu">Kurse</NuxtLink>
-      <NuxtLink to="/stylists" @click="closeMenu">Stiliste</NuxtLink>
-      <NuxtLink to="/contact" @click="closeMenu">Kontakt</NuxtLink>
+      <NuxtLink to="/courses" @click="closeMenu">Courses</NuxtLink>
+      <NuxtLink to="/stylists" @click="closeMenu">Stylists</NuxtLink>
+      <NuxtLink to="/contact" @click="closeMenu">Contact</NuxtLink>
     </nav>
   </header>
 </template>
