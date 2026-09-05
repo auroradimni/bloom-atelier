@@ -89,16 +89,6 @@
         />
       </div>
     </section>
-
-    <section v-scroll-reveal class="quote-section page-shell">
-      <p class="quote-label">Real Women. Timeless Style.</p>
-      <div class="quote-grid">
-        <blockquote v-for="(review, index) in reviews" :key="review.name" v-scroll-reveal="{ delay: index * 100 }">
-          <p>"{{ review.text }}"</p>
-          <cite>— {{ review.name }}</cite>
-        </blockquote>
-      </div>
-    </section>
   </div>
 </template>
 
