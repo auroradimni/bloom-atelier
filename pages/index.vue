@@ -242,14 +242,14 @@ function getCover(slug) {
 
 .product-track {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 0.75rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
 }
 
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem 1.25rem;
 }
 
 .editorial {
@@ -297,10 +297,6 @@ function getCover(slug) {
 
 @media (max-width: 1024px) {
   .product-track {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .product-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
@@ -327,17 +323,14 @@ function getCover(slug) {
   }
 
   .product-track {
-    display: flex;
-    overflow-x: auto;
-    gap: 0.75rem;
-    padding-bottom: 0.5rem;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: none;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
 
-  .product-track :deep(.product-card) {
-    flex: 0 0 min(220px, 72vw);
-    scroll-snap-align: start;
+  .product-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
 }
 </style>

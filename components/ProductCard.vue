@@ -169,27 +169,27 @@ function toggleWish() {
 
 .product-meta h3 {
   font-family: var(--font-display);
-  font-size: 0.98rem;
+  font-size: clamp(1.05rem, 2.2vw, 1.35rem);
   font-weight: 400;
   line-height: 1.35;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.35rem;
 }
 
 .price {
-  font-size: 0.78rem;
+  font-size: 0.92rem;
   letter-spacing: 0.06em;
   color: var(--stone);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.65rem;
 }
 
 .swatches {
   display: flex;
-  gap: 0.35rem;
+  gap: 0.45rem;
 }
 
 .swatches span {
-  width: 12px;
-  height: 12px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
   border: 1px solid var(--line);
 }

@@ -99,7 +99,7 @@ function checkoutNow() {
 
 .product-gallery img {
   width: 100%;
-  max-height: min(420px, 52vh);
+  max-height: min(560px, 68vh);
   aspect-ratio: 3 / 4;
   object-fit: cover;
 }
