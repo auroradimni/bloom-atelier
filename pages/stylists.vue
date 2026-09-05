@@ -6,10 +6,6 @@
       të reja për të sjellë frymëzim të freskët në koleksionet tona.
     </p>
 
-    <figure>
-<img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80" alt="Stiliste duke punuar" />      <figcaption>Bashkohu me ekipin tonë të dizajnit kreativ!</figcaption>
-    </figure>
-
     <aside>
       <strong>Afati i aplikimit:</strong> 30 Prill 2025
       <br />
