@@ -55,16 +55,18 @@
 </template>
 
 <script setup>
-defineProps({
+const props = defineProps({
   product: { type: Object, required: true },
   to: { type: String, default: '' },
   compact: { type: Boolean, default: false }
 })
 
-const liked = ref(false)
+const { toggle, isSaved } = useWishlist()
+
+const liked = computed(() => isSaved(props.product.id))
 
 function toggleWish() {
-  liked.value = !liked.value
+  toggle(props.product)
 }
 </script>
 
