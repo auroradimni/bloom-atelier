@@ -48,7 +48,7 @@ function getCategoryCover(slug) {
 
 <style scoped>
 .collection-page {
-  padding: calc(var(--nav-stack) + 1rem) 0 4rem;
+  padding: 1.25rem 0 4rem;
 }
 
 .page-head {
