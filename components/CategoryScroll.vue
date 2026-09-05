@@ -1,10 +1,10 @@
 <template>
-  <div v-scroll-reveal class="category-scroll-wrap">
+  <div class="category-scroll-wrap">
     <div class="category-scroll">
       <NuxtLink
         v-for="(item, index) in items"
         :key="item.to"
-        v-scroll-reveal="{ delay: index * 60 }"
+        v-scroll-reveal="{ delay: index * 50 }"
         :to="item.to"
         class="category-pill"
       >
@@ -20,14 +20,15 @@ const items = [
   { label: 'Dress', to: '/collection/dress' },
   { label: 'Skirt', to: '/collection/skirt' },
   { label: 'Coats', to: '/collection/coats' },
-  { label: 'Kontakt', to: '/contact' }
+  { label: 'Më të dashurat', to: '/collection/dress' },
+  { label: 'Porosit', to: '/contact' }
 ]
 </script>
 
 <style scoped>
 .category-scroll-wrap {
   position: sticky;
-  top: calc(var(--promo-h) + var(--header-h));
+  top: calc(var(--promo-h) + var(--header-h) + var(--search-h));
   z-index: 99;
   border-bottom: 1px solid var(--line);
   background: var(--bg);
@@ -37,9 +38,8 @@ const items = [
   display: flex;
   gap: 0.5rem;
   overflow-x: auto;
-  padding: 0.85rem clamp(1.25rem, 4vw, 3rem);
+  padding: 0.75rem clamp(1.25rem, 4vw, 3rem);
   scrollbar-width: none;
-  -ms-overflow-style: none;
 }
 
 .category-scroll::-webkit-scrollbar {
@@ -48,23 +48,23 @@ const items = [
 
 .category-pill {
   flex: 0 0 auto;
-  padding: 0.55rem 1.1rem;
-  border: 1px solid var(--line);
-  border-radius: 999px;
+  padding: 0.5rem 1rem;
   font-size: 0.62rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   text-decoration: none;
   color: var(--ink);
-  background: var(--surface);
-  transition: background 0.3s var(--ease), color 0.3s var(--ease);
   white-space: nowrap;
+  transition: opacity 0.3s var(--ease);
 }
 
 .category-pill:hover,
 .category-pill.router-link-active {
-  background: var(--ink);
-  color: var(--surface);
-  border-color: var(--ink);
+  opacity: 0.55;
+}
+
+.category-pill.router-link-active {
+  border-bottom: 1px solid var(--ink);
+  padding-bottom: calc(0.5rem - 1px);
 }
 </style>

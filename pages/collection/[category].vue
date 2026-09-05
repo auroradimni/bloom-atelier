@@ -1,29 +1,20 @@
 <template>
   <div class="category-page page-shell">
-    <NuxtLink
-      v-scroll-reveal
-      to="/collection"
-      class="text-link back"
-    >
-      Kthehu
-    </NuxtLink>
+    <NuxtLink v-scroll-reveal to="/collection" class="text-link back">Kthehu</NuxtLink>
 
-    <header v-if="category" v-scroll-reveal="{ delay: 80 }" class="page-head">
+    <header v-if="category" v-scroll-reveal="{ delay: 60 }" class="page-head">
       <h1>{{ category.title }}</h1>
       <p>{{ category.subtitle }}</p>
     </header>
 
     <div v-if="items.length" class="product-grid">
-      <article
+      <ProductCard
         v-for="(item, index) in items"
         :key="item.id"
-        v-scroll-reveal="{ delay: index * 100 }"
-        class="product-item"
-      >
-        <img :src="item.image" :alt="item.name" />
-        <h2>{{ item.name }}</h2>
-        <p>{{ item.description }}</p>
-      </article>
+        v-scroll-reveal="{ delay: index * 90 }"
+        :product="item"
+        :to="`/collection/${item.category}`"
+      />
     </div>
 
     <p v-else v-scroll-reveal class="empty">Nuk ka produkte në këtë kategori.</p>
@@ -47,11 +38,11 @@ useHead(() => ({
 
 <style scoped>
 .category-page {
-  padding: calc(var(--nav-stack) + 1.5rem) 0 4rem;
+  padding: calc(var(--nav-stack) + 1rem) 0 4rem;
 }
 
 .back {
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
 
 .back::after {
@@ -59,12 +50,12 @@ useHead(() => ({
 }
 
 .page-head {
-  margin-bottom: 2.5rem;
+  margin-bottom: 2rem;
 }
 
 .page-head h1 {
   font-family: var(--font-display);
-  font-size: clamp(2.2rem, 5vw, 3rem);
+  font-size: clamp(2rem, 5vw, 2.8rem);
   font-weight: 300;
   color: var(--ink);
 }
@@ -76,34 +67,8 @@ useHead(() => ({
 
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 2rem 1rem;
-}
-
-.product-item img {
-  width: 100%;
-  aspect-ratio: 3 / 4;
-  object-fit: cover;
-  margin-bottom: 0.85rem;
-  transition: transform 0.5s var(--ease);
-}
-
-.product-item:hover img {
-  transform: scale(1.02);
-}
-
-.product-item h2 {
-  font-family: var(--font-display);
-  font-size: 1.15rem;
-  font-weight: 400;
-  color: var(--ink);
-  margin-bottom: 0.35rem;
-}
-
-.product-item p {
-  font-size: 0.88rem;
-  color: var(--stone);
-  line-height: 1.5;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.25rem 0.85rem;
 }
 
 .empty {

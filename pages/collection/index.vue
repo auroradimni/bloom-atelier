@@ -2,32 +2,42 @@
   <div class="collection-page page-shell">
     <header v-scroll-reveal class="page-head">
       <h1>Koleksioni</h1>
-      <p>Tre kategori. Linja të pastra. Zero zhurmë.</p>
+      <p>Modë minimale. Craft i përkushtuar. Elegancë shqiptare.</p>
     </header>
 
-    <div class="category-grid">
+    <div class="shop-grid">
       <NuxtLink
         v-for="(category, index) in categories"
         :key="category.slug"
-        v-scroll-reveal="{ delay: index * 120 }"
+        v-scroll-reveal="{ delay: index * 100 }"
         :to="`/collection/${category.slug}`"
-        class="category-tile"
+        class="shop-tile"
       >
-        <img
-          :src="getCategoryCover(category.slug)"
-          :alt="category.title"
-        />
+        <img :src="getCategoryCover(category.slug)" :alt="category.title" />
         <div>
           <h2>{{ category.title }}</h2>
           <p>{{ getProductsByCategory(category.slug).length }} modele</p>
         </div>
       </NuxtLink>
     </div>
+
+    <section class="all-products">
+      <h2 v-scroll-reveal>Të gjitha produktet</h2>
+      <div class="product-grid">
+        <ProductCard
+          v-for="(item, index) in products"
+          :key="item.id"
+          v-scroll-reveal="{ delay: index * 70 }"
+          :product="item"
+          :to="`/collection/${item.category}`"
+        />
+      </div>
+    </section>
   </div>
 </template>
 
 <script setup>
-import { categories, getProductsByCategory } from '~/data/collection'
+import { categories, getProductsByCategory, products } from '~/data/collection'
 
 useHead({ title: 'Koleksioni - Bloom Atelier' })
 
@@ -38,16 +48,16 @@ function getCategoryCover(slug) {
 
 <style scoped>
 .collection-page {
-  padding: calc(var(--nav-stack) + 1.5rem) 0 4rem;
+  padding: calc(var(--nav-stack) + 1rem) 0 4rem;
 }
 
 .page-head {
-  margin-bottom: 2.5rem;
+  margin-bottom: 2rem;
 }
 
 .page-head h1 {
   font-family: var(--font-display);
-  font-size: clamp(2.2rem, 5vw, 3rem);
+  font-size: clamp(2rem, 5vw, 2.8rem);
   font-weight: 300;
   color: var(--ink);
 }
@@ -57,45 +67,60 @@ function getCategoryCover(slug) {
   color: var(--stone);
 }
 
-.category-grid {
+.shop-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
+  gap: 0.65rem;
+  margin-bottom: 3rem;
 }
 
-.category-tile {
+.shop-tile {
   text-decoration: none;
   color: var(--ink);
+  overflow: hidden;
 }
 
-.category-tile img {
+.shop-tile img {
   width: 100%;
   aspect-ratio: 4 / 5;
   object-fit: cover;
-  margin-bottom: 1rem;
-  transition: transform 0.5s var(--ease);
+  margin-bottom: 0.75rem;
+  transition: transform 0.6s var(--ease);
 }
 
-.category-tile:hover img {
-  transform: scale(1.02);
+.shop-tile:hover img {
+  transform: scale(1.03);
 }
 
-.category-tile h2 {
+.shop-tile h2 {
   font-family: var(--font-display);
-  font-size: 1.5rem;
+  font-size: 1.35rem;
   font-weight: 400;
 }
 
-.category-tile p {
-  margin-top: 0.25rem;
-  font-size: 0.72rem;
+.shop-tile p {
+  margin-top: 0.2rem;
+  font-size: 0.62rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--stone);
 }
 
+.all-products h2 {
+  font-size: 0.68rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  margin-bottom: 1.25rem;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.25rem 0.85rem;
+}
+
 @media (max-width: 900px) {
-  .category-grid {
+  .shop-grid {
     grid-template-columns: 1fr;
   }
 }

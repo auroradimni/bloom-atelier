@@ -20,7 +20,8 @@
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   --promo-h: 32px;
   --header-h: 64px;
-  --nav-stack: calc(var(--promo-h) + var(--header-h) + 52px);
+  --search-h: 54px;
+  --nav-stack: calc(var(--promo-h) + var(--header-h) + var(--search-h) + 48px);
 }
 
 html {
