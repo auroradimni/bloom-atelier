@@ -27,10 +27,11 @@
             <path d="M16 16l5 5" fill="none" stroke="currentColor" stroke-width="1.5" />
           </svg>
         </button>
-        <NuxtLink to="/collection" class="icon-btn" aria-label="Wishlist">
+        <NuxtLink to="/wishlist" class="icon-btn wishlist-link" aria-label="Wishlist">
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <path fill="none" stroke="currentColor" stroke-width="1.5" d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9z" />
           </svg>
+          <span v-if="wishlistCount" class="bag-count">{{ wishlistCount }}</span>
         </NuxtLink>
         <NuxtLink to="/checkout" class="icon-btn bag" aria-label="Shopping bag">
           <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -86,6 +87,7 @@ const query = ref('')
 const searchInput = ref(null)
 const router = useRouter()
 const { count } = useCart()
+const { count: wishlistCount } = useWishlist()
 
 const navItems = [
   { label: 'New Arrivals', to: '/collection' },

@@ -11,7 +11,8 @@
       <button
         type="button"
         class="wishlist"
-        aria-label="Add to wishlist"
+        :class="{ saved: liked }"
+        :aria-label="liked ? 'Remove from wishlist' : 'Add to wishlist'"
         @click.stop.prevent="toggleWish"
       >
         <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -144,9 +145,14 @@ function toggleWish() {
 }
 
 .product-card:hover .wishlist,
-.product-card:focus-within .wishlist {
+.product-card:focus-within .wishlist,
+.wishlist.saved {
   opacity: 1;
   transform: translateY(0);
+}
+
+.wishlist.saved {
+  color: var(--wine);
 }
 
 .quick-view {
