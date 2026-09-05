@@ -1,6 +1,6 @@
 <template>
   <div class="promo-bar">
-    <p>Free shipping on orders over €80 — use code <strong>BLOOM10</strong></p>
+    <p>Free shipping on orders over 3.500 Lek — use code <strong>BLOOM10</strong></p>
   </div>
 </template>
 

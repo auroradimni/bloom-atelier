@@ -72,7 +72,10 @@ function toggleWish() {
 
 <style scoped>
 .product-card {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-width: 0;
   color: var(--ink);
 }
 
@@ -81,19 +84,24 @@ function toggleWish() {
   overflow: hidden;
   background: var(--surface);
   margin-bottom: 0.75rem;
+  width: 100%;
   aspect-ratio: 3 / 4;
+  flex-shrink: 0;
 }
 
 .product-image-link {
+  position: absolute;
+  inset: 0;
   display: block;
-  width: 100%;
-  height: 100%;
 }
 
 .product-media img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center top;
   transition: transform 0.65s var(--ease);
 }
 

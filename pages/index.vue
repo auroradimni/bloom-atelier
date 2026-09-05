@@ -244,12 +244,14 @@ function getCover(slug) {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1.25rem;
+  align-items: stretch;
 }
 
 .product-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1.5rem 1.25rem;
+  align-items: stretch;
 }
 
 .editorial {

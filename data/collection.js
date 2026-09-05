@@ -33,7 +33,7 @@ export const products = [
     name: 'Cream Pleated Skirt',
     image: '/images/skirt-2.jpg',
     description: 'Cream pleated skirt with asymmetric details.',
-    price: '€119',
+    price: '2.400 Lek',
     isNew: true,
     colors: ['#f7f4ef', '#b07a66']
   },
@@ -43,7 +43,7 @@ export const products = [
     name: 'Red Skirt Set',
     image: '/images/skirt-3.jpg',
     description: 'Red skirt with tailored vest for special occasions.',
-    price: '€149',
+    price: '2.800 Lek',
     isNew: false,
     colors: ['#8b2635', '#141210']
   },
@@ -53,7 +53,7 @@ export const products = [
     name: 'Evening Star Dress',
     image: '/images/dress-1.jpg',
     description: 'White dress with pleated ruffle hem from the spring collection.',
-    price: '€189',
+    price: '3.200 Lek',
     isNew: true,
     colors: ['#ffffff']
   },
@@ -63,7 +63,7 @@ export const products = [
     name: 'Grey Oversized Coat',
     image: '/images/coat-1.jpg',
     description: 'Long wool coat in an oversized urban silhouette.',
-    price: '€249',
+    price: '3.900 Lek',
     isNew: false,
     colors: ['#9a8f86', '#141210']
   },
@@ -73,7 +73,7 @@ export const products = [
     name: 'Dark Brown Leather Tote',
     image: '/images/tote-1.jpg',
     description: 'Structured winged tote in smooth chocolate leather with a gold turn-lock closure.',
-    price: '€169',
+    price: '3.500 Lek',
     isNew: true,
     colors: ['#3d2419', '#141210']
   },
@@ -83,7 +83,7 @@ export const products = [
     name: 'Wide-Leg Indigo Jeans',
     image: '/images/denim-1.jpg',
     description: 'High-waisted puddle jeans in dark indigo denim with a relaxed wide-leg silhouette.',
-    price: '€129',
+    price: '2.200 Lek',
     isNew: true,
     colors: ['#1a2744', '#141210']
   },
@@ -93,7 +93,7 @@ export const products = [
     name: 'Champagne Silk Slip Dress',
     image: '/images/dress-2.jpg',
     description: 'Floor-length slip dress in shimmering champagne silk with a deep V-neck and gathered bust.',
-    price: '€199',
+    price: '3.600 Lek',
     isNew: true,
     colors: ['#e8d5a3', '#141210']
   }
