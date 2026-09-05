@@ -1,12 +1,8 @@
 <template>
   <div class="home">
     <section class="mosaic page-shell">
-      <NuxtLink v-scroll-reveal to="/collection/dress" class="mosaic-item mosaic-tall">
-        <img src="/images/dress-1.jpg" alt="Dress" />
-      </NuxtLink>
-
       <NuxtLink
-        v-scroll-reveal="{ delay: 100 }"
+        v-scroll-reveal
         to="/collection"
         class="mosaic-item mosaic-promo"
       >
@@ -15,21 +11,12 @@
         <span class="promo-link">Shop Now</span>
       </NuxtLink>
 
-      <NuxtLink v-scroll-reveal="{ delay: 160 }" to="/collection/skirt" class="mosaic-item mosaic-sm">
+      <NuxtLink v-scroll-reveal="{ delay: 100 }" to="/collection/skirt" class="mosaic-item mosaic-sm">
         <img src="/images/skirt-3.jpg" alt="Skirt" />
       </NuxtLink>
 
-      <NuxtLink v-scroll-reveal="{ delay: 220 }" to="/collection/coats" class="mosaic-item mosaic-sm">
+      <NuxtLink v-scroll-reveal="{ delay: 160 }" to="/collection/coats" class="mosaic-item mosaic-sm">
         <img src="/images/coat-1.jpg" alt="Coats" />
-      </NuxtLink>
-
-      <NuxtLink
-        v-scroll-reveal="{ delay: 280, variant: 'scale' }"
-        to="/collection/skirt"
-        class="mosaic-item mosaic-wide"
-      >
-        <img src="/images/skirt-2.jpg" alt="Skirt" />
-        <span class="mosaic-caption">Love, love, love</span>
       </NuxtLink>
     </section>
 
@@ -156,18 +143,8 @@ function getCover(slug) {
   transform: scale(1.05);
 }
 
-.mosaic-tall {
-  grid-column: span 5;
-  grid-row: span 2;
-  min-height: 380px;
-}
-
-.mosaic-tall img {
-  min-height: 380px;
-}
-
 .mosaic-promo {
-  grid-column: span 4;
+  grid-column: span 6;
   grid-row: span 2;
   min-height: 380px;
   background: var(--wine);
@@ -210,20 +187,6 @@ function getCover(slug) {
 
 .mosaic-sm {
   grid-column: span 3;
-}
-
-.mosaic-wide {
-  grid-column: span 6;
-}
-
-.mosaic-caption {
-  position: absolute;
-  left: 1rem;
-  bottom: 1rem;
-  font-family: var(--font-script);
-  font-size: 1.45rem;
-  color: var(--surface);
-  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.35);
 }
 
 .shop-section {
@@ -400,16 +363,13 @@ blockquote cite {
     grid-template-columns: 1fr 1fr;
   }
 
-  .mosaic-tall,
   .mosaic-promo,
-  .mosaic-sm,
-  .mosaic-wide {
+  .mosaic-sm {
     grid-column: span 2;
     grid-row: span 1;
     min-height: 260px;
   }
 
-  .mosaic-tall img,
   .mosaic-promo {
     min-height: 260px;
   }
