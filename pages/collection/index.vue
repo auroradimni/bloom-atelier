@@ -1,36 +1,39 @@
 <template>
   <div class="collection-page">
-    <header class="collection-header">
-      <h2>Koleksioni i Fundit</h2>
-      <p>Zgjidh kategorinë dhe shiko modelet e reja të Bloom Atelier.</p>
-    </header>
+    <section class="page-intro page-shell">
+      <p class="eyebrow fade-up">Lookbook</p>
+      <h1 class="fade-up fade-up-delay-1">Koleksioni</h1>
+      <p class="fade-up fade-up-delay-2">
+        Tre kategori, një vizion — linja të pastra dhe silueta që mbeten relevante.
+      </p>
+    </section>
 
-    <div class="category-grid">
+    <section class="editorial-grid page-shell">
       <NuxtLink
-        v-for="category in categories"
+        v-for="(category, index) in categories"
         :key="category.slug"
         :to="`/collection/${category.slug}`"
-        class="category-card"
+        class="editorial-card"
+        :class="`span-${index + 1}`"
       >
         <img
           :src="getCategoryCover(category.slug)"
           :alt="category.title"
-          class="category-cover"
         />
-        <div class="category-info">
-          <h3>{{ category.title }}</h3>
-          <p>{{ category.subtitle }}</p>
-          <span>{{ getProductsByCategory(category.slug).length }} modele</span>
+        <div class="editorial-overlay">
+          <span>0{{ index + 1 }}</span>
+          <h2>{{ category.title }}</h2>
+          <p>{{ getProductsByCategory(category.slug).length }} modele</p>
         </div>
       </NuxtLink>
-    </div>
+    </section>
   </div>
 </template>
 
 <script setup>
 import { categories, getProductsByCategory } from '~/data/collection'
 
-useHead({ title: 'Koleksioni i Fundit - Bloom Atelier' })
+useHead({ title: 'Koleksioni - Bloom Atelier' })
 
 function getCategoryCover(slug) {
   return getProductsByCategory(slug)[0]?.image || '/images/dress-1.jpg'
@@ -39,78 +42,88 @@ function getCategoryCover(slug) {
 
 <style scoped>
 .collection-page {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 4rem 2rem;
+  padding-bottom: clamp(4rem, 8vw, 6rem);
 }
 
-.collection-header {
-  text-align: center;
-  margin-bottom: 3rem;
-}
-
-.collection-header h2 {
-  font-family: var(--font-display);
-  font-size: 2.8rem;
-  font-weight: 300;
-  color: var(--deep);
-  margin-bottom: 0.75rem;
-}
-
-.collection-header p {
-  color: var(--muted);
-}
-
-.category-grid {
+.editorial-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1rem;
 }
 
-.category-card {
-  display: block;
-  text-decoration: none;
-  background: var(--white);
-  border: 1px solid var(--blush);
-  border-radius: 2px;
+.editorial-card {
+  position: relative;
   overflow: hidden;
-  transition: box-shadow 0.2s, transform 0.2s;
+  text-decoration: none;
+  min-height: 420px;
 }
 
-.category-card:hover {
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-  transform: translateY(-2px);
-}
-
-.category-cover {
+.editorial-card img {
   width: 100%;
-  height: 320px;
+  height: 100%;
+  min-height: 420px;
   object-fit: cover;
-  display: block;
+  transition: transform 0.8s var(--ease);
 }
 
-.category-info {
-  padding: 1.25rem 1.5rem 1.5rem;
+.editorial-card:hover img {
+  transform: scale(1.04);
 }
 
-.category-info h3 {
-  font-family: var(--font-display);
-  font-size: 1.8rem;
-  font-weight: 400;
-  color: var(--deep);
-  margin-bottom: 0.35rem;
+.editorial-overlay {
+  position: absolute;
+  inset: auto 0 0;
+  padding: 1.5rem;
+  background: linear-gradient(to top, rgba(20, 18, 16, 0.72), transparent);
+  color: var(--surface);
 }
 
-.category-info p {
-  color: var(--muted);
-  font-size: 0.9rem;
-  margin-bottom: 0.75rem;
-}
-
-.category-info span {
-  font-size: 0.75rem;
-  letter-spacing: 0.1em;
+.editorial-overlay span {
+  font-size: 0.68rem;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: var(--rose);
+  opacity: 0.8;
+}
+
+.editorial-overlay h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 300;
+  line-height: 1;
+  margin: 0.35rem 0;
+}
+
+.editorial-overlay p {
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+.span-1 {
+  grid-column: span 7;
+}
+
+.span-2 {
+  grid-column: span 5;
+}
+
+.span-3 {
+  grid-column: span 12;
+  min-height: 360px;
+}
+
+.span-3 img {
+  min-height: 360px;
+}
+
+@media (max-width: 900px) {
+  .editorial-card,
+  .span-1,
+  .span-2,
+  .span-3 {
+    grid-column: span 12;
+    min-height: 320px;
+  }
 }
 </style>

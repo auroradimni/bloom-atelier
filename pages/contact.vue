@@ -1,7 +1,8 @@
 <template>
-  <section class="section" id="porosia">
+  <section class="section page-shell">
+    <p class="eyebrow">Kontakt</p>
     <h2>Porosit produktet tona</h2>
-    <p>Zgjidhni njërën nga opsionet më poshtë për të porositur produkte ose për të rezervuar një takim.</p>
+    <p>Zgjidhni opsionin më poshtë për të porositur produkte ose për të rezervuar një takim.</p>
 
     <div class="forms-container">
       <div class="form-column">

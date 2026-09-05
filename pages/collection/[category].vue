@@ -1,28 +1,36 @@
 <template>
   <div class="category-page">
-    <NuxtLink to="/collection" class="back-link">← Kthehu te koleksioni</NuxtLink>
+    <section class="page-intro page-shell">
+      <NuxtLink to="/collection" class="text-link back-link">Kthehu</NuxtLink>
+      <p v-if="category" class="eyebrow fade-up">{{ category.title }}</p>
+      <h1 v-if="category" class="fade-up fade-up-delay-1">{{ category.title }}</h1>
+      <p v-if="category" class="fade-up fade-up-delay-2">{{ category.subtitle }}</p>
+    </section>
 
-    <header v-if="category" class="category-header">
-      <h2>{{ category.title }}</h2>
-      <p>{{ category.subtitle }}</p>
-    </header>
-
-    <div v-if="items.length" class="product-grid">
-      <article v-for="item in items" :key="item.id" class="product-card">
-        <img :src="item.image" :alt="item.name" />
-        <div class="product-info">
-          <h3>{{ item.name }}</h3>
+    <section v-if="items.length" class="lookbook page-shell">
+      <article
+        v-for="(item, index) in items"
+        :key="item.id"
+        class="look-item"
+        :class="{ featured: index === 0 && items.length > 1 }"
+      >
+        <div class="look-image">
+          <img :src="item.image" :alt="item.name" />
+        </div>
+        <div class="look-copy">
+          <span class="eyebrow">Look 0{{ index + 1 }}</span>
+          <h2>{{ item.name }}</h2>
           <p>{{ item.description }}</p>
         </div>
       </article>
-    </div>
+    </section>
 
-    <p v-else class="empty-state">Nuk ka produkte në këtë kategori.</p>
+    <p v-else class="empty page-shell">Nuk ka produkte në këtë kategori.</p>
   </div>
 </template>
 
 <script setup>
-import { categories, getCategory, getProductsByCategory } from '~/data/collection'
+import { getCategory, getProductsByCategory } from '~/data/collection'
 
 const route = useRoute()
 const slug = computed(() => String(route.params.category))
@@ -38,79 +46,73 @@ useHead(() => ({
 
 <style scoped>
 .category-page {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 4rem 2rem;
+  padding-bottom: clamp(4rem, 8vw, 6rem);
 }
 
 .back-link {
-  display: inline-block;
   margin-bottom: 2rem;
-  color: var(--muted);
-  text-decoration: none;
-  font-size: 0.85rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
 }
 
-.back-link:hover {
-  color: var(--rose);
+.back-link::after {
+  content: '←';
 }
 
-.category-header {
-  margin-bottom: 2.5rem;
+.back-link:hover::after {
+  transform: translateX(-4px);
 }
 
-.category-header h2 {
-  font-family: var(--font-display);
-  font-size: 2.8rem;
-  font-weight: 300;
-  color: var(--deep);
-  margin-bottom: 0.5rem;
-}
-
-.category-header p {
-  color: var(--muted);
-}
-
-.product-grid {
+.lookbook {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1.5rem;
+  gap: clamp(2rem, 5vw, 4rem);
 }
 
-.product-card {
-  background: var(--white);
-  border: 1px solid var(--blush);
-  border-radius: 2px;
-  overflow: hidden;
+.look-item {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  align-items: end;
+  padding-top: 2rem;
+  border-top: 1px solid var(--line);
 }
 
-.product-card img {
+.look-item.featured {
+  grid-template-columns: 1fr;
+  align-items: stretch;
+}
+
+.look-item.featured .look-image img {
+  aspect-ratio: 16 / 10;
+}
+
+.look-image img {
   width: 100%;
-  height: 360px;
+  aspect-ratio: 4 / 5;
   object-fit: cover;
-  display: block;
 }
 
-.product-info {
-  padding: 1.25rem 1.5rem 1.5rem;
-}
-
-.product-info h3 {
+.look-copy h2 {
   font-family: var(--font-display);
-  font-size: 1.4rem;
-  font-weight: 400;
-  color: var(--deep);
-  margin-bottom: 0.5rem;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 300;
+  line-height: 1.05;
+  color: var(--ink);
+  margin: 0.75rem 0;
 }
 
-.product-info p {
-  color: var(--muted);
-  font-size: 0.9rem;
+.look-copy p {
+  max-width: 30rem;
+  color: var(--stone);
 }
 
-.empty-state {
-  color: var(--muted);
+.empty {
+  color: var(--stone);
+  padding-bottom: 4rem;
+}
+
+@media (max-width: 900px) {
+  .look-item,
+  .look-item.featured {
+    grid-template-columns: 1fr;
+  }
 }
 </style>
