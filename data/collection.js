@@ -13,6 +13,16 @@ export const categories = [
     slug: 'coats',
     title: 'Coats',
     subtitle: 'Luxury coats for the cold season'
+  },
+  {
+    slug: 'denim',
+    title: 'Denim',
+    subtitle: 'Modern denim with a relaxed silhouette'
+  },
+  {
+    slug: 'accessories',
+    title: 'Accessories',
+    subtitle: 'Leather bags and refined everyday essentials'
   }
 ]
 
@@ -56,6 +66,36 @@ export const products = [
     price: '€249',
     isNew: false,
     colors: ['#9a8f86', '#141210']
+  },
+  {
+    id: 'tote-1',
+    category: 'accessories',
+    name: 'Dark Brown Leather Tote',
+    image: '/images/tote-1.jpg',
+    description: 'Structured winged tote in smooth chocolate leather with a gold turn-lock closure.',
+    price: '€169',
+    isNew: true,
+    colors: ['#3d2419', '#b8860b']
+  },
+  {
+    id: 'denim-1',
+    category: 'denim',
+    name: 'Wide-Leg Indigo Jeans',
+    image: '/images/denim-1.jpg',
+    description: 'High-waisted puddle jeans in dark indigo denim with a relaxed wide-leg silhouette.',
+    price: '€129',
+    isNew: true,
+    colors: ['#1a2744', '#141210']
+  },
+  {
+    id: 'dress-2',
+    category: 'dress',
+    name: 'Champagne Silk Slip Dress',
+    image: '/images/dress-2.jpg',
+    description: 'Floor-length slip dress in shimmering champagne silk with a deep V-neck and gathered bust.',
+    price: '€199',
+    isNew: true,
+    colors: ['#e8d5a3', '#f5e6c8']
   }
 ]
 

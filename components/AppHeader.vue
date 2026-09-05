@@ -48,7 +48,7 @@
           ref="searchInput"
           v-model="query"
           type="search"
-          placeholder="Search dresses, skirts, coats..."
+          placeholder="Search dresses, skirts, denim, accessories..."
           aria-label="Search products"
         />
         <button type="submit" class="search-submit">Go</button>
@@ -73,6 +73,8 @@
       <NuxtLink to="/collection/dress" @click="closeMenu">Dress</NuxtLink>
       <NuxtLink to="/collection/skirt" @click="closeMenu">Skirt</NuxtLink>
       <NuxtLink to="/collection/coats" @click="closeMenu">Coats</NuxtLink>
+      <NuxtLink to="/collection/denim" @click="closeMenu">Denim</NuxtLink>
+      <NuxtLink to="/collection/accessories" @click="closeMenu">Accessories</NuxtLink>
       <NuxtLink to="/courses" @click="closeMenu">Courses</NuxtLink>
       <NuxtLink to="/stylists" @click="closeMenu">Stylists</NuxtLink>
       <NuxtLink to="/contact" @click="closeMenu">Contact</NuxtLink>
@@ -130,6 +132,10 @@ function onSearch() {
     router.push('/collection/skirt')
   } else if (term.includes('coat')) {
     router.push('/collection/coats')
+  } else if (term.includes('denim') || term.includes('jean')) {
+    router.push('/collection/denim')
+  } else if (term.includes('access') || term.includes('bag') || term.includes('tote')) {
+    router.push('/collection/accessories')
   } else {
     router.push('/collection')
   }
