@@ -42,7 +42,7 @@ import { categories, getProductsByCategory, products } from '~/data/collection'
 useHead({ title: 'Collection - Bloom Atelier' })
 
 function getCategoryCover(slug) {
-  return getProductsByCategory(slug)[0]?.image || '/images/dress-1.jpg'
+  return getProductsByCategory(slug)[0]?.image || '/images/skirt-2.jpg'
 }
 </script>
 

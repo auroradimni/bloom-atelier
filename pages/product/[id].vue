@@ -36,6 +36,8 @@
             <button type="submit" class="btn-solid">Add to bag</button>
             <button type="button" class="btn-ghost" @click="checkoutNow">Checkout</button>
           </div>
+
+          <p v-if="added" class="added-note">Added to your bag.</p>
         </form>
       </div>
     </div>
@@ -64,6 +66,8 @@ useHead(() => ({
 function addToBag() {
   if (!product.value || !size.value) return
   addItem(product.value, size.value)
+  added.value = true
+  setTimeout(() => added.value = false, 2500)
 }
 
 function checkoutNow() {
@@ -95,6 +99,7 @@ function checkoutNow() {
 
 .product-gallery img {
   width: 100%;
+  max-height: min(420px, 52vh);
   aspect-ratio: 3 / 4;
   object-fit: cover;
 }
@@ -152,6 +157,12 @@ function checkoutNow() {
 
 .empty {
   color: var(--stone);
+}
+
+.added-note {
+  margin-top: 0.75rem;
+  font-size: 0.82rem;
+  color: var(--accent);
 }
 
 @media (max-width: 900px) {

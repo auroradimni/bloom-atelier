@@ -18,15 +18,6 @@
       <NuxtLink v-scroll-reveal="{ delay: 160 }" to="/collection/coats" class="mosaic-item mosaic-sm">
         <img src="/images/coat-1.jpg" alt="Coats" />
       </NuxtLink>
-
-      <NuxtLink
-        v-scroll-reveal="{ delay: 220, variant: 'scale' }"
-        to="/collection/skirt"
-        class="mosaic-item mosaic-wide"
-      >
-        <img src="/images/skirt-2.jpg" alt="Skirt" />
-        <span class="mosaic-caption">Love, love, love</span>
-      </NuxtLink>
     </section>
 
     <section v-scroll-reveal class="shop-section page-shell">
@@ -100,14 +91,8 @@ useHead({ title: 'Bloom Atelier — Minimalist Fashion' })
 const newArrivals = products.filter((item) => item.isNew)
 const loved = [...products].reverse()
 
-const reviews = [
-  { name: 'Elira M.', text: 'Exceptional quality and style that lasts.' },
-  { name: 'Sara K.', text: 'Bloom Atelier is my go-to for elegance.' },
-  { name: 'Diana R.', text: 'The most beautiful dress I bought this year.' }
-]
-
 function getCover(slug) {
-  return getProductsByCategory(slug)[0]?.image || '/images/dress-1.jpg'
+  return getProductsByCategory(slug)[0]?.image || '/images/skirt-2.jpg'
 }
 </script>
 
@@ -186,20 +171,6 @@ function getCover(slug) {
 
 .mosaic-sm {
   grid-column: span 3;
-}
-
-.mosaic-wide {
-  grid-column: span 12;
-}
-
-.mosaic-caption {
-  position: absolute;
-  left: 1rem;
-  bottom: 1rem;
-  font-family: var(--font-script);
-  font-size: 1.45rem;
-  color: var(--surface);
-  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.35);
 }
 
 .shop-section {
@@ -324,43 +295,6 @@ function getCover(slug) {
   transform: scale(1.04);
 }
 
-.quote-section {
-  padding: clamp(2.5rem, 6vw, 4rem) 0 clamp(3rem, 7vw, 5rem);
-  border-top: 1px solid var(--line);
-  text-align: center;
-}
-
-.quote-label {
-  font-size: 0.62rem;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: var(--stone);
-  margin-bottom: 2rem;
-}
-
-.quote-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-  text-align: left;
-}
-
-blockquote p {
-  font-family: var(--font-display);
-  font-size: 1.15rem;
-  line-height: 1.5;
-  color: var(--ink);
-  margin-bottom: 0.75rem;
-}
-
-blockquote cite {
-  font-size: 0.72rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--stone);
-  font-style: normal;
-}
-
 @media (max-width: 1024px) {
   .product-track {
     grid-template-columns: repeat(3, 1fr);
@@ -377,8 +311,7 @@ blockquote cite {
   }
 
   .mosaic-promo,
-  .mosaic-sm,
-  .mosaic-wide {
+  .mosaic-sm {
     grid-column: span 2;
     grid-row: span 1;
     min-height: 260px;
@@ -389,8 +322,7 @@ blockquote cite {
   }
 
   .shop-grid,
-  .editorial,
-  .quote-grid {
+  .editorial {
     grid-template-columns: 1fr;
   }
 

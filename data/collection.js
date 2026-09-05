@@ -18,16 +18,6 @@ export const categories = [
 
 export const products = [
   {
-    id: 'skirt-1',
-    category: 'skirt',
-    name: 'White Pleated Skirt Set',
-    image: '/images/skirt-1.jpg',
-    description: 'White sleeveless vest and pleated skirt set.',
-    price: '€129',
-    isNew: true,
-    colors: ['#ffffff', '#141210']
-  },
-  {
     id: 'skirt-2',
     category: 'skirt',
     name: 'Cream Pleated Skirt',
