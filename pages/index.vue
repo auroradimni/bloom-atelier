@@ -72,15 +72,7 @@
           <h2>Most Loved</h2>
         </div>
 
-        <ProductCard
-          v-if="lovedFeatured"
-          v-scroll-reveal
-          :product="lovedFeatured"
-          :to="`/product/${lovedFeatured.id}`"
-          layout="featured"
-        />
-
-        <div v-if="lovedRest.length" class="most-loved-carousel">
+        <div class="most-loved-carousel">
           <button
             type="button"
             class="carousel-arrow carousel-arrow--prev"
@@ -95,9 +87,25 @@
 
           <div ref="trackRef" class="most-loved-track" @scroll="updateScrollState">
             <ProductCard
-              v-for="(item, index) in lovedRest"
+              v-for="(item, index) in lovedLeft"
               :key="item.id"
-              v-scroll-reveal="{ delay: index * 70 }"
+              v-scroll-reveal="{ delay: index * 60 }"
+              :product="item"
+              :to="`/product/${item.id}`"
+            />
+
+            <ProductCard
+              v-if="lovedFeatured"
+              v-scroll-reveal
+              :product="lovedFeatured"
+              :to="`/product/${lovedFeatured.id}`"
+              layout="featured"
+            />
+
+            <ProductCard
+              v-for="(item, index) in lovedRight"
+              :key="item.id"
+              v-scroll-reveal="{ delay: index * 60 }"
               :product="item"
               :to="`/product/${item.id}`"
             />
@@ -128,7 +136,16 @@ useHead({ title: 'Bloom Atelier — Minimalist Fashion' })
 const newArrivals = products.filter((item) => item.isNew)
 const loved = [...products].reverse()
 const lovedFeatured = computed(() => loved[0] ?? null)
-const lovedRest = computed(() => loved.slice(1))
+const lovedLeft = computed(() => {
+  const rest = loved.slice(1)
+  const split = Math.floor(rest.length / 2)
+  return rest.slice(0, split)
+})
+const lovedRight = computed(() => {
+  const rest = loved.slice(1)
+  const split = Math.floor(rest.length / 2)
+  return rest.slice(split)
+})
 
 const trackRef = ref(null)
 const canScrollPrev = ref(false)
@@ -156,14 +173,28 @@ function scrollTrack(direction) {
 
 onMounted(() => {
   nextTick(() => {
+    centerFeatured()
     updateScrollState()
-    window.addEventListener('resize', updateScrollState)
+    window.addEventListener('resize', onResize)
   })
 })
 
 onBeforeUnmount(() => {
-  window.removeEventListener('resize', updateScrollState)
+  window.removeEventListener('resize', onResize)
 })
+
+function onResize() {
+  updateScrollState()
+}
+
+function centerFeatured() {
+  const track = trackRef.value
+  const featured = track?.querySelector('.product-card--featured')
+  if (!track || !featured) return
+
+  const left = featured.offsetLeft - (track.clientWidth - featured.offsetWidth) / 2
+  track.scrollLeft = Math.max(0, left)
+}
 
 function getCover(slug) {
   return getProductsByCategory(slug)[0]?.image || '/images/skirt-2.jpg'
@@ -333,17 +364,17 @@ function getCover(slug) {
 
 .most-loved-carousel {
   position: relative;
-  margin-top: 1.5rem;
 }
 
 .most-loved-track {
   display: flex;
+  align-items: flex-end;
   gap: 1.25rem;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   overscroll-behavior-x: contain;
   scrollbar-width: none;
-  padding: 0.15rem 0;
+  padding: 0.15rem 0 0.35rem;
 }
 
 .most-loved-track::-webkit-scrollbar {
@@ -351,8 +382,24 @@ function getCover(slug) {
 }
 
 .most-loved-track :deep(.product-card) {
-  flex: 0 0 min(260px, 78vw);
+  flex: 0 0 min(220px, 58vw);
   scroll-snap-align: start;
+}
+
+.most-loved-track :deep(.product-card--featured) {
+  flex: 0 0 min(380px, 82vw);
+  scroll-snap-align: center;
+}
+
+.most-loved-track :deep(.product-card--featured .product-media) {
+  height: 0;
+  padding-top: 145%;
+  aspect-ratio: unset;
+  max-height: none;
+}
+
+.most-loved-track :deep(.product-card--featured .product-meta h3) {
+  font-size: clamp(1.1rem, 2vw, 1.45rem);
 }
 
 .carousel-arrow {
