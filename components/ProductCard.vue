@@ -78,15 +78,18 @@ function toggleWish() {
   overflow: hidden;
   background: var(--surface);
   margin-bottom: 0.75rem;
+  aspect-ratio: 3 / 4;
 }
 
 .product-image-link {
   display: block;
+  width: 100%;
+  height: 100%;
 }
 
 .product-media img {
   width: 100%;
-  aspect-ratio: 3 / 4;
+  height: 100%;
   object-fit: cover;
   transition: transform 0.65s var(--ease);
 }
@@ -114,6 +117,9 @@ function toggleWish() {
   right: 0.55rem;
   width: 34px;
   height: 34px;
+  min-width: 34px;
+  min-height: 34px;
+  padding: 0;
   border: 0;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.92);
@@ -125,6 +131,11 @@ function toggleWish() {
   transform: translateY(-4px);
   transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
   z-index: 3;
+  flex-shrink: 0;
+  aspect-ratio: 1;
+  letter-spacing: 0;
+  text-transform: none;
+  align-self: auto;
 }
 
 .wishlist svg {
@@ -190,6 +201,10 @@ function toggleWish() {
 .swatches span {
   width: 14px;
   height: 14px;
+  min-width: 14px;
+  min-height: 14px;
+  flex-shrink: 0;
+  aspect-ratio: 1;
   border-radius: 50%;
   border: 1px solid var(--line);
 }
