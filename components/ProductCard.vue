@@ -1,5 +1,9 @@
 <template>
-  <article class="product-card" :class="{ compact }">
+  <article
+    class="product-card"
+    :class="{ compact, 'product-card--rail': layout === 'rail' }"
+    :style="railStyle"
+  >
     <div class="product-media">
       <NuxtLink v-if="to" :to="to" class="product-image-link" :aria-label="`View ${product.name}`">
         <img :src="product.image" :alt="product.name" loading="lazy" />
@@ -58,8 +62,14 @@
 const props = defineProps({
   product: { type: Object, required: true },
   to: { type: String, default: '' },
-  compact: { type: Boolean, default: false }
+  compact: { type: Boolean, default: false },
+  layout: { type: String, default: 'grid' },
+  railWidth: { type: Number, default: 160 }
 })
+
+const railStyle = computed(() =>
+  props.layout === 'rail' ? { '--rail-width': `${props.railWidth}px` } : {}
+)
 
 const { toggle, isSaved } = useWishlist()
 
@@ -227,6 +237,35 @@ function toggleWish() {
 
 .compact .product-meta h3 {
   font-size: 0.88rem;
+}
+
+.product-card--rail {
+  width: var(--rail-width, 160px);
+  flex-shrink: 0;
+}
+
+.product-card--rail .product-media {
+  aspect-ratio: unset;
+  height: clamp(188px, 26vh, 228px);
+  width: 100%;
+}
+
+.product-card--rail .product-meta h3 {
+  font-size: 0.78rem;
+  line-height: 1.3;
+  margin-bottom: 0.25rem;
+}
+
+.product-card--rail .price {
+  font-size: 0.68rem;
+  margin-bottom: 0.45rem;
+}
+
+.product-card--rail .swatches span {
+  width: 11px;
+  height: 11px;
+  min-width: 11px;
+  min-height: 11px;
 }
 
 @media (hover: none) {

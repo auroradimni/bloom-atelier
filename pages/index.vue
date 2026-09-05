@@ -44,13 +44,15 @@
       <div class="section-head page-shell">
         <h2>New Arrivals</h2>
       </div>
-      <div class="product-track page-shell">
+      <div class="product-rail page-shell">
         <ProductCard
           v-for="(item, index) in newArrivals"
           :key="item.id"
           v-scroll-reveal="{ delay: index * 70, variant: 'scale' }"
           :product="item"
           :to="`/product/${item.id}`"
+          layout="rail"
+          :rail-width="railWidths[index % railWidths.length]"
         />
       </div>
     </section>
@@ -70,13 +72,15 @@
       <div class="section-head">
         <h2>Most Loved</h2>
       </div>
-      <div class="product-grid">
+      <div class="product-rail">
         <ProductCard
           v-for="(item, index) in loved"
           :key="item.id"
           v-scroll-reveal="{ delay: index * 80 }"
           :product="item"
           :to="`/product/${item.id}`"
+          layout="rail"
+          :rail-width="railWidths[index % railWidths.length]"
         />
       </div>
     </section>
@@ -90,6 +94,7 @@ useHead({ title: 'Bloom Atelier — Minimalist Fashion' })
 
 const newArrivals = products.filter((item) => item.isNew)
 const loved = [...products].reverse()
+const railWidths = [148, 176, 132, 168, 156, 184, 140, 172]
 
 function getCover(slug) {
   return getProductsByCategory(slug)[0]?.image || '/images/skirt-2.jpg'
@@ -240,18 +245,29 @@ function getCover(slug) {
   text-transform: uppercase;
 }
 
-.product-track {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.25rem;
-  align-items: stretch;
+.product-rail {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.75rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  padding: 0.15rem 0 0.85rem;
+  scrollbar-width: thin;
 }
 
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem 1.25rem;
-  align-items: stretch;
+.product-rail :deep(.product-card) {
+  scroll-snap-align: start;
+}
+
+.product-rail::-webkit-scrollbar {
+  height: 4px;
+}
+
+.product-rail::-webkit-scrollbar-thumb {
+  background: rgba(20, 18, 16, 0.18);
+  border-radius: 999px;
 }
 
 .editorial {
@@ -297,12 +313,6 @@ function getCover(slug) {
   transform: scale(1.04);
 }
 
-@media (max-width: 1024px) {
-  .product-track {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
 @media (max-width: 900px) {
   .mosaic {
     grid-template-columns: 1fr 1fr;
@@ -322,17 +332,6 @@ function getCover(slug) {
   .shop-grid,
   .editorial {
     grid-template-columns: 1fr;
-  }
-
-  .product-track {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-
-  .product-grid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
   }
 }
 </style>
