@@ -75,7 +75,7 @@ export const products = [
     description: 'Structured winged tote in smooth chocolate leather with a gold turn-lock closure.',
     price: '€169',
     isNew: true,
-    colors: ['#3d2419', '#b8860b']
+    colors: ['#3d2419', '#141210']
   },
   {
     id: 'denim-1',
@@ -95,7 +95,7 @@ export const products = [
     description: 'Floor-length slip dress in shimmering champagne silk with a deep V-neck and gathered bust.',
     price: '€199',
     isNew: true,
-    colors: ['#e8d5a3', '#f5e6c8']
+    colors: ['#e8d5a3', '#141210']
   }
 ]
 

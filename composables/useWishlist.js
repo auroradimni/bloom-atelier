@@ -1,8 +1,25 @@
+import { getProduct } from '~/data/collection'
+
 const STORAGE_KEY = 'bloom-wishlist'
 
 function saveWishlist(items) {
   if (import.meta.client) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(items))
+  }
+}
+
+function toWishlistItem(product) {
+  const catalog = getProduct(product.id)
+  const source = catalog ? { ...catalog, ...product } : product
+
+  return {
+    id: source.id,
+    category: source.category,
+    name: source.name,
+    image: source.image,
+    price: source.price,
+    isNew: source.isNew ?? false,
+    colors: Array.isArray(source.colors) ? source.colors : []
   }
 }
 
@@ -21,13 +38,7 @@ export function useWishlist() {
     if (index >= 0) {
       wishlist.value.splice(index, 1)
     } else {
-      wishlist.value.push({
-        id: product.id,
-        category: product.category,
-        name: product.name,
-        image: product.image,
-        price: product.price
-      })
+      wishlist.value.push(toWishlistItem(product))
     }
 
     saveWishlist(wishlist.value)
@@ -43,5 +54,5 @@ export function useWishlist() {
     saveWishlist(wishlist.value)
   }
 
-  return { wishlist, count, isSaved, toggle, remove, clearWishlist }
+  return { wishlist, count, isSaved, toggle, remove, clearWishlist, toWishlistItem }
 }
