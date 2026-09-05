@@ -20,7 +20,6 @@
         <div>
           <p class="eyebrow">Kontakt</p>
           <p>info@ateliebloom.al</p>
-          <p>+355 69 123 4567</p>
         </div>
         <div>
           <p class="eyebrow">Linqe</p>
