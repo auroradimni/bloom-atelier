@@ -2,9 +2,10 @@
   "name": "bloom-atelier",
   "private": true,
   "scripts": {
-    "dev": "nuxt dev",
+    "dev": "nuxt dev --host 0.0.0.0",
     "build": "nuxt build",
-    "preview": "nuxt preview"
+    "preview": "nuxt preview",
+    "postinstall": "chmod +x node_modules/.bin/* 2>/dev/null || true"
   },
   "devDependencies": {
     "nuxt": "^3.11.0"
