@@ -6,7 +6,7 @@
     </header>
 
     <figure>
-      <img src="/assets/fustan.jpg" alt="Pamje nga koleksioni i fundit" />
+      <img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800&q=80" alt="Pamje nga koleksioni i fundit" />
       <figcaption>
         Fustani "Yll i mbrëmjes" – pjesë e koleksionit pranveror 2025
       </figcaption>
