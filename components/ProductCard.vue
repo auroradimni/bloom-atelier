@@ -1,18 +1,18 @@
 <template>
-  <component
-    :is="to ? 'NuxtLink' : 'article'"
-    :to="to"
-    class="product-card"
-    :class="{ compact }"
-  >
+  <article class="product-card" :class="{ compact }">
     <div class="product-media">
-      <img :src="product.image" :alt="product.name" loading="lazy" />
+      <NuxtLink v-if="to" :to="to" class="product-image-link" :aria-label="`View ${product.name}`">
+        <img :src="product.image" :alt="product.name" loading="lazy" />
+      </NuxtLink>
+      <img v-else :src="product.image" :alt="product.name" loading="lazy" />
+
       <span v-if="product.isNew" class="badge">New</span>
+
       <button
         type="button"
         class="wishlist"
         aria-label="Add to wishlist"
-        @click.prevent="toggleWish"
+        @click.stop.prevent="toggleWish"
       >
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <path
@@ -23,10 +23,23 @@
           />
         </svg>
       </button>
-      <span class="quick-view">View</span>
+
+      <NuxtLink v-if="to" :to="to" class="quick-view">View</NuxtLink>
     </div>
 
-    <div class="product-meta">
+    <NuxtLink v-if="to" :to="to" class="product-meta">
+      <h3>{{ product.name }}</h3>
+      <p class="price">{{ product.price }}</p>
+      <div v-if="product.colors?.length" class="swatches">
+        <span
+          v-for="color in product.colors"
+          :key="color"
+          :style="{ background: color }"
+        />
+      </div>
+    </NuxtLink>
+
+    <div v-else class="product-meta">
       <h3>{{ product.name }}</h3>
       <p class="price">{{ product.price }}</p>
       <div v-if="product.colors?.length" class="swatches">
@@ -37,11 +50,11 @@
         />
       </div>
     </div>
-  </component>
+  </article>
 </template>
 
 <script setup>
-const props = defineProps({
+defineProps({
   product: { type: Object, required: true },
   to: { type: String, default: '' },
   compact: { type: Boolean, default: false }
@@ -57,7 +70,6 @@ function toggleWish() {
 <style scoped>
 .product-card {
   display: block;
-  text-decoration: none;
   color: var(--ink);
 }
 
@@ -66,6 +78,10 @@ function toggleWish() {
   overflow: hidden;
   background: var(--surface);
   margin-bottom: 0.75rem;
+}
+
+.product-image-link {
+  display: block;
 }
 
 .product-media img {
@@ -89,6 +105,7 @@ function toggleWish() {
   font-size: 0.55rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
+  z-index: 2;
 }
 
 .wishlist {
@@ -107,6 +124,7 @@ function toggleWish() {
   opacity: 0;
   transform: translateY(-4px);
   transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
+  z-index: 3;
 }
 
 .wishlist svg {
@@ -114,7 +132,8 @@ function toggleWish() {
   height: 16px;
 }
 
-.product-card:hover .wishlist {
+.product-card:hover .wishlist,
+.product-card:focus-within .wishlist {
   opacity: 1;
   transform: translateY(0);
 }
@@ -130,13 +149,22 @@ function toggleWish() {
   font-size: 0.58rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
+  text-decoration: none;
+  color: var(--ink);
   transition: opacity 0.35s var(--ease), transform 0.35s var(--ease);
-  pointer-events: none;
+  z-index: 3;
 }
 
-.product-card:hover .quick-view {
+.product-card:hover .quick-view,
+.product-card:focus-within .quick-view {
   opacity: 1;
   transform: translate(-50%, 0);
+}
+
+.product-meta {
+  display: block;
+  text-decoration: none;
+  color: inherit;
 }
 
 .product-meta h3 {
@@ -168,5 +196,12 @@ function toggleWish() {
 
 .compact .product-meta h3 {
   font-size: 0.88rem;
+}
+
+@media (hover: none) {
+  .quick-view {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
 }
 </style>
