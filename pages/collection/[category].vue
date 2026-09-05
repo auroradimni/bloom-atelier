@@ -1,31 +1,21 @@
 <template>
-  <div class="category-page">
-    <section class="page-intro page-shell">
-      <NuxtLink to="/collection" class="text-link back-link">Kthehu</NuxtLink>
-      <p v-if="category" class="eyebrow fade-up">{{ category.title }}</p>
-      <h1 v-if="category" class="fade-up fade-up-delay-1">{{ category.title }}</h1>
-      <p v-if="category" class="fade-up fade-up-delay-2">{{ category.subtitle }}</p>
-    </section>
+  <div class="category-page page-shell">
+    <NuxtLink to="/collection" class="text-link back">Kthehu</NuxtLink>
 
-    <section v-if="items.length" class="lookbook page-shell">
-      <article
-        v-for="(item, index) in items"
-        :key="item.id"
-        class="look-item"
-        :class="{ featured: index === 0 && items.length > 1 }"
-      >
-        <div class="look-image">
-          <img :src="item.image" :alt="item.name" />
-        </div>
-        <div class="look-copy">
-          <span class="eyebrow">Look 0{{ index + 1 }}</span>
-          <h2>{{ item.name }}</h2>
-          <p>{{ item.description }}</p>
-        </div>
+    <header v-if="category" class="page-head">
+      <h1>{{ category.title }}</h1>
+      <p>{{ category.subtitle }}</p>
+    </header>
+
+    <div v-if="items.length" class="product-grid">
+      <article v-for="item in items" :key="item.id" class="product-item">
+        <img :src="item.image" :alt="item.name" />
+        <h2>{{ item.name }}</h2>
+        <p>{{ item.description }}</p>
       </article>
-    </section>
+    </div>
 
-    <p v-else class="empty page-shell">Nuk ka produkte në këtë kategori.</p>
+    <p v-else class="empty">Nuk ka produkte në këtë kategori.</p>
   </div>
 </template>
 
@@ -46,73 +36,61 @@ useHead(() => ({
 
 <style scoped>
 .category-page {
-  padding-bottom: clamp(4rem, 8vw, 6rem);
+  padding: calc(var(--header-h) + 2.5rem) 0 4rem;
 }
 
-.back-link {
+.back {
   margin-bottom: 2rem;
 }
 
-.back-link::after {
+.back::after {
   content: '←';
 }
 
-.back-link:hover::after {
-  transform: translateX(-4px);
+.page-head {
+  margin-bottom: 2.5rem;
 }
 
-.lookbook {
-  display: grid;
-  gap: clamp(2rem, 5vw, 4rem);
-}
-
-.look-item {
-  display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  gap: clamp(1.5rem, 4vw, 3rem);
-  align-items: end;
-  padding-top: 2rem;
-  border-top: 1px solid var(--line);
-}
-
-.look-item.featured {
-  grid-template-columns: 1fr;
-  align-items: stretch;
-}
-
-.look-item.featured .look-image img {
-  aspect-ratio: 16 / 10;
-}
-
-.look-image img {
-  width: 100%;
-  aspect-ratio: 4 / 5;
-  object-fit: cover;
-}
-
-.look-copy h2 {
+.page-head h1 {
   font-family: var(--font-display);
-  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-size: clamp(2.2rem, 5vw, 3rem);
   font-weight: 300;
-  line-height: 1.05;
   color: var(--ink);
-  margin: 0.75rem 0;
 }
 
-.look-copy p {
-  max-width: 30rem;
+.page-head p {
+  margin-top: 0.5rem;
   color: var(--stone);
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 2rem 1rem;
+}
+
+.product-item img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  margin-bottom: 0.85rem;
+}
+
+.product-item h2 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 400;
+  color: var(--ink);
+  margin-bottom: 0.35rem;
+}
+
+.product-item p {
+  font-size: 0.88rem;
+  color: var(--stone);
+  line-height: 1.5;
 }
 
 .empty {
   color: var(--stone);
-  padding-bottom: 4rem;
-}
-
-@media (max-width: 900px) {
-  .look-item,
-  .look-item.featured {
-    grid-template-columns: 1fr;
-  }
 }
 </style>

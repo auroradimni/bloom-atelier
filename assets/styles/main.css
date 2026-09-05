@@ -162,43 +162,10 @@ main {
   inset: 0 0 auto;
   z-index: 100;
   height: var(--header-h);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   padding: 0 clamp(1.25rem, 4vw, 3rem);
-  background: rgba(247, 244, 239, 0.72);
+  background: rgba(247, 244, 239, 0.85);
   backdrop-filter: blur(18px);
   border-bottom: 1px solid var(--line);
-}
-
-.site-header .brand {
-  font-family: var(--font-display);
-  font-size: clamp(1.35rem, 2vw, 1.75rem);
-  font-weight: 400;
-  letter-spacing: 0.04em;
-  text-decoration: none;
-  color: var(--ink);
-}
-
-.site-nav {
-  display: flex;
-  align-items: center;
-  gap: clamp(1rem, 3vw, 2.5rem);
-  list-style: none;
-}
-
-.site-nav a {
-  text-decoration: none;
-  font-size: 0.68rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--stone);
-  transition: color 0.3s var(--ease);
-}
-
-.site-nav a:hover,
-.site-nav a.router-link-active {
-  color: var(--ink);
 }
 
 .menu-toggle {
@@ -242,49 +209,8 @@ main {
   z-index: 90;
 }
 
-/* Footer */
-.site-footer {
-  margin-top: clamp(4rem, 10vw, 8rem);
-  padding: clamp(3rem, 6vw, 5rem) clamp(1.25rem, 4vw, 3rem) 2rem;
-  border-top: 1px solid var(--line);
-}
-
-.footer-grid {
-  width: min(1320px, 100%);
-  margin-inline: auto;
-  display: grid;
-  grid-template-columns: 1.4fr 1fr 1fr;
-  gap: 2rem;
-}
-
-.footer-brand {
-  font-family: var(--font-display);
-  font-size: 2rem;
-  font-weight: 300;
-  color: var(--ink);
-  margin-bottom: 0.75rem;
-}
-
-.footer-grid p,
-.footer-grid a {
-  font-size: 0.88rem;
-  color: var(--stone);
-  text-decoration: none;
-}
-
-.footer-grid a:hover {
-  color: var(--ink);
-}
-
-.footer-bottom {
-  width: min(1320px, 100%);
-  margin: 2.5rem auto 0;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--line);
-  font-size: 0.72rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--stone);
+.menu-overlay.open {
+  display: block;
 }
 
 /* Shared page blocks */
@@ -491,37 +417,8 @@ aside {
 }
 
 @media (max-width: 900px) {
-  .footer-grid {
-    grid-template-columns: 1fr;
-  }
-
   .menu-toggle {
     display: grid;
     place-items: center;
-  }
-
-  .site-nav {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: min(320px, 85vw);
-    height: 100vh;
-    padding: calc(var(--header-h) + 1rem) 2rem 2rem;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1.5rem;
-    background: var(--bg);
-    border-left: 1px solid var(--line);
-    transform: translateX(100%);
-    transition: transform 0.4s var(--ease);
-    z-index: 95;
-  }
-
-  .site-nav.open {
-    transform: translateX(0);
-  }
-
-  .menu-overlay.open {
-    display: block;
   }
 }

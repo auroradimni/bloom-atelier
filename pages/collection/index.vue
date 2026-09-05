@@ -1,32 +1,27 @@
 <template>
-  <div class="collection-page">
-    <section class="page-intro page-shell">
-      <p class="eyebrow fade-up">Lookbook</p>
-      <h1 class="fade-up fade-up-delay-1">Koleksioni</h1>
-      <p class="fade-up fade-up-delay-2">
-        Tre kategori, një vizion — linja të pastra dhe silueta që mbeten relevante.
-      </p>
-    </section>
+  <div class="collection-page page-shell">
+    <header class="page-head">
+      <h1>Koleksioni</h1>
+      <p>Tre kategori. Linja të pastra. Zero zhurmë.</p>
+    </header>
 
-    <section class="editorial-grid page-shell">
+    <div class="category-grid">
       <NuxtLink
-        v-for="(category, index) in categories"
+        v-for="category in categories"
         :key="category.slug"
         :to="`/collection/${category.slug}`"
-        class="editorial-card"
-        :class="`span-${index + 1}`"
+        class="category-tile"
       >
         <img
           :src="getCategoryCover(category.slug)"
           :alt="category.title"
         />
-        <div class="editorial-overlay">
-          <span>0{{ index + 1 }}</span>
+        <div>
           <h2>{{ category.title }}</h2>
           <p>{{ getProductsByCategory(category.slug).length }} modele</p>
         </div>
       </NuxtLink>
-    </section>
+    </div>
   </div>
 </template>
 
@@ -42,88 +37,60 @@ function getCategoryCover(slug) {
 
 <style scoped>
 .collection-page {
-  padding-bottom: clamp(4rem, 8vw, 6rem);
+  padding: calc(var(--header-h) + 2.5rem) 0 4rem;
 }
 
-.editorial-grid {
+.page-head {
+  margin-bottom: 2.5rem;
+}
+
+.page-head h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5vw, 3rem);
+  font-weight: 300;
+  color: var(--ink);
+}
+
+.page-head p {
+  margin-top: 0.5rem;
+  color: var(--stone);
+}
+
+.category-grid {
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
 }
 
-.editorial-card {
-  position: relative;
-  overflow: hidden;
+.category-tile {
   text-decoration: none;
-  min-height: 420px;
+  color: var(--ink);
 }
 
-.editorial-card img {
+.category-tile img {
   width: 100%;
-  height: 100%;
-  min-height: 420px;
+  aspect-ratio: 4 / 5;
   object-fit: cover;
-  transition: transform 0.8s var(--ease);
+  margin-bottom: 1rem;
 }
 
-.editorial-card:hover img {
-  transform: scale(1.04);
-}
-
-.editorial-overlay {
-  position: absolute;
-  inset: auto 0 0;
-  padding: 1.5rem;
-  background: linear-gradient(to top, rgba(20, 18, 16, 0.72), transparent);
-  color: var(--surface);
-}
-
-.editorial-overlay span {
-  font-size: 0.68rem;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  opacity: 0.8;
-}
-
-.editorial-overlay h2 {
+.category-tile h2 {
   font-family: var(--font-display);
-  font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 300;
-  line-height: 1;
-  margin: 0.35rem 0;
+  font-size: 1.5rem;
+  font-weight: 400;
 }
 
-.editorial-overlay p {
+.category-tile p {
+  margin-top: 0.25rem;
   font-size: 0.72rem;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  opacity: 0.85;
-}
-
-.span-1 {
-  grid-column: span 7;
-}
-
-.span-2 {
-  grid-column: span 5;
-}
-
-.span-3 {
-  grid-column: span 12;
-  min-height: 360px;
-}
-
-.span-3 img {
-  min-height: 360px;
+  color: var(--stone);
 }
 
 @media (max-width: 900px) {
-  .editorial-card,
-  .span-1,
-  .span-2,
-  .span-3 {
-    grid-column: span 12;
-    min-height: 320px;
+  .category-grid {
+    grid-template-columns: 1fr;
   }
 }
 </style>
