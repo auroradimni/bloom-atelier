@@ -54,6 +54,7 @@ useHead({ title: 'Wishlist - Bloom Atelier' })
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1.5rem 1.25rem;
+  align-items: stretch;
 }
 
 .empty-state {
