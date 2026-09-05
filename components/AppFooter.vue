@@ -1,125 +1,81 @@
 <template>
   <footer class="site-footer">
-    <div v-scroll-reveal class="footer-inner page-shell">
-      <div class="newsletter">
-        <p class="eyebrow">Newsletter</p>
-        <h2>Join Bloom</h2>
-        <form @submit.prevent="subscribe">
-          <input
-            v-model="email"
-            type="email"
-            placeholder="Email address"
-            required
-          />
-          <button type="submit">Subscribe</button>
-        </form>
-        <p v-if="subscribed" class="success">Thank you!</p>
+    <div v-scroll-reveal class="footer-grid page-shell">
+      <div>
+        <div class="footer-brand">Bloom Atelier</div>
+        <p>Minimal fashion. Dedicated craft. Albanian elegance.</p>
       </div>
 
-      <div class="footer-links">
-        <div>
-          <p class="eyebrow">Contact</p>
-          <p>info@ateliebloom.al</p>
-        </div>
-        <div>
-          <p class="eyebrow">Links</p>
-          <p><NuxtLink to="/collection">Collection</NuxtLink></p>
-          <p><NuxtLink to="/contact">Order</NuxtLink></p>
-        </div>
+      <div>
+        <p class="eyebrow footer-label">Contact</p>
+        <p>info@ateliebloom.al</p>
+        <p>Rr. Elbasanit, Tirana</p>
+      </div>
+
+      <div>
+        <p class="eyebrow footer-label">Explore</p>
+        <p><NuxtLink to="/collection/skirt">Skirt</NuxtLink></p>
+        <p><NuxtLink to="/collection/dress">Dress</NuxtLink></p>
+        <p><NuxtLink to="/collection/coats">Coats</NuxtLink></p>
+        <p><NuxtLink to="/contact">Order</NuxtLink></p>
       </div>
     </div>
 
-    <p class="footer-copy page-shell">© 2025 Bloom Atelier</p>
+    <div class="footer-bottom page-shell">© 2025 Bloom Atelier</div>
   </footer>
 </template>
 
-<script setup>
-const email = ref('')
-const subscribed = ref(false)
-
-function subscribe() {
-  subscribed.value = true
-  email.value = ''
-  setTimeout(() => subscribed.value = false, 3000)
-}
-</script>
-
 <style scoped>
 .site-footer {
-  margin-top: 2rem;
-  padding: clamp(3rem, 6vw, 4rem) 0 2rem;
+  margin-top: clamp(4rem, 10vw, 8rem);
+  padding: clamp(3rem, 6vw, 5rem) 0 2rem;
   border-top: 1px solid var(--line);
 }
 
-.footer-inner {
+.footer-grid {
   display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  gap: 3rem;
-  align-items: start;
-}
-
-.newsletter h2 {
-  font-family: var(--font-display);
-  font-size: 1.75rem;
-  font-weight: 400;
-  color: var(--ink);
-  margin: 0.5rem 0 1.25rem;
-}
-
-.newsletter form {
-  display: flex;
-  gap: 0.5rem;
-  max-width: 420px;
-}
-
-.newsletter input {
-  flex: 1;
-}
-
-.success {
-  margin-top: 0.75rem;
-  font-size: 0.85rem;
-  color: var(--accent);
-}
-
-.footer-links {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1.4fr 1fr 1fr;
   gap: 2rem;
 }
 
-.footer-links p {
+.footer-brand {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 300;
+  color: var(--ink);
+  margin-bottom: 0.75rem;
+}
+
+.footer-label {
+  margin-bottom: 1rem;
+}
+
+.footer-grid p,
+.footer-grid a {
   font-size: 0.88rem;
   color: var(--stone);
+  text-decoration: none;
   margin-bottom: 0.35rem;
 }
 
-.footer-links a {
-  text-decoration: none;
-  color: var(--stone);
-}
-
-.footer-links a:hover {
+.footer-grid a:hover {
   color: var(--ink);
 }
 
-.footer-copy {
+.footer-bottom {
   margin-top: 2.5rem;
   padding-top: 1.5rem;
   border-top: 1px solid var(--line);
-  font-size: 0.68rem;
+  font-size: 0.72rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--stone);
 }
 
 @media (max-width: 768px) {
-  .footer-inner {
+  .footer-grid {
     grid-template-columns: 1fr;
-  }
-
-  .newsletter form {
-    flex-direction: column;
+    gap: 2.5rem;
   }
 }
 </style>
