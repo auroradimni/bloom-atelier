@@ -84,13 +84,13 @@
       </form>
     </div>
 
-    <nav class="site-nav-shop" aria-label="Shop navigation">
+    <nav class="site-nav-categories" aria-label="Shop categories">
       <NuxtLink
-        v-for="item in shopNavItems"
+        v-for="item in navItems"
         :key="item.to"
         :to="item.to"
-        class="shop-nav-pill"
-        :class="{ 'shop-nav-pill--sale': item.sale }"
+        class="category-pill"
+        :class="{ 'category-pill--sale': item.sale }"
       >
         {{ item.label }}
       </NuxtLink>
@@ -150,9 +150,12 @@ const { count } = useCart()
 const { count: wishlistCount } = useWishlist()
 const { registerFocusSearch } = useMobileSearch()
 
-const shopNavItems = [
-  { label: 'All Products', to: '/collection' },
-  { label: 'New', to: '/collection/new-arrivals' },
+const navItems = [
+  { label: 'Dress', to: '/collection/dress' },
+  { label: 'Skirt', to: '/collection/skirt' },
+  { label: 'Coats', to: '/collection/coats' },
+  { label: 'Denim', to: '/collection/denim' },
+  { label: 'Accessories', to: '/collection/accessories' },
   { label: 'Sale', to: '/sale', sale: true }
 ]
 
@@ -430,7 +433,7 @@ function onSearch() {
   opacity: 0.45;
 }
 
-.site-nav-shop {
+.site-nav-categories {
   display: flex;
   gap: 0.35rem;
   overflow-x: auto;
@@ -439,11 +442,11 @@ function onSearch() {
   border-top: 1px solid var(--line);
 }
 
-.site-nav-shop::-webkit-scrollbar {
+.site-nav-categories::-webkit-scrollbar {
   display: none;
 }
 
-.shop-nav-pill {
+.category-pill {
   flex: 0 0 auto;
   padding: 0.35rem 0.85rem;
   font-family: var(--font-body);
@@ -457,23 +460,23 @@ function onSearch() {
   transition: opacity 0.3s var(--ease), border-color 0.3s var(--ease);
 }
 
-.shop-nav-pill:hover,
-.shop-nav-pill.router-link-active {
+.category-pill:hover,
+.category-pill.router-link-active {
   opacity: 0.55;
 }
 
-.shop-nav-pill.router-link-active {
+.category-pill.router-link-active {
   border-bottom: 1px solid var(--ink);
   padding-bottom: calc(0.35rem - 1px);
 }
 
-.shop-nav-pill--sale {
+.category-pill--sale {
   color: var(--wine);
   font-weight: 600;
 }
 
-.shop-nav-pill--sale:hover,
-.shop-nav-pill--sale.router-link-active {
+.category-pill--sale:hover,
+.category-pill--sale.router-link-active {
   opacity: 1;
   color: var(--wine);
   border-bottom-color: var(--wine);
@@ -555,29 +558,29 @@ function onSearch() {
     gap: 0;
   }
 
-  .site-nav-shop {
+  .site-nav-categories {
     display: flex;
     gap: 0;
-    padding: 0.55rem 0 0.65rem;
+    padding: 0 0 0.5rem;
     border-top: 1px solid var(--line);
     -webkit-overflow-scrolling: touch;
   }
 
-  .shop-nav-pill {
-    padding: 0.35rem 0.85rem;
+  .category-pill {
+    padding: 0.45rem 0.85rem;
     font-size: 0.62rem;
     font-weight: 400;
     letter-spacing: 0.18em;
     opacity: 1;
   }
 
-  .shop-nav-pill.router-link-active {
+  .category-pill.router-link-active {
     border-bottom: 1px solid var(--ink);
-    padding-bottom: calc(0.35rem - 1px);
+    padding-bottom: calc(0.45rem - 1px);
     opacity: 0.55;
   }
 
-  .shop-nav-pill--sale.router-link-active {
+  .category-pill--sale.router-link-active {
     border-bottom-color: var(--wine);
     opacity: 1;
   }
@@ -605,7 +608,7 @@ function onSearch() {
   }
 
   .site-nav.menu-open .site-nav-search--mobile,
-  .site-nav.menu-open .site-nav-shop {
+  .site-nav.menu-open .site-nav-categories {
     display: none;
   }
 
