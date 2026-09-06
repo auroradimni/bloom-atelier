@@ -257,18 +257,6 @@ main {
 .menu-toggle span::before { top: -7px; }
 .menu-toggle span::after { top: 7px; }
 
-.menu-overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(20, 18, 16, 0.24);
-  z-index: 90;
-}
-
-.menu-overlay.open {
-  display: block;
-}
-
 /* Shared page blocks */
 .page-intro {
   padding: 2.5rem 0 3rem;
