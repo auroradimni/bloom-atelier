@@ -69,19 +69,18 @@
         <NuxtLink to="/collection/coats" class="btn-solid">Explore the Edit</NuxtLink>
       </div>
       <NuxtLink v-scroll-reveal="{ delay: 120 }" to="/collection/coats" class="editorial-media">
-        <NuxtImg
+        <img
           src="/images/coat-1.jpg"
           alt="Fall edit"
           width="800"
           height="520"
-          sizes="(max-width: 900px) 100vw, 50vw"
           loading="lazy"
           decoding="async"
         />
       </NuxtLink>
     </section>
 
-    <section v-scroll-reveal class="shop-section page-shell handpicked-section">
+    <section v-scroll-reveal class="shop-section page-shell">
       <div class="section-head section-head--handpicked">
         <h2>Handpicked For You</h2>
       </div>
@@ -272,35 +271,29 @@ const handpicked = [...products].reverse().slice(0, 5)
 .editorial-media {
   display: block;
   overflow: hidden;
-  min-height: 0;
+  min-height: 220px;
   height: 100%;
   background: #e8e4df;
 }
 
-.editorial-media img,
-.editorial-media :deep(img) {
+.editorial-media img {
   display: block;
   width: 100%;
   height: 100%;
-  min-height: 220px;
+  min-height: inherit;
   object-fit: cover;
   object-position: center center;
   transition: transform 0.7s var(--ease);
 }
 
 @media (min-width: 901px) {
-  .editorial-media img,
-  .editorial-media :deep(img) {
+  .editorial-media {
     min-height: 280px;
   }
 }
 
 .editorial-media:hover img {
   transform: scale(1.04);
-}
-
-.handpicked-section {
-  background: var(--surface);
 }
 
 .section-head--handpicked h2 {
@@ -356,10 +349,15 @@ const handpicked = [...products].reverse().slice(0, 5)
     border-top: 0;
     gap: 2px;
     max-height: none;
+    min-height: 0;
   }
 
-  .editorial-media img,
-  .editorial-media :deep(img) {
+  .editorial-media {
+    min-height: 220px;
+    aspect-ratio: 16 / 10;
+  }
+
+  .editorial-media img {
     min-height: 220px;
     aspect-ratio: 16 / 10;
     height: auto;
