@@ -3,14 +3,27 @@ const { join } = require('path')
 
 if (process.platform === 'win32') return
 
-const binDir = join(process.cwd(), 'node_modules', '.bin')
+function makeExecutable(path) {
+  if (!existsSync(path)) return
 
-if (!existsSync(binDir)) return
-
-for (const entry of readdirSync(binDir)) {
   try {
-    chmodSync(join(binDir, entry), 0o755)
+    chmodSync(path, 0o755)
   } catch {
     // Ignore entries that cannot be chmodded.
   }
+}
+
+const binDir = join(process.cwd(), 'node_modules', '.bin')
+
+if (existsSync(binDir)) {
+  for (const entry of readdirSync(binDir)) {
+    makeExecutable(join(binDir, entry))
+  }
+}
+
+for (const cliPath of [
+  join(process.cwd(), 'node_modules', '@nuxt/cli', 'bin', 'nuxi.mjs'),
+  join(process.cwd(), 'node_modules', 'nuxt', 'bin', 'nuxt.mjs')
+]) {
+  makeExecutable(cliPath)
 }
