@@ -44,14 +44,28 @@
 
     <div v-if="searchOpen" class="site-nav-search page-shell">
       <form class="search-form" @submit.prevent="onSearch">
-        <input
-          ref="searchInput"
-          v-model="query"
-          type="search"
-          placeholder="Search dresses, skirts, denim, accessories..."
-          aria-label="Search products"
-        />
-        <button type="submit" class="search-submit">Go</button>
+        <div class="search-field">
+          <svg class="search-leading-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <path d="M16 16l5 5" fill="none" stroke="currentColor" stroke-width="1.5" />
+          </svg>
+          <input
+            ref="searchInput"
+            v-model="query"
+            type="search"
+            placeholder="Search dresses, skirts, denim, accessories..."
+            aria-label="Search products"
+          />
+          <button type="submit" class="search-action" aria-label="Search">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="1.5" />
+              <path d="M16 16l5 5" fill="none" stroke="currentColor" stroke-width="1.5" />
+            </svg>
+          </button>
+        </div>
+        <button type="button" class="search-close" aria-label="Close search" @click="toggleSearch">
+          Close
+        </button>
       </form>
     </div>
 
@@ -235,47 +249,108 @@ function onSearch() {
 }
 
 .site-nav-search {
-  padding: 0 0 0.75rem;
+  padding: 0 0 0.85rem;
 }
 
 .search-form {
   display: flex;
-  gap: 0.5rem;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.85rem;
+  width: 100%;
+  max-width: none;
 }
 
-.search-form input {
+.search-field {
   flex: 1;
-  padding: 0.7rem 1rem;
-  border: 1px solid var(--line);
-  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  min-height: 46px;
+  padding: 0 0.35rem 0 1rem;
+  border: 1px solid rgba(20, 18, 16, 0.14);
   background: var(--surface);
-  font-family: var(--font-body);
-  font-size: 0.82rem;
-  color: var(--ink);
-  outline: none;
-  transition: border-color 0.3s var(--ease);
+  transition: border-color 0.3s var(--ease), box-shadow 0.3s var(--ease);
 }
 
-.search-form input:focus {
+.search-field:focus-within {
   border-color: var(--ink);
+  box-shadow: 0 8px 24px rgba(20, 18, 16, 0.06);
 }
 
-.search-form input::placeholder {
+.search-leading-icon {
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
   color: var(--stone);
 }
 
-.search-submit {
-  min-height: 40px;
-  padding: 0 1.1rem;
-  border: 1px solid var(--ink);
-  border-radius: 999px;
+.search-field input {
+  flex: 1;
+  min-width: 0;
+  width: auto;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  font-family: var(--font-body);
+  font-size: 0.86rem;
+  color: var(--ink);
+  outline: none;
+}
+
+.search-field input::placeholder {
+  color: var(--stone);
+}
+
+.search-field input::-webkit-search-cancel-button {
+  display: none;
+}
+
+.search-action {
+  width: 36px;
+  height: 36px;
+  min-height: 36px;
+  padding: 0;
+  margin: 4px;
+  border: 0;
+  border-radius: 0;
   background: var(--ink);
   color: var(--surface);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  align-self: auto;
+  transition: opacity 0.3s var(--ease);
+}
+
+.search-action:hover {
+  opacity: 0.82;
+}
+
+.search-action svg {
+  width: 16px;
+  height: 16px;
+}
+
+.search-close {
+  min-height: auto;
+  padding: 0.35rem 0;
+  border: 0;
+  background: transparent;
   font-family: var(--font-body);
   font-size: 0.62rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
+  color: var(--stone);
   cursor: pointer;
+  align-self: auto;
+  white-space: nowrap;
+}
+
+.search-close:hover {
+  color: var(--ink);
 }
 
 .site-nav-categories {
@@ -323,6 +398,18 @@ function onSearch() {
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--stone);
+}
+
+@media (max-width: 560px) {
+  .search-form {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.55rem;
+  }
+
+  .search-close {
+    align-self: flex-end;
+  }
 }
 
 @media (max-width: 900px) {
