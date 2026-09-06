@@ -92,6 +92,7 @@
               v-scroll-reveal="{ delay: index * 60 }"
               :product="item"
               :to="`/product/${item.id}`"
+              compact
             />
 
             <ProductCard
@@ -108,6 +109,7 @@
               v-scroll-reveal="{ delay: index * 60 }"
               :product="item"
               :to="`/product/${item.id}`"
+              compact
             />
           </div>
 
@@ -362,31 +364,26 @@ function getCover(slug) {
 .most-loved-track {
   display: flex;
   align-items: flex-end;
-  gap: 1.25rem;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  overscroll-behavior-x: contain;
-  scrollbar-width: none;
-  padding: 0.15rem 0 0.35rem;
-}
-
-.most-loved-track::-webkit-scrollbar {
-  display: none;
+  gap: 0.65rem;
+  width: 100%;
 }
 
 .most-loved-track :deep(.product-card) {
-  flex: 0 0 min(220px, 58vw);
-  scroll-snap-align: start;
+  flex: 1 1 0;
+  min-width: 0;
 }
 
 .most-loved-track :deep(.product-card--featured) {
-  flex: 0 0 min(380px, 82vw);
-  scroll-snap-align: center;
+  flex: 2.35 1 0;
+}
+
+.most-loved-track :deep(.product-card:not(.product-card--featured) .product-media) {
+  padding-top: 105%;
 }
 
 .most-loved-track :deep(.product-card--featured .product-media) {
   height: 0;
-  padding-top: 145%;
+  padding-top: 138%;
   aspect-ratio: unset;
   max-height: none;
 }
@@ -499,6 +496,34 @@ function getCover(slug) {
   .shop-grid,
   .editorial {
     grid-template-columns: 1fr;
+  }
+
+  .most-loved-track {
+    display: flex;
+    gap: 0.75rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    padding: 0.15rem 0 0.35rem;
+  }
+
+  .most-loved-track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .most-loved-track :deep(.product-card) {
+    flex: 0 0 min(42vw, 200px);
+    scroll-snap-align: start;
+  }
+
+  .most-loved-track :deep(.product-card--featured) {
+    flex: 0 0 min(62vw, 280px);
+    scroll-snap-align: center;
+  }
+
+  .most-loved-track :deep(.product-card:not(.product-card--featured) .product-media) {
+    padding-top: 133.333%;
   }
 
   .carousel-arrow--prev {
