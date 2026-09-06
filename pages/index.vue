@@ -251,6 +251,17 @@ const handpicked = [...products].reverse().slice(0, 6)
   flex: 0 0 min(46vw, 168px);
   scroll-snap-align: start;
   min-width: 0;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.new-arrivals-track :deep(.product-media) {
+  margin-bottom: 0.5rem;
+}
+
+.new-arrivals-track :deep(.price) {
+  margin-bottom: 0.35rem;
 }
 
 .new-arrivals-track :deep(.product-card.scroll-reveal),
@@ -264,17 +275,19 @@ const handpicked = [...products].reverse().slice(0, 6)
   }
 
   .new-arrivals-track {
-    display: flex;
-    flex-wrap: nowrap;
-    gap: 0;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 2px;
     overflow: visible;
     scroll-snap-type: none;
   }
 
   .new-arrivals-track :deep(.product-card) {
-    flex: 1 1 0;
-    min-width: 0;
-    width: auto;
+    flex: unset;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 0;
   }
 }
 
@@ -372,7 +385,7 @@ const handpicked = [...products].reverse().slice(0, 6)
 
 .handpicked-grid {
   display: grid;
-  gap: 0.5rem;
+  gap: 2px;
   align-items: start;
   width: 100%;
 }
@@ -380,13 +393,15 @@ const handpicked = [...products].reverse().slice(0, 6)
 @media (min-width: 901px) {
   .handpicked-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 0.5rem;
+    gap: 2px;
   }
 }
 
 .handpicked-grid :deep(.product-card) {
   min-width: 0;
   width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 @media (max-width: 900px) {
@@ -406,6 +421,7 @@ const handpicked = [...products].reverse().slice(0, 6)
 
   .shop-section {
     padding: 0.65rem 0;
+    border-top: 0;
   }
 
   .shop-section + .shop-section {
