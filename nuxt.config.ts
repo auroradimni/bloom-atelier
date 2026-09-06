@@ -7,6 +7,7 @@ export default defineNuxtConfig({
   css: ['~/assets/styles/main.css'],
   app: {
     head: {
+      title: 'Bloom Atelier',
       htmlAttrs: { lang: 'en' },
       meta: [
         {
@@ -15,6 +16,11 @@ export default defineNuxtConfig({
         }
       ],
       link: [
+        {
+          rel: 'icon',
+          href: 'data:,',
+          sizes: 'any'
+        },
         {
           rel: 'stylesheet',
           href: 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@300;400;500&family=Pinyon+Script&display=swap'

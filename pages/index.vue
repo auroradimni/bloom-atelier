@@ -133,7 +133,7 @@
 <script setup>
 import { categories, getProductsByCategory, products } from '~/data/collection'
 
-useHead({ title: 'Bloom Atelier — Minimalist Fashion' })
+useHead({ title: 'Bloom Atelier' })
 
 const newArrivals = products.filter((item) => item.isNew)
 const loved = [...products].reverse()
