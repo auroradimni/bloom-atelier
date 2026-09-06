@@ -3,7 +3,7 @@ export default defineNuxtConfig({
     host: '0.0.0.0',
     port: 3000
   },
-  devtools: { enabled: true },
+  devtools: { enabled: false },
   css: ['~/assets/styles/main.css'],
   app: {
     head: {
