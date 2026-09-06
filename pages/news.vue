@@ -13,15 +13,6 @@
         <p><NuxtLink to="/collection">More info</NuxtLink></p>
       </div>
       <div class="event">
-        <h3>Call for New Stylists</h3>
-        <p>
-          Bloom Atelier is looking for new and creative stylists to join
-          our team. Apply now and become part of our unique style!
-        </p>
-        <p><strong>Application deadline:</strong> April 30, 2026</p>
-        <p><NuxtLink to="/stylists">Apply here</NuxtLink></p>
-      </div>
-      <div class="event">
         <h3>Courses for Future Stylists</h3>
         <p>
           We offer online courses for aspiring stylists.
