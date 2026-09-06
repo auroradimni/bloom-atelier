@@ -14,15 +14,6 @@
       </p>
     </header>
 
-    <CategoryRail
-      v-if="hasSubcategories"
-      v-scroll-reveal="{ delay: 100 }"
-      :items="category.subcategories"
-      :active-slug="subcategoryFilter"
-      aria-label="Filter by type"
-      @select="subcategoryFilter = $event"
-    />
-
     <ProductToolbar
       v-if="items.length"
       v-model:sort="sort"
@@ -61,15 +52,10 @@ import {
 const route = useRoute()
 const slug = computed(() => String(route.params.category))
 const category = computed(() => getCategory(slug.value))
-const subcategoryFilter = ref('all')
-
-const hasSubcategories = computed(() => Boolean(category.value?.subcategories?.length))
 
 const categoryTotal = computed(() => getProductsByCategory(slug.value).length)
 
-const items = computed(() =>
-  getProductsByCategory(slug.value, hasSubcategories.value ? subcategoryFilter.value : undefined)
-)
+const items = computed(() => getProductsByCategory(slug.value))
 
 const breadcrumbs = computed(() => [
   { label: 'Home', to: '/' },
@@ -92,7 +78,6 @@ const {
 } = useProductFilters(items)
 
 watch(slug, () => {
-  subcategoryFilter.value = 'all'
   resetFilters()
 })
 
