@@ -116,10 +116,6 @@ function getCategoryCover(slug) {
   margin-bottom: 1.25rem;
 }
 
-.product-grid {
-  gap: 1.5rem 1.25rem;
-}
-
 @media (max-width: 900px) {
   .shop-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));

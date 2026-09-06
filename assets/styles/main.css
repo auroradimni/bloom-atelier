@@ -66,8 +66,9 @@ main {
 
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 280px));
+  justify-content: start;
+  gap: 0.65rem;
   align-items: start;
   width: 100%;
 }
@@ -496,8 +497,8 @@ aside {
 
 @media (min-width: 901px) {
   .product-grid {
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 0.85rem;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 300px));
+    gap: 0.75rem;
   }
 }
 
@@ -514,7 +515,7 @@ aside {
 
   .product-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.85rem 0.65rem;
+    gap: 0.55rem;
   }
 
   .menu-toggle {
@@ -530,7 +531,7 @@ aside {
   }
 
   .product-grid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem;
   }
 }
