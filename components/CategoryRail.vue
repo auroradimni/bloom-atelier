@@ -1,38 +1,64 @@
 <template>
   <nav class="category-rail" :aria-label="ariaLabel">
-    <component
-      :is="useLinks ? 'NuxtLink' : 'button'"
-      v-if="showAll"
-      :key="'all'"
-      :to="useLinks ? allLink : undefined"
-      :type="useLinks ? undefined : 'button'"
-      class="category-circle"
-      :class="{ active: activeSlug === 'all' }"
-      @click="!useLinks && $emit('select', 'all')"
-    >
-      <span class="circle-image circle-image--all">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path fill="none" stroke="currentColor" stroke-width="1.2" d="M4 7h16M7 12h10M10 17h4" />
-        </svg>
-      </span>
-      <span class="circle-label">All</span>
-    </component>
+    <template v-if="useLinks">
+      <NuxtLink
+        v-if="showAll"
+        :to="allLink"
+        class="category-circle"
+        :class="{ active: activeSlug === 'all' }"
+      >
+        <span class="circle-image circle-image--all">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="none" stroke="currentColor" stroke-width="1.2" d="M4 7h16M7 12h10M10 17h4" />
+          </svg>
+        </span>
+        <span class="circle-label">All</span>
+      </NuxtLink>
 
-    <component
-      :is="useLinks ? 'NuxtLink' : 'button'"
-      v-for="item in items"
-      :key="item.slug"
-      :to="useLinks ? `${linkPrefix}${item.slug}` : undefined"
-      :type="useLinks ? undefined : 'button'"
-      class="category-circle"
-      :class="{ active: activeSlug === item.slug }"
-      @click="!useLinks && $emit('select', item.slug)"
-    >
-      <span class="circle-image">
-        <img :src="item.image" :alt="item.title" loading="lazy" />
-      </span>
-      <span class="circle-label">{{ item.title }}</span>
-    </component>
+      <NuxtLink
+        v-for="item in items"
+        :key="item.slug"
+        :to="item.to || `${linkPrefix}${item.slug}`"
+        class="category-circle"
+        :class="{ active: activeSlug === item.slug }"
+      >
+        <span class="circle-image">
+          <img :src="item.image" :alt="item.title" loading="lazy" />
+        </span>
+        <span class="circle-label">{{ item.title }}</span>
+      </NuxtLink>
+    </template>
+
+    <template v-else>
+      <button
+        v-if="showAll"
+        type="button"
+        class="category-circle"
+        :class="{ active: activeSlug === 'all' }"
+        @click="$emit('select', 'all')"
+      >
+        <span class="circle-image circle-image--all">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="none" stroke="currentColor" stroke-width="1.2" d="M4 7h16M7 12h10M10 17h4" />
+          </svg>
+        </span>
+        <span class="circle-label">All</span>
+      </button>
+
+      <button
+        v-for="item in items"
+        :key="item.slug"
+        type="button"
+        class="category-circle"
+        :class="{ active: activeSlug === item.slug }"
+        @click="$emit('select', item.slug)"
+      >
+        <span class="circle-image">
+          <img :src="item.image" :alt="item.title" loading="lazy" />
+        </span>
+        <span class="circle-label">{{ item.title }}</span>
+      </button>
+    </template>
   </nav>
 </template>
 
@@ -90,12 +116,14 @@ defineEmits(['select'])
   overflow: hidden;
   border: 2px solid transparent;
   transition: border-color 0.3s var(--ease), transform 0.3s var(--ease);
+  pointer-events: none;
 }
 
 .circle-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  pointer-events: none;
 }
 
 .circle-image--all {
@@ -124,6 +152,7 @@ defineEmits(['select'])
   line-height: 1.25;
   color: var(--ink-soft);
   transition: color 0.3s var(--ease);
+  pointer-events: none;
 }
 
 .category-circle.active .circle-label {

@@ -1,7 +1,7 @@
 <template>
   <div class="collection-page page-shell page-shell--wide">
     <header v-scroll-reveal class="page-head">
-      <h1>Collection</h1>
+      <h1>New Arrivals</h1>
       <p class="product-count">{{ totalProducts }} {{ totalProducts === 1 ? 'product' : 'products' }}</p>
     </header>
 
@@ -44,13 +44,13 @@
 </template>
 
 <script setup>
-import { getShopRailActiveSlug, getShopRailItems, products } from '~/data/collection'
+import { getNewArrivals, getShopRailActiveSlug, getShopRailItems } from '~/data/collection'
 
-useHead({ title: 'Collection - Bloom Atelier' })
+useHead({ title: 'New Arrivals - Bloom Atelier' })
 
 const route = useRoute()
-const allProducts = computed(() => products)
-const totalProducts = computed(() => products.length)
+const newArrivals = computed(() => getNewArrivals())
+const totalProducts = computed(() => newArrivals.value.length)
 const shopRailItems = computed(() => getShopRailItems())
 const shopRailActive = computed(() => getShopRailActiveSlug(route.path))
 
@@ -67,7 +67,7 @@ const {
   resultCount,
   hasActiveFilters,
   resetFilters
-} = useProductFilters(allProducts, { showCategoryFilter: true })
+} = useProductFilters(newArrivals, { showCategoryFilter: true })
 </script>
 
 <style scoped>

@@ -168,8 +168,45 @@ export function getCategoryRailItems() {
   return categories.map((category) => ({
     slug: category.slug,
     title: category.title,
-    image: category.image || getCategoryCover(category.slug)
+    image: category.image || getCategoryCover(category.slug),
+    to: `/collection/${category.slug}`
   }))
+}
+
+export const shopRailItems = [
+  {
+    slug: 'all-products',
+    title: 'All Products',
+    to: '/collection',
+    image: '/images/dress-2.jpg'
+  },
+  {
+    slug: 'new-arrivals',
+    title: 'New Arrivals',
+    to: '/collection/new-arrivals',
+    image: '/images/skirt-2.jpg'
+  },
+  {
+    slug: 'sale',
+    title: 'Sale',
+    to: '/sale',
+    image: '/images/skirt-3.jpg'
+  }
+]
+
+export function getShopRailItems() {
+  return shopRailItems
+}
+
+export function getShopRailActiveSlug(path) {
+  if (path === '/sale') return 'sale'
+  if (path === '/collection/new-arrivals') return 'new-arrivals'
+  if (path === '/collection') return 'all-products'
+  return ''
+}
+
+export function getNewArrivals() {
+  return products.filter((product) => product.isNew)
 }
 
 export function getProduct(id) {

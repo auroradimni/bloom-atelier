@@ -120,7 +120,8 @@
 
       <div class="mobile-nav-body">
         <p class="mobile-nav-group">Shop</p>
-        <NuxtLink to="/collection" class="mobile-nav-link" @click="closeMenu">Collection</NuxtLink>
+        <NuxtLink to="/collection" class="mobile-nav-link" @click="closeMenu">All Products</NuxtLink>
+        <NuxtLink to="/collection/new-arrivals" class="mobile-nav-link" @click="closeMenu">New Arrivals</NuxtLink>
         <NuxtLink to="/collection/dress" class="mobile-nav-link" @click="closeMenu">Dress</NuxtLink>
         <NuxtLink to="/collection/skirt" class="mobile-nav-link" @click="closeMenu">Skirt</NuxtLink>
         <NuxtLink to="/collection/coats" class="mobile-nav-link" @click="closeMenu">Coats</NuxtLink>
@@ -160,12 +161,12 @@ const { count: wishlistCount } = useWishlist()
 const { registerFocusSearch } = useMobileSearch()
 
 const navItems = [
-  { label: 'New Arrivals', to: '/collection' },
   { label: 'Dress', to: '/collection/dress' },
   { label: 'Skirt', to: '/collection/skirt' },
   { label: 'Coats', to: '/collection/coats' },
-  { label: 'Sale', to: '/sale', sale: true },
-  { label: 'Shop Now', to: '/collection' }
+  { label: 'Denim', to: '/collection/denim' },
+  { label: 'Accessories', to: '/collection/accessories' },
+  { label: 'Sale', to: '/sale', sale: true }
 ]
 
 function toggleMenu() {

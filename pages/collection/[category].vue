@@ -22,13 +22,12 @@
     />
 
     <CategoryRail
-      v-else
       v-scroll-reveal="{ delay: 80 }"
-      :items="siblingCategories"
-      :active-slug="slug"
+      :items="shopRailItems"
+      :active-slug="shopRailActive"
       :show-all="false"
       use-links
-      aria-label="Browse categories"
+      aria-label="Browse shop"
     />
 
     <ProductToolbar
@@ -63,14 +62,17 @@
 <script setup>
 import {
   getCategory,
-  getCategoryRailItems,
-  getProductsByCategory
+  getProductsByCategory,
+  getShopRailActiveSlug,
+  getShopRailItems
 } from '~/data/collection'
 
 const route = useRoute()
 const slug = computed(() => String(route.params.category))
 const category = computed(() => getCategory(slug.value))
 const subcategoryFilter = ref('all')
+const shopRailItems = computed(() => getShopRailItems())
+const shopRailActive = computed(() => getShopRailActiveSlug(route.path))
 
 const hasSubcategories = computed(() => Boolean(category.value?.subcategories?.length))
 
@@ -79,8 +81,6 @@ const categoryTotal = computed(() => getProductsByCategory(slug.value).length)
 const items = computed(() =>
   getProductsByCategory(slug.value, hasSubcategories.value ? subcategoryFilter.value : undefined)
 )
-
-const siblingCategories = computed(() => getCategoryRailItems())
 
 const breadcrumbs = computed(() => [
   { label: 'Home', to: '/' },
