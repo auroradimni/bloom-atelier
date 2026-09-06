@@ -509,7 +509,7 @@ aside {
 
 @media (max-width: 900px) {
   :root {
-    --header-h: 48px;
+    --header-h: 52px;
     --nav-cats-h: 36px;
     --mobile-search-h: 52px;
   }

@@ -519,24 +519,31 @@ function onSearch() {
   }
 
   .nav-left {
-    flex: 0 0 44px;
+    flex: 0 0 88px;
+    position: relative;
+    z-index: 2;
   }
 
   .brand {
-    position: static;
-    transform: none;
-    flex: 1;
-    min-width: 0;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    flex: none;
+    width: max-content;
+    max-width: calc(100% - 7.5rem);
+    font-family: var(--font-display);
+    font-size: clamp(0.95rem, 4.8vw, 1.15rem);
+    font-weight: 500;
+    letter-spacing: 0.26em;
     text-align: center;
-    font-size: clamp(0.58rem, 2.8vw, 0.72rem);
-    letter-spacing: clamp(0.14em, 1.2vw, 0.22em);
     white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    z-index: 1;
   }
 
   .header-actions {
-    flex: 0 0 auto;
+    flex: 0 0 88px;
+    justify-content: flex-end;
     gap: 0;
   }
 
