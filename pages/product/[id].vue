@@ -50,17 +50,31 @@
     </div>
 
     <p v-else class="empty">Product not found.</p>
+
+    <section v-if="product && relatedProducts.length" v-scroll-reveal class="related-section">
+      <h2>You may also like</h2>
+      <div class="product-grid">
+        <ProductCard
+          v-for="(item, index) in relatedProducts"
+          :key="item.id"
+          v-scroll-reveal="{ delay: index * 70 }"
+          :product="item"
+          :to="`/product/${item.id}`"
+        />
+      </div>
+    </section>
   </div>
 </template>
 
 <script setup>
-import { getProduct } from '~/data/collection'
+import { getProduct, getRelatedProducts } from '~/data/collection'
 
 const route = useRoute()
 const router = useRouter()
 const { addItem } = useCart()
 
 const product = computed(() => getProduct(String(route.params.id)))
+const relatedProducts = computed(() => getRelatedProducts(String(route.params.id)))
 const size = ref('')
 const added = ref(false)
 const sizes = ['XS', 'S', 'M', 'L', 'XL']
@@ -264,9 +278,34 @@ function checkoutNow() {
   color: var(--accent);
 }
 
+.related-section {
+  margin-top: clamp(3rem, 8vw, 5rem);
+  padding-top: clamp(2rem, 5vw, 3rem);
+  border-top: 1px solid var(--line);
+}
+
+.related-section h2 {
+  font-size: 0.68rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 1.25rem;
+}
+
 @media (max-width: 900px) {
   .product-layout {
     grid-template-columns: 1fr;
+  }
+
+  .related-section {
+    width: calc(100% + 1.5rem);
+    margin-inline: -0.75rem;
+    padding-inline: 0;
+  }
+
+  .related-section h2 {
+    padding-inline: 0.75rem;
   }
 }
 </style>

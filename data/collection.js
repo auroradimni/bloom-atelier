@@ -110,3 +110,17 @@ export function getProductsByCategory(slug) {
 export function getProduct(id) {
   return products.find((product) => product.id === id)
 }
+
+export function getRelatedProducts(id, limit = 4) {
+  const current = getProduct(id)
+  if (!current) return []
+
+  const sameCategory = products.filter(
+    (item) => item.id !== id && item.category === current.category
+  )
+  const others = products.filter(
+    (item) => item.id !== id && item.category !== current.category
+  )
+
+  return [...sameCategory, ...others].slice(0, limit)
+}
