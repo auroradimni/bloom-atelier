@@ -100,7 +100,6 @@
               v-scroll-reveal
               :product="lovedFeatured"
               :to="`/product/${lovedFeatured.id}`"
-              layout="featured"
             />
 
             <ProductCard
@@ -191,7 +190,7 @@ function onResize() {
 
 function centerFeatured() {
   const track = trackRef.value
-  const featured = track?.querySelector('.product-card--featured')
+  const featured = track?.querySelector('.product-card:nth-child(4)')
   if (!track || !featured) return
 
   const left = featured.offsetLeft - (track.clientWidth - featured.offsetWidth) / 2
@@ -363,34 +362,31 @@ function getCover(slug) {
 }
 
 .most-loved-track {
-  display: flex;
-  align-items: flex-end;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) minmax(0, 1.45fr) repeat(3, minmax(0, 1fr));
   gap: 0.65rem;
+  align-items: end;
   width: 100%;
 }
 
 .most-loved-track :deep(.product-card) {
-  flex: 1 1 0;
   min-width: 0;
 }
 
-.most-loved-track :deep(.product-card--featured) {
-  flex: 2.35 1 0;
-}
-
-.most-loved-track :deep(.product-card:not(.product-card--featured) .product-media) {
-  padding-top: 105%;
-}
-
-.most-loved-track :deep(.product-card--featured .product-media) {
+.most-loved-track :deep(.product-card .product-media) {
   height: 0;
-  padding-top: 138%;
+  padding-top: 125%;
   aspect-ratio: unset;
   max-height: none;
 }
 
-.most-loved-track :deep(.product-card--featured .product-meta h3) {
-  font-size: clamp(1.1rem, 2vw, 1.45rem);
+.most-loved-track :deep(.product-card .product-meta h3) {
+  font-size: clamp(0.9rem, 1.2vw, 1.05rem);
+  min-height: 2.4em;
+}
+
+.most-loved-track :deep(.product-card .price) {
+  font-size: 0.82rem;
 }
 
 .carousel-arrow {
@@ -520,6 +516,7 @@ function getCover(slug) {
 
   .most-loved-track {
     display: flex;
+    grid-template-columns: none;
     gap: 0.75rem;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
@@ -534,16 +531,16 @@ function getCover(slug) {
   }
 
   .most-loved-track :deep(.product-card) {
-    flex: 0 0 min(68vw, 220px);
+    flex: 0 0 min(58vw, 200px);
     scroll-snap-align: start;
   }
 
-  .most-loved-track :deep(.product-card--featured) {
-    flex: 0 0 min(78vw, 260px);
+  .most-loved-track :deep(.product-card:nth-child(4)) {
+    flex-basis: min(64vw, 220px);
     scroll-snap-align: center;
   }
 
-  .most-loved-track :deep(.product-card:not(.product-card--featured) .product-media) {
+  .most-loved-track :deep(.product-card .product-media) {
     padding-top: 133.333%;
   }
 
