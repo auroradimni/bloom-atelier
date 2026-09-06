@@ -26,18 +26,12 @@
         <NuxtLink to="/collection" class="section-link">View All</NuxtLink>
       </div>
 
-      <div class="shop-grid">
-        <NuxtLink
-          v-for="(cat, index) in categories"
-          :key="cat.slug"
-          v-scroll-reveal="{ delay: index * 90 }"
-          :to="`/collection/${cat.slug}`"
-          class="shop-tile"
-        >
-          <img :src="getCover(cat.slug)" :alt="cat.title" />
-          <span>{{ cat.title }}</span>
-        </NuxtLink>
-      </div>
+      <CategoryRail
+        :items="categoryRailItems"
+        :show-all="false"
+        use-links
+        aria-label="Shop by category"
+      />
     </section>
 
     <section v-scroll-reveal class="shop-section page-shell">
@@ -89,16 +83,13 @@
 </template>
 
 <script setup>
-import { categories, getProductsByCategory, products } from '~/data/collection'
+import { getCategoryRailItems, products } from '~/data/collection'
 
 useHead({ title: 'Bloom Atelier' })
 
+const categoryRailItems = getCategoryRailItems()
 const newArrivals = products.filter((item) => item.isNew)
 const loved = [...products].reverse()
-
-function getCover(slug) {
-  return getProductsByCategory(slug)[0]?.image || '/images/skirt-2.jpg'
-}
 </script>
 
 <style scoped>
@@ -174,8 +165,13 @@ function getCover(slug) {
 }
 
 .shop-section {
-  padding: clamp(2rem, 5vw, 3rem) 0;
+  padding: clamp(1.5rem, 4vw, 2.5rem) 0;
   border-top: 1px solid var(--line);
+}
+
+.shop-section :deep(.category-rail) {
+  margin-bottom: 0;
+  padding-bottom: 0.5rem;
 }
 
 .section-head {
@@ -204,40 +200,6 @@ function getCover(slug) {
 
 .section-link:hover {
   color: var(--ink);
-}
-
-.shop-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.5rem;
-}
-
-.shop-tile {
-  position: relative;
-  overflow: hidden;
-  text-decoration: none;
-  color: var(--surface);
-}
-
-.shop-tile img {
-  width: 100%;
-  aspect-ratio: 1;
-  object-fit: cover;
-  transition: transform 0.6s var(--ease);
-}
-
-.shop-tile:hover img {
-  transform: scale(1.04);
-}
-
-.shop-tile span {
-  position: absolute;
-  inset: auto 0 0;
-  padding: 1rem;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.55), transparent);
-  font-size: 0.62rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
 }
 
 .new-arrivals-scroll {
@@ -290,6 +252,63 @@ function getCover(slug) {
   }
 }
 
+.editorial {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  align-items: stretch;
+  gap: 0.5rem;
+  margin: clamp(1.5rem, 4vw, 2.5rem) auto;
+  border-top: 1px solid var(--line);
+  padding-top: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.editorial-copy {
+  background: var(--accent-soft);
+  padding: clamp(1.25rem, 3vw, 2rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 0;
+}
+
+.editorial-copy h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3.2vw, 2.1rem);
+  font-weight: 300;
+  line-height: 1.15;
+  color: var(--ink);
+  margin: 0.5rem 0 1rem;
+}
+
+.editorial-copy .eyebrow {
+  margin-bottom: 0;
+}
+
+.editorial-copy .btn-solid {
+  align-self: flex-start;
+  padding: 0.65rem 1.25rem;
+  font-size: 0.62rem;
+}
+
+.editorial-media {
+  display: block;
+  overflow: hidden;
+  min-height: 0;
+}
+
+.editorial-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  transition: transform 0.7s var(--ease);
+}
+
+.editorial-media:hover img {
+  transform: scale(1.04);
+}
+
 .most-loved {
   padding: clamp(2rem, 5vw, 3rem) 0;
   background: var(--accent-soft);
@@ -320,49 +339,6 @@ function getCover(slug) {
   width: 100%;
 }
 
-.editorial {
-  display: grid;
-  grid-template-columns: 1fr 1.1fr;
-  gap: 0.5rem;
-  margin: clamp(2rem, 5vw, 3rem) auto;
-  border-top: 1px solid var(--line);
-  padding-top: clamp(2rem, 5vw, 3rem);
-}
-
-.editorial-copy {
-  background: var(--accent-soft);
-  padding: clamp(2rem, 5vw, 3.5rem);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.editorial-copy h2 {
-  font-family: var(--font-display);
-  font-size: clamp(1.8rem, 4vw, 2.6rem);
-  font-weight: 300;
-  line-height: 1.15;
-  color: var(--ink);
-  margin: 0.75rem 0 1.5rem;
-}
-
-.editorial-media {
-  display: block;
-  overflow: hidden;
-}
-
-.editorial-media img {
-  width: 100%;
-  height: 100%;
-  min-height: 280px;
-  object-fit: cover;
-  transition: transform 0.7s var(--ease);
-}
-
-.editorial-media:hover img {
-  transform: scale(1.04);
-}
-
 @media (max-width: 900px) {
   .mosaic {
     grid-template-columns: 1fr;
@@ -386,15 +362,6 @@ function getCover(slug) {
   .section-head {
     padding: 0 0.75rem;
     margin-bottom: 0.65rem;
-  }
-
-  .shop-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 2px;
-  }
-
-  .shop-tile img {
-    aspect-ratio: 3 / 4;
   }
 
   .new-arrivals-scroll {
@@ -421,6 +388,10 @@ function getCover(slug) {
     padding: 1rem 0.75rem;
     border-top: 0;
     gap: 2px;
+  }
+
+  .editorial-media img {
+    aspect-ratio: 3 / 4;
   }
 
   .most-loved {
