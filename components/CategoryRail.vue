@@ -26,9 +26,9 @@
           <NuxtImg
             :src="item.image"
             :alt="item.title"
-            width="128"
-            height="128"
-            sizes="(max-width: 900px) 50vw, 128px"
+            width="80"
+            height="80"
+            sizes="(max-width: 900px) 50vw, 80px"
             loading="lazy"
             decoding="async"
           />
@@ -65,9 +65,9 @@
           <NuxtImg
             :src="item.image"
             :alt="item.title"
-            width="128"
-            height="128"
-            sizes="(max-width: 900px) 50vw, 128px"
+            width="80"
+            height="80"
+            sizes="(max-width: 900px) 50vw, 80px"
             loading="lazy"
             decoding="async"
           />
@@ -182,49 +182,29 @@ defineEmits(['select'])
     justify-content: center;
     flex-wrap: wrap;
     overflow-x: visible;
-    gap: 1.35rem 2rem;
-    padding-bottom: 1.5rem;
+    gap: 1rem 1.35rem;
+    padding-bottom: 1.15rem;
   }
 
   .category-circle {
-    width: 132px;
-    gap: 0.7rem;
+    width: 84px;
+    gap: 0.5rem;
   }
 
   .circle-image {
-    width: 112px;
-    height: 112px;
-    border-width: 2.5px;
+    width: 72px;
+    height: 72px;
+    border-width: 2px;
   }
 
   .circle-image--all svg {
-    width: 30px;
-    height: 30px;
+    width: 24px;
+    height: 24px;
   }
 
   .circle-label {
-    font-size: 0.82rem;
-    letter-spacing: 0.05em;
-  }
-}
-
-@media (min-width: 1280px) {
-  .category-rail {
-    gap: 1.5rem 2.25rem;
-  }
-
-  .category-circle {
-    width: 148px;
-    gap: 0.75rem;
-  }
-
-  .circle-image {
-    width: 128px;
-    height: 128px;
-  }
-
-  .circle-label {
-    font-size: 0.88rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
   }
 }
 
