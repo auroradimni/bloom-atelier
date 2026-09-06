@@ -31,7 +31,9 @@
 .site-footer {
   margin-top: clamp(4rem, 10vw, 8rem);
   padding: clamp(3rem, 6vw, 5rem) 0 2rem;
-  border-top: 1px solid var(--line);
+  background: var(--wine);
+  color: var(--surface);
+  border-top: 0;
 }
 
 .footer-grid {
@@ -44,34 +46,35 @@
   font-family: var(--font-display);
   font-size: 2rem;
   font-weight: 300;
-  color: var(--ink);
+  color: var(--surface);
   margin-bottom: 0.75rem;
 }
 
 .footer-label {
   margin-bottom: 1rem;
+  color: rgba(255, 255, 255, 0.55);
 }
 
 .footer-grid p,
 .footer-grid a {
   font-size: 0.88rem;
-  color: var(--stone);
+  color: rgba(255, 255, 255, 0.72);
   text-decoration: none;
   margin-bottom: 0.35rem;
 }
 
 .footer-grid a:hover {
-  color: var(--ink);
+  color: var(--surface);
 }
 
 .footer-bottom {
   margin-top: 2.5rem;
   padding-top: 1.5rem;
-  border-top: 1px solid var(--line);
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
   font-size: 0.72rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--stone);
+  color: rgba(255, 255, 255, 0.55);
 }
 
 @media (max-width: 900px) {
