@@ -108,8 +108,9 @@ function getCover(slug) {
 
 .mosaic {
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
+  grid-template-columns: 2fr 1fr 1fr;
   gap: 0.5rem;
+  align-items: stretch;
   padding-bottom: clamp(1.5rem, 4vw, 2.5rem);
 }
 
@@ -117,13 +118,14 @@ function getCover(slug) {
   position: relative;
   overflow: hidden;
   display: block;
-  min-height: 160px;
+  min-height: 0;
 }
 
 .mosaic-item img {
+  display: block;
   width: 100%;
   height: 100%;
-  min-height: 160px;
+  aspect-ratio: 3 / 4;
   object-fit: cover;
   transition: transform 0.7s var(--ease);
 }
@@ -133,9 +135,6 @@ function getCover(slug) {
 }
 
 .mosaic-promo {
-  grid-column: span 6;
-  grid-row: span 2;
-  min-height: 380px;
   background: var(--wine);
   color: var(--surface);
   display: flex;
@@ -143,7 +142,7 @@ function getCover(slug) {
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 2rem;
+  padding: 1.5rem;
   text-decoration: none;
   transition: background 0.4s var(--ease);
 }
@@ -172,10 +171,6 @@ function getCover(slug) {
   text-transform: uppercase;
   border-bottom: 1px solid rgba(255, 255, 255, 0.65);
   padding-bottom: 2px;
-}
-
-.mosaic-sm {
-  grid-column: span 3;
 }
 
 .shop-section {
@@ -375,15 +370,8 @@ function getCover(slug) {
     padding-bottom: 0;
   }
 
-  .mosaic-promo,
-  .mosaic-sm {
-    grid-column: span 1;
-    grid-row: span 1;
-    min-height: 220px;
-  }
-
   .mosaic-promo {
-    min-height: 280px;
+    min-height: 240px;
   }
 
   .script {
