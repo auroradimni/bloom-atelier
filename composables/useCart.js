@@ -22,9 +22,18 @@ export function useCart() {
     cart.value.splice(index, 1)
   }
 
+  function updateQuantity(index, quantity) {
+    if (quantity < 1) {
+      removeItem(index)
+      return
+    }
+
+    cart.value[index].quantity = quantity
+  }
+
   function clearCart() {
     cart.value = []
   }
 
-  return { cart, count, addItem, removeItem, clearCart }
+  return { cart, count, addItem, removeItem, updateQuantity, clearCart }
 }
