@@ -105,11 +105,18 @@ function checkoutNow() {
   align-items: start;
 }
 
+.product-gallery {
+  background: var(--surface);
+  line-height: 0;
+}
+
 .product-gallery img {
+  display: block;
   width: 100%;
-  max-height: min(560px, 68vh);
-  aspect-ratio: 3 / 4;
-  object-fit: cover;
+  height: auto;
+  max-height: min(78vh, 760px);
+  object-fit: contain;
+  object-position: center center;
 }
 
 .product-info h1 {
