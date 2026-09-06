@@ -269,6 +269,52 @@ function toggleWish() {
   font-size: 0.95rem;
 }
 
+@media (max-width: 640px) {
+  .product-media {
+    padding-top: 118%;
+    margin-bottom: 0.5rem;
+  }
+
+  .product-meta h3 {
+    font-size: 0.82rem;
+    min-height: 2.2em;
+    margin-bottom: 0.2rem;
+  }
+
+  .price {
+    font-size: 0.78rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .swatches span {
+    width: 10px;
+    height: 10px;
+    min-width: 10px;
+    min-height: 10px;
+  }
+
+  .badge {
+    top: 0.45rem;
+    left: 0.45rem;
+    padding: 0.22rem 0.4rem;
+    font-size: 0.48rem;
+  }
+
+  .wishlist {
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+    min-height: 28px;
+    top: 0.4rem;
+    right: 0.4rem;
+  }
+
+  .wishlist svg {
+    width: 13px;
+    height: 13px;
+  }
+}
+
 @media (max-width: 720px) {
   .product-card--featured .product-media {
     aspect-ratio: 4 / 3;

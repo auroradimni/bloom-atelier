@@ -213,19 +213,45 @@ function checkoutNow() {
 .actions .purchase-btn {
   flex: 1;
   min-width: 140px;
+  min-height: 48px;
+  padding: 0 1rem;
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  -webkit-text-fill-color: currentColor;
+}
+
+.actions .btn-solid {
+  background: var(--ink);
+  color: var(--bg);
+  border: 1px solid var(--ink);
+}
+
+.actions .btn-solid:hover:not(:disabled) {
+  background: transparent;
+  color: var(--ink);
+}
+
+.actions .purchase-btn {
+  background: var(--ink);
+  color: var(--bg);
+  border: 1px solid var(--ink);
+}
+
+.actions .purchase-btn:hover:not(:disabled) {
+  background: var(--bg);
+  color: var(--ink);
 }
 
 .actions .btn-solid:disabled,
 .actions .purchase-btn:disabled {
-  opacity: 0.45;
+  opacity: 0.55;
   cursor: not-allowed;
-}
-
-.purchase-btn {
-  min-height: 48px;
-  padding: 0 1.75rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
+  color: var(--bg);
+  background: var(--ink);
 }
 
 .empty {

@@ -44,25 +44,27 @@
       <div class="section-head">
         <h2>New Arrivals</h2>
       </div>
-      <div class="product-grid">
-        <ProductCard
-          v-for="(item, index) in newArrivals"
-          :key="item.id"
-          v-scroll-reveal="{ delay: index * 70, variant: 'scale' }"
-          :product="item"
-          :to="`/product/${item.id}`"
-        />
+      <div class="new-arrivals-scroll">
+        <div class="new-arrivals-track">
+          <ProductCard
+            v-for="(item, index) in newArrivals"
+            :key="item.id"
+            v-scroll-reveal="{ delay: index * 70, variant: 'scale' }"
+            :product="item"
+            :to="`/product/${item.id}`"
+          />
+        </div>
       </div>
     </section>
 
     <section v-scroll-reveal class="editorial page-shell">
       <div class="editorial-copy">
-        <p class="eyebrow">The Spring Edit</p>
+        <p class="eyebrow">The Fall Edit</p>
         <h2>Refined layers for the new season</h2>
         <NuxtLink to="/collection/coats" class="btn-solid">Explore the Edit</NuxtLink>
       </div>
       <NuxtLink v-scroll-reveal="{ delay: 120 }" to="/collection/coats" class="editorial-media">
-        <img src="/images/coat-1.jpg" alt="Spring edit" />
+        <img src="/images/coat-1.jpg" alt="Fall edit" />
       </NuxtLink>
     </section>
 
@@ -85,25 +87,14 @@
             </svg>
           </button>
 
-          <div ref="trackRef" class="most-loved-track" @scroll="updateScrollState">
+          <div
+            ref="trackRef"
+            class="most-loved-track"
+            :style="{ gridTemplateColumns: `repeat(${loved.length}, minmax(0, 1fr))` }"
+            @scroll="updateScrollState"
+          >
             <ProductCard
-              v-for="(item, index) in lovedLeft"
-              :key="item.id"
-              v-scroll-reveal="{ delay: index * 60 }"
-              :product="item"
-              :to="`/product/${item.id}`"
-              compact
-            />
-
-            <ProductCard
-              v-if="lovedFeatured"
-              v-scroll-reveal
-              :product="lovedFeatured"
-              :to="`/product/${lovedFeatured.id}`"
-            />
-
-            <ProductCard
-              v-for="(item, index) in lovedRight"
+              v-for="(item, index) in loved"
               :key="item.id"
               v-scroll-reveal="{ delay: index * 60 }"
               :product="item"
@@ -136,17 +127,6 @@ useHead({ title: 'Bloom Atelier' })
 
 const newArrivals = products.filter((item) => item.isNew)
 const loved = [...products].reverse()
-const lovedFeatured = computed(() => loved[0] ?? null)
-const lovedLeft = computed(() => {
-  const rest = loved.slice(1)
-  const split = Math.floor(rest.length / 2)
-  return rest.slice(0, split)
-})
-const lovedRight = computed(() => {
-  const rest = loved.slice(1)
-  const split = Math.floor(rest.length / 2)
-  return rest.slice(split)
-})
 
 const trackRef = ref(null)
 const canScrollPrev = ref(false)
@@ -174,7 +154,6 @@ function scrollTrack(direction) {
 
 onMounted(() => {
   nextTick(() => {
-    centerFeatured()
     updateScrollState()
     window.addEventListener('resize', onResize)
   })
@@ -186,15 +165,6 @@ onBeforeUnmount(() => {
 
 function onResize() {
   updateScrollState()
-}
-
-function centerFeatured() {
-  const track = trackRef.value
-  const featured = track?.querySelector('.product-card:nth-child(4)')
-  if (!track || !featured) return
-
-  const left = featured.offsetLeft - (track.clientWidth - featured.offsetWidth) / 2
-  track.scrollLeft = Math.max(0, left)
 }
 
 function getCover(slug) {
@@ -346,8 +316,29 @@ function getCover(slug) {
   text-transform: uppercase;
 }
 
-.product-grid {
-  gap: 0.85rem;
+.new-arrivals-scroll {
+  overflow: hidden;
+}
+
+.new-arrivals-track {
+  display: flex;
+  gap: 0.65rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  padding: 0.15rem 0 0.35rem;
+  -webkit-overflow-scrolling: touch;
+}
+
+.new-arrivals-track::-webkit-scrollbar {
+  display: none;
+}
+
+.new-arrivals-track :deep(.product-card) {
+  flex: 0 0 min(46vw, 168px);
+  scroll-snap-align: start;
+  min-width: 0;
 }
 
 .most-loved {
@@ -363,9 +354,8 @@ function getCover(slug) {
 
 .most-loved-track {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr)) minmax(0, 1.45fr) repeat(3, minmax(0, 1fr));
   gap: 0.65rem;
-  align-items: end;
+  align-items: start;
   width: 100%;
 }
 
@@ -375,13 +365,13 @@ function getCover(slug) {
 
 .most-loved-track :deep(.product-card .product-media) {
   height: 0;
-  padding-top: 125%;
+  padding-top: 133.333%;
   aspect-ratio: unset;
   max-height: none;
 }
 
 .most-loved-track :deep(.product-card .product-meta h3) {
-  font-size: clamp(0.9rem, 1.2vw, 1.05rem);
+  font-size: clamp(0.88rem, 1.1vw, 1rem);
   min-height: 2.4em;
 }
 
@@ -501,7 +491,12 @@ function getCover(slug) {
   }
 
   .shop-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem;
+  }
+
+  .shop-tile img {
+    aspect-ratio: 4 / 5;
   }
 
   .editorial {
@@ -531,13 +526,8 @@ function getCover(slug) {
   }
 
   .most-loved-track :deep(.product-card) {
-    flex: 0 0 min(58vw, 200px);
+    flex: 0 0 min(46vw, 168px);
     scroll-snap-align: start;
-  }
-
-  .most-loved-track :deep(.product-card:nth-child(4)) {
-    flex-basis: min(64vw, 220px);
-    scroll-snap-align: center;
   }
 
   .most-loved-track :deep(.product-card .product-media) {

@@ -50,10 +50,6 @@ useHead({ title: 'Wishlist - Bloom Atelier' })
   color: var(--stone);
 }
 
-.product-grid {
-  gap: 1.5rem 1.25rem;
-}
-
 .empty-state {
   padding: 2rem 0;
 }
