@@ -446,13 +446,15 @@ function onSearch() {
 .shop-nav-pill {
   flex: 0 0 auto;
   padding: 0.35rem 0.85rem;
+  font-family: var(--font-body);
   font-size: 0.62rem;
+  font-weight: 400;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   text-decoration: none;
   color: var(--ink);
   white-space: nowrap;
-  transition: opacity 0.3s var(--ease);
+  transition: opacity 0.3s var(--ease), border-color 0.3s var(--ease);
 }
 
 .shop-nav-pill:hover,
@@ -556,27 +558,28 @@ function onSearch() {
   .site-nav-shop {
     display: flex;
     gap: 0;
-    padding: 0 0 0.5rem;
-    border-top: 0;
+    padding: 0.55rem 0 0.65rem;
+    border-top: 1px solid var(--line);
     -webkit-overflow-scrolling: touch;
   }
 
   .shop-nav-pill {
-    padding: 0.45rem 0.85rem;
-    font-size: 0.58rem;
-    font-weight: 600;
-    letter-spacing: 0.14em;
+    padding: 0.35rem 0.85rem;
+    font-size: 0.62rem;
+    font-weight: 400;
+    letter-spacing: 0.18em;
     opacity: 1;
   }
 
   .shop-nav-pill.router-link-active {
-    border-bottom: 2px solid var(--ink);
-    padding-bottom: calc(0.45rem - 2px);
-    opacity: 1;
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: calc(0.35rem - 1px);
+    opacity: 0.55;
   }
 
   .shop-nav-pill--sale.router-link-active {
     border-bottom-color: var(--wine);
+    opacity: 1;
   }
 
   .menu-toggle {
