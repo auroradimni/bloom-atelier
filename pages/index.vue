@@ -22,7 +22,7 @@
 
     <section v-scroll-reveal class="shop-section page-shell">
       <div class="section-head">
-        <h2>Shop</h2>
+        <h2>Shop by Category</h2>
         <NuxtLink to="/collection" class="section-link">View All</NuxtLink>
       </div>
 
@@ -351,6 +351,14 @@ const loved = [...products].reverse()
   .shop-section {
     padding: 1rem 0;
     border-top: 0;
+  }
+
+  .shop-section :deep(.shop-page-rails) {
+    padding-inline: 0;
+  }
+
+  .shop-section :deep(.category-rail) {
+    width: 100%;
   }
 
   .section-head {

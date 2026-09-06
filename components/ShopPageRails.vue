@@ -50,4 +50,26 @@ const categoryActive = computed(() => getCategoryActiveSlug(route.path))
   padding-top: 0;
   border-top: 1px solid var(--line);
 }
+
+@media (max-width: 900px) {
+  .shop-page-rails {
+    gap: 0.35rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .shop-page-rails :deep(.category-rail:first-child) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
+
+  .shop-page-rails :deep(.category-rail:last-child) {
+    border-top: 0;
+    padding-top: 0;
+  }
+
+  .shop-page-rails :deep(.category-rail:first-child .circle-image) {
+    aspect-ratio: 1;
+  }
+}
 </style>

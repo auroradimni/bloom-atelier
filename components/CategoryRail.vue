@@ -180,23 +180,60 @@ defineEmits(['select'])
 
 @media (max-width: 900px) {
   .category-rail {
-    gap: 0.85rem;
-    padding-bottom: 1rem;
-    margin-inline: -0.25rem;
-    padding-inline: 0.25rem;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2px;
+    overflow-x: visible;
+    padding: 0;
+    margin-inline: 0;
   }
 
   .category-circle {
-    width: 76px;
+    position: relative;
+    width: 100%;
+    gap: 0;
   }
 
   .circle-image {
-    width: 64px;
-    height: 64px;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    border-radius: 0;
+    border-width: 0;
+    outline: 2px solid transparent;
+    outline-offset: -2px;
+  }
+
+  .circle-image--all {
+    border: 0;
+    background: var(--surface);
+  }
+
+  .category-circle:hover .circle-image {
+    transform: none;
+  }
+
+  .category-circle.active .circle-image {
+    outline-color: var(--wine);
+    border-color: transparent;
   }
 
   .circle-label {
-    font-size: 0.68rem;
+    position: absolute;
+    inset: auto 0 0;
+    padding: 0.85rem 0.75rem;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.58), transparent);
+    font-size: 0.58rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-align: left;
+    color: var(--surface);
+    font-weight: 500;
+  }
+
+  .category-circle.active .circle-label {
+    color: var(--surface);
+    font-weight: 600;
   }
 }
 </style>
