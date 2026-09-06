@@ -40,8 +40,8 @@
           </div>
 
           <div class="actions">
-            <button type="submit" class="btn-solid" :disabled="!size">Add to bag</button>
-            <button type="button" class="btn-ghost purchase-btn" :disabled="!size" @click="checkoutNow">Checkout</button>
+            <button type="submit" class="action-primary" :disabled="!size">Add to bag</button>
+            <button type="button" class="action-secondary" :disabled="!size" @click="checkoutNow">Checkout</button>
           </div>
 
           <p v-if="added" class="added-note">Added to your bag.</p>
@@ -154,7 +154,8 @@ function checkoutNow() {
 }
 
 .purchase-form {
-  max-width: 360px;
+  display: block;
+  max-width: 380px;
   width: 100%;
 }
 
@@ -203,29 +204,56 @@ function checkoutNow() {
 }
 
 .actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  margin-top: 0.25rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.65rem;
+  width: 100%;
 }
 
-.actions .btn-solid,
-.actions .purchase-btn {
-  flex: 1;
-  min-width: 140px;
+.actions button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 48px;
+  padding: 0 1rem;
+  border-radius: 0;
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  align-self: stretch;
+  cursor: pointer;
+  transition: background 0.35s var(--ease), color 0.35s var(--ease), border-color 0.35s var(--ease);
 }
 
-.actions .btn-solid:disabled,
-.actions .purchase-btn:disabled {
+.action-primary {
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  color: var(--surface);
+}
+
+.action-primary:hover:not(:disabled) {
+  background: transparent;
+  color: var(--ink);
+}
+
+.action-secondary {
+  border: 1px solid var(--ink);
+  background: var(--surface);
+  color: var(--ink);
+}
+
+.action-secondary:hover:not(:disabled) {
+  background: var(--ink);
+  color: var(--surface);
+}
+
+.actions button:disabled {
   opacity: 0.45;
   cursor: not-allowed;
-}
-
-.purchase-btn {
-  min-height: 48px;
-  padding: 0 1.75rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
 }
 
 .empty {
@@ -240,6 +268,12 @@ function checkoutNow() {
 
 @media (max-width: 900px) {
   .product-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .actions {
     grid-template-columns: 1fr;
   }
 }
