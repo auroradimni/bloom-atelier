@@ -147,9 +147,39 @@ function getCategoryCover(slug) {
 }
 
 @media (max-width: 900px) {
+  .collection-page {
+    padding-top: 0.85rem;
+  }
+
+  .page-head {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .page-head h1 {
+    line-height: 1.05;
+  }
+
+  .page-head p {
+    margin-top: 0.25rem;
+    line-height: 1.4;
+    font-size: 0.85rem;
+  }
+
   .shop-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 0.65rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2px;
+    width: calc(100% + 1.5rem);
+    margin-inline: -0.75rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .shop-tile img {
+    margin-bottom: 0.45rem;
+  }
+
+  .shop-tile div {
+    padding-inline: 0.75rem;
   }
 }
 
