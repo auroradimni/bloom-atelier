@@ -571,12 +571,13 @@ function checkoutNow() {
 
 .related-grid {
   display: grid;
-  gap: clamp(1.25rem, 3vw, 2rem);
+  gap: 2px;
 }
 
 @media (min-width: 901px) {
   .related-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 2px;
   }
 }
 
