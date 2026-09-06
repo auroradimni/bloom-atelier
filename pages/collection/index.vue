@@ -1,5 +1,5 @@
 <template>
-  <div class="collection-page page-shell">
+  <div class="collection-page page-shell page-shell--wide">
     <header v-scroll-reveal class="page-head">
       <h1>Collection</h1>
       <p class="product-count">{{ totalProducts }} {{ totalProducts === 1 ? 'product' : 'products' }}</p>
@@ -45,7 +45,7 @@
       @reset="resetFilters"
     />
 
-    <div v-if="filteredItems.length" class="product-grid">
+    <div v-if="filteredItems.length" class="product-grid product-grid--showcase">
       <ProductCard
         v-for="(item, index) in filteredItems"
         :key="item.id"

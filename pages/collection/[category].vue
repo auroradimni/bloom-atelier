@@ -1,5 +1,5 @@
 <template>
-  <div class="category-page page-shell">
+  <div class="category-page page-shell page-shell--wide">
     <NuxtLink v-scroll-reveal to="/collection" class="text-link back">Back</NuxtLink>
 
     <header v-if="category" v-scroll-reveal="{ delay: 60 }" class="page-head">
@@ -16,7 +16,7 @@
       @reset="resetFilters"
     />
 
-    <div v-if="filteredItems.length" class="product-grid">
+    <div v-if="filteredItems.length" class="product-grid product-grid--showcase">
       <ProductCard
         v-for="(item, index) in filteredItems"
         :key="item.id"
