@@ -74,7 +74,7 @@
           src="/images/coat-1.jpg"
           alt="Fall edit"
           width="800"
-          height="1000"
+          height="520"
           sizes="(max-width: 900px) 100vw, 50vw"
           loading="lazy"
           decoding="async"
@@ -299,17 +299,18 @@ const handpicked = [...products].reverse().slice(0, 6)
   margin: clamp(0.65rem, 1.8vw, 1rem) auto;
   border-top: 1px solid var(--line);
   padding-top: clamp(0.65rem, 1.8vw, 1rem);
+  overflow: hidden;
 }
 
 @media (min-width: 901px) {
   .editorial {
-    max-height: 360px;
+    max-height: 260px;
   }
 }
 
 .editorial-copy {
   background: var(--accent-soft);
-  padding: clamp(1rem, 2vw, 1.35rem);
+  padding: clamp(0.75rem, 1.5vw, 1rem);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -318,11 +319,11 @@ const handpicked = [...products].reverse().slice(0, 6)
 
 .editorial-copy h2 {
   font-family: var(--font-display);
-  font-size: clamp(1.25rem, 2.4vw, 1.65rem);
+  font-size: clamp(1.05rem, 2vw, 1.35rem);
   font-weight: 300;
   line-height: 1.15;
   color: var(--ink);
-  margin: 0.35rem 0 0.75rem;
+  margin: 0.25rem 0 0.55rem;
 }
 
 .editorial-copy .eyebrow {
@@ -331,14 +332,15 @@ const handpicked = [...products].reverse().slice(0, 6)
 
 .editorial-copy .btn-solid {
   align-self: flex-start;
-  padding: 0.65rem 1.25rem;
-  font-size: 0.62rem;
+  padding: 0.55rem 1rem;
+  font-size: 0.58rem;
 }
 
 .editorial-media {
   display: block;
   overflow: hidden;
   min-height: 0;
+  max-height: 260px;
 }
 
 .editorial-media img,
@@ -346,16 +348,20 @@ const handpicked = [...products].reverse().slice(0, 6)
   display: block;
   width: 100%;
   height: 100%;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 16 / 10;
+  max-height: 260px;
   object-fit: cover;
+  object-position: center 20%;
   transition: transform 0.7s var(--ease);
 }
 
 @media (min-width: 901px) {
+  .editorial-media,
   .editorial-media img,
   .editorial-media :deep(img) {
     aspect-ratio: auto;
-    max-height: 360px;
+    height: 100%;
+    max-height: 260px;
     min-height: 0;
   }
 }
@@ -462,15 +468,20 @@ const handpicked = [...products].reverse().slice(0, 6)
   .editorial {
     grid-template-columns: 1fr;
     margin: 0;
-    padding: 1rem 0.75rem;
+    padding: 0.65rem 0.75rem;
     border-top: 0;
     gap: 2px;
+    max-height: none;
+  }
+
+  .editorial-media {
+    max-height: 220px;
   }
 
   .editorial-media img,
   .editorial-media :deep(img) {
-    aspect-ratio: 3 / 4;
-    max-height: none;
+    aspect-ratio: 16 / 10;
+    max-height: 220px;
   }
 
   .handpicked {
