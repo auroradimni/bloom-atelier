@@ -57,12 +57,12 @@
 
     <section v-scroll-reveal class="editorial page-shell">
       <div class="editorial-copy">
-        <p class="eyebrow">The Spring Edit</p>
+        <p class="eyebrow">The Fall Edit</p>
         <h2>Refined layers for the new season</h2>
         <NuxtLink to="/collection/coats" class="btn-solid">Explore the Edit</NuxtLink>
       </div>
       <NuxtLink v-scroll-reveal="{ delay: 120 }" to="/collection/coats" class="editorial-media">
-        <img src="/images/coat-1.jpg" alt="Spring edit" />
+        <img src="/images/coat-1.jpg" alt="Fall edit" />
       </NuxtLink>
     </section>
 
