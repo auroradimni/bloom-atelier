@@ -7,8 +7,15 @@ export default defineNuxtConfig({
   devtools: { enabled: false },
   modules: ['@nuxt/image'],
   css: ['~/assets/styles/main.css'],
+  experimental: {
+    defaults: {
+      nuxtLink: {
+        prefetch: false
+      }
+    }
+  },
   image: {
-    quality: 78,
+    quality: 72,
     format: ['webp', 'jpeg'],
     screens: {
       xs: 320,
@@ -57,8 +64,21 @@ export default defineNuxtConfig({
           crossorigin: ''
         },
         {
+          rel: 'preload',
+          as: 'image',
+          href: '/images/skirt-3-hero.webp',
+          type: 'image/webp',
+          fetchpriority: 'high'
+        },
+        {
           rel: 'stylesheet',
-          href: 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Outfit:wght@300;400&family=Pinyon+Script&display=swap',
+          href: 'https://fonts.googleapis.com/css2?family=Outfit:wght@300;400&display=swap',
+          media: 'print',
+          onload: "this.media='all'"
+        },
+        {
+          rel: 'stylesheet',
+          href: 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Pinyon+Script&display=swap',
           media: 'print',
           onload: "this.media='all'"
         }

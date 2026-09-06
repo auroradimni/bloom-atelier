@@ -2,7 +2,6 @@
   <div class="home">
     <section class="mosaic page-shell">
       <NuxtLink
-        v-scroll-reveal
         to="/collection"
         class="mosaic-item mosaic-promo"
       >
@@ -11,33 +10,37 @@
         <span class="promo-link">Shop Now</span>
       </NuxtLink>
 
-      <NuxtLink v-scroll-reveal="{ delay: 100 }" to="/collection/skirt" class="mosaic-item mosaic-sm">
-        <NuxtImg
-          src="/images/skirt-3.jpg"
-          alt="Skirt"
-          width="600"
-          height="800"
-          sizes="(max-width: 900px) 100vw, 420px"
-          fetchpriority="high"
-          loading="eager"
-          decoding="async"
-        />
+      <NuxtLink to="/collection/skirt" class="mosaic-item mosaic-sm">
+        <picture>
+          <source srcset="/images/skirt-3-hero.webp" type="image/webp" />
+          <img
+            src="/images/skirt-3.jpg"
+            alt="Skirt"
+            width="640"
+            height="853"
+            fetchpriority="high"
+            loading="eager"
+            decoding="async"
+          />
+        </picture>
       </NuxtLink>
 
-      <NuxtLink v-scroll-reveal="{ delay: 160 }" to="/collection/coats" class="mosaic-item mosaic-sm">
-        <NuxtImg
-          src="/images/coat-1.jpg"
-          alt="Coats"
-          width="600"
-          height="800"
-          sizes="(max-width: 900px) 100vw, 420px"
-          loading="lazy"
-          decoding="async"
-        />
+      <NuxtLink to="/collection/coats" class="mosaic-item mosaic-sm">
+        <picture>
+          <source srcset="/images/coat-1-mosaic.webp" type="image/webp" />
+          <img
+            src="/images/coat-1.jpg"
+            alt="Coats"
+            width="480"
+            height="640"
+            loading="lazy"
+            decoding="async"
+          />
+        </picture>
       </NuxtLink>
     </section>
 
-    <section v-scroll-reveal class="shop-section page-shell">
+    <section class="shop-section page-shell">
       <div class="section-head">
         <h2>Shop by Category</h2>
         <NuxtLink to="/collection" class="section-link">View All</NuxtLink>
@@ -46,7 +49,7 @@
       <ShopPageRails />
     </section>
 
-    <section v-scroll-reveal class="shop-section page-shell">
+    <section class="shop-section page-shell">
       <div class="section-head">
         <h2>New Arrivals</h2>
       </div>
@@ -69,18 +72,21 @@
         <NuxtLink to="/collection/coats" class="btn-solid">Explore the Edit</NuxtLink>
       </div>
       <NuxtLink to="/collection/coats" class="editorial-media">
-        <img
-          src="/images/coat-1.jpg"
-          alt="Fall edit"
-          width="800"
-          height="520"
-          loading="lazy"
-          decoding="async"
-        />
+        <picture>
+          <source srcset="/images/coat-1-editorial.webp" type="image/webp" />
+          <img
+            src="/images/coat-1.jpg"
+            alt="Fall edit"
+            width="720"
+            height="468"
+            loading="lazy"
+            decoding="async"
+          />
+        </picture>
       </NuxtLink>
     </section>
 
-    <section v-scroll-reveal class="shop-section page-shell">
+    <section class="shop-section page-shell">
       <div class="section-head section-head--handpicked">
         <h2>Handpicked For You</h2>
       </div>
@@ -99,7 +105,7 @@
 </template>
 
 <script setup>
-import { getNewArrivals, products } from '~/data/collection'
+import { products } from '~/data/collection'
 
 useHead({ title: 'Bloom Atelier' })
 
@@ -127,7 +133,9 @@ const handpicked = [...products].reverse().slice(0, 5)
   min-height: 0;
 }
 
-.mosaic-item img {
+.mosaic-item img,
+.mosaic-item picture,
+.mosaic-item picture img {
   display: block;
   width: 100%;
   height: 100%;
@@ -136,7 +144,8 @@ const handpicked = [...products].reverse().slice(0, 5)
   transition: transform 0.7s var(--ease);
 }
 
-.mosaic-item:hover img {
+.mosaic-item:hover img,
+.mosaic-item:hover picture img {
   transform: scale(1.05);
 }
 
@@ -285,6 +294,8 @@ const handpicked = [...products].reverse().slice(0, 5)
 }
 
 .editorial-media img,
+.editorial-media picture,
+.editorial-media picture img,
 .editorial-media :deep(img) {
   display: block;
   width: 100%;
@@ -298,12 +309,15 @@ const handpicked = [...products].reverse().slice(0, 5)
 @media (min-width: 901px) {
   .editorial-media,
   .editorial-media img,
+  .editorial-media picture,
+  .editorial-media picture img,
   .editorial-media :deep(img) {
     min-height: 320px;
   }
 }
 
-.editorial-media:hover img {
+.editorial-media:hover img,
+.editorial-media:hover picture img {
   transform: scale(1.04);
 }
 
@@ -377,6 +391,8 @@ const handpicked = [...products].reverse().slice(0, 5)
   }
 
   .editorial-media img,
+  .editorial-media picture,
+  .editorial-media picture img,
   .editorial-media :deep(img) {
     min-height: 0;
     height: 100%;
