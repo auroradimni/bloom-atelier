@@ -18,6 +18,7 @@
         <button
           type="button"
           class="icon-btn"
+          :class="{ active: searchOpen }"
           aria-label="Search"
           :aria-expanded="searchOpen"
           @click="toggleSearch"
@@ -45,7 +46,7 @@
     <div v-if="searchOpen" class="site-nav-search page-shell">
       <form class="search-form" @submit.prevent="onSearch">
         <div class="search-field">
-          <svg class="search-leading-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true">
             <circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="1.5" />
             <path d="M16 16l5 5" fill="none" stroke="currentColor" stroke-width="1.5" />
           </svg>
@@ -53,19 +54,15 @@
             ref="searchInput"
             v-model="query"
             type="search"
-            placeholder="Search dresses, skirts, denim, accessories..."
+            placeholder="Search collection..."
             aria-label="Search products"
           />
-          <button type="submit" class="search-action" aria-label="Search">
+          <button type="button" class="search-close-btn" aria-label="Close search" @click="toggleSearch">
             <svg viewBox="0 0 24 24" aria-hidden="true">
-              <circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="1.5" />
-              <path d="M16 16l5 5" fill="none" stroke="currentColor" stroke-width="1.5" />
+              <path fill="none" stroke="currentColor" stroke-width="1.5" d="M6 6l12 12M18 6L6 18" />
             </svg>
           </button>
         </div>
-        <button type="button" class="search-close" aria-label="Close search" @click="toggleSearch">
-          Close
-        </button>
       </form>
     </div>
 
@@ -258,38 +255,37 @@ function onSearch() {
 }
 
 .site-nav-search {
-  padding: 0 0 0.85rem;
+  padding: 0 0 0.55rem;
 }
 
 .search-form {
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 0.85rem;
+  justify-content: center;
   width: 100%;
-  max-width: none;
+  max-width: 380px;
+  margin: 0 auto;
 }
 
 .search-field {
-  flex: 1;
+  width: 100%;
   display: flex;
   align-items: center;
-  gap: 0.65rem;
-  min-height: 46px;
-  padding: 0 0.35rem 0 1rem;
-  border: 1px solid rgba(20, 18, 16, 0.14);
-  background: var(--surface);
-  transition: border-color 0.3s var(--ease), box-shadow 0.3s var(--ease);
+  gap: 0.45rem;
+  min-height: 34px;
+  padding: 0 0.15rem 0.35rem;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  background: transparent;
+  transition: border-color 0.3s var(--ease);
 }
 
 .search-field:focus-within {
-  border-color: var(--ink);
-  box-shadow: 0 8px 24px rgba(20, 18, 16, 0.06);
+  border-bottom-color: var(--ink);
 }
 
-.search-leading-icon {
-  width: 17px;
-  height: 17px;
+.search-icon {
+  width: 14px;
+  height: 14px;
   flex-shrink: 0;
   color: var(--stone);
 }
@@ -303,63 +299,52 @@ function onSearch() {
   border-radius: 0;
   background: transparent;
   font-family: var(--font-body);
-  font-size: 0.86rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
   color: var(--ink);
   outline: none;
 }
 
 .search-field input::placeholder {
   color: var(--stone);
+  font-size: 0.74rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
 .search-field input::-webkit-search-cancel-button {
   display: none;
 }
 
-.search-action {
-  width: 36px;
-  height: 36px;
-  min-height: 36px;
+.search-close-btn {
+  width: 24px;
+  height: 24px;
+  min-height: 24px;
   padding: 0;
-  margin: 4px;
+  margin: 0;
   border: 0;
   border-radius: 0;
-  background: var(--ink);
-  color: var(--surface);
+  background: transparent;
+  color: var(--stone);
   display: grid;
   place-items: center;
   cursor: pointer;
   flex-shrink: 0;
   align-self: auto;
-  transition: opacity 0.3s var(--ease);
+  transition: color 0.3s var(--ease);
 }
 
-.search-action:hover {
-  opacity: 0.82;
-}
-
-.search-action svg {
-  width: 16px;
-  height: 16px;
-}
-
-.search-close {
-  min-height: auto;
-  padding: 0.35rem 0;
-  border: 0;
-  background: transparent;
-  font-family: var(--font-body);
-  font-size: 0.62rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--stone);
-  cursor: pointer;
-  align-self: auto;
-  white-space: nowrap;
-}
-
-.search-close:hover {
+.search-close-btn:hover {
   color: var(--ink);
+}
+
+.search-close-btn svg {
+  width: 14px;
+  height: 14px;
+}
+
+.icon-btn.active {
+  opacity: 0.45;
 }
 
 .site-nav-categories {
@@ -407,18 +392,6 @@ function onSearch() {
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--stone);
-}
-
-@media (max-width: 560px) {
-  .search-form {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0.55rem;
-  }
-
-  .search-close {
-    align-self: flex-end;
-  }
 }
 
 @media (max-width: 900px) {
