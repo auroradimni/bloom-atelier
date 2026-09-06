@@ -32,7 +32,7 @@
             :alt="product.name"
             width="800"
             height="1066"
-            sizes="(max-width: 900px) 100vw, 55vw"
+            sizes="(max-width: 900px) 100vw, 800px"
             fetchpriority="high"
             loading="eager"
             decoding="async"
