@@ -4,7 +4,7 @@
       <div class="nav-left">
         <button
           class="menu-toggle"
-          aria-label="Open menu"
+          :aria-label="menuOpen ? 'Close menu' : 'Open menu'"
           :aria-expanded="menuOpen"
           @click="toggleMenu"
         >
@@ -18,6 +18,7 @@
         <button
           type="button"
           class="icon-btn"
+          :class="{ active: searchOpen }"
           aria-label="Search"
           :aria-expanded="searchOpen"
           @click="toggleSearch"
@@ -45,7 +46,7 @@
     <div v-if="searchOpen" class="site-nav-search page-shell">
       <form class="search-form" @submit.prevent="onSearch">
         <div class="search-field">
-          <svg class="search-leading-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true">
             <circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="1.5" />
             <path d="M16 16l5 5" fill="none" stroke="currentColor" stroke-width="1.5" />
           </svg>
@@ -53,19 +54,15 @@
             ref="searchInput"
             v-model="query"
             type="search"
-            placeholder="Search dresses, skirts, denim, accessories..."
+            placeholder="Search collection..."
             aria-label="Search products"
           />
-          <button type="submit" class="search-action" aria-label="Search">
+          <button type="button" class="search-close-btn" aria-label="Close search" @click="toggleSearch">
             <svg viewBox="0 0 24 24" aria-hidden="true">
-              <circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="1.5" />
-              <path d="M16 16l5 5" fill="none" stroke="currentColor" stroke-width="1.5" />
+              <path fill="none" stroke="currentColor" stroke-width="1.5" d="M6 6l12 12M18 6L6 18" />
             </svg>
           </button>
         </div>
-        <button type="button" class="search-close" aria-label="Close search" @click="toggleSearch">
-          Close
-        </button>
       </form>
     </div>
 
@@ -80,18 +77,52 @@
       </NuxtLink>
     </nav>
 
-    <div class="menu-overlay" :class="{ open: menuOpen }" @click="closeMenu"></div>
+    <div
+      class="menu-overlay"
+      :class="{ open: menuOpen }"
+      aria-hidden="true"
+      @click="closeMenu"
+    ></div>
 
-    <nav class="mobile-nav" :class="{ open: menuOpen }">
-      <NuxtLink to="/collection" @click="closeMenu">Collection</NuxtLink>
-      <NuxtLink to="/collection/dress" @click="closeMenu">Dress</NuxtLink>
-      <NuxtLink to="/collection/skirt" @click="closeMenu">Skirt</NuxtLink>
-      <NuxtLink to="/collection/coats" @click="closeMenu">Coats</NuxtLink>
-      <NuxtLink to="/collection/denim" @click="closeMenu">Denim</NuxtLink>
-      <NuxtLink to="/collection/accessories" @click="closeMenu">Accessories</NuxtLink>
-      <NuxtLink to="/courses" @click="closeMenu">Courses</NuxtLink>
-      <NuxtLink to="/stylists" @click="closeMenu">Stylists</NuxtLink>
-      <NuxtLink to="/contact" @click="closeMenu">Contact</NuxtLink>
+    <nav
+      class="mobile-nav"
+      :class="{ open: menuOpen }"
+      aria-label="Mobile navigation"
+      :aria-hidden="!menuOpen"
+    >
+      <div class="mobile-nav-head">
+        <p class="mobile-nav-label">Menu</p>
+        <button type="button" class="mobile-nav-close" aria-label="Close menu" @click="closeMenu">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="none" stroke="currentColor" stroke-width="1.5" d="M6 6l12 12M18 6L6 18" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="mobile-nav-body">
+        <p class="mobile-nav-group">Shop</p>
+        <NuxtLink to="/collection" class="mobile-nav-link" @click="closeMenu">Collection</NuxtLink>
+        <NuxtLink to="/collection/dress" class="mobile-nav-link" @click="closeMenu">Dress</NuxtLink>
+        <NuxtLink to="/collection/skirt" class="mobile-nav-link" @click="closeMenu">Skirt</NuxtLink>
+        <NuxtLink to="/collection/coats" class="mobile-nav-link" @click="closeMenu">Coats</NuxtLink>
+        <NuxtLink to="/collection/denim" class="mobile-nav-link" @click="closeMenu">Denim</NuxtLink>
+        <NuxtLink to="/collection/accessories" class="mobile-nav-link" @click="closeMenu">Accessories</NuxtLink>
+
+        <p class="mobile-nav-group">Explore</p>
+        <NuxtLink to="/courses" class="mobile-nav-link" @click="closeMenu">Courses</NuxtLink>
+        <NuxtLink to="/contact" class="mobile-nav-link" @click="closeMenu">Contact</NuxtLink>
+      </div>
+
+      <div class="mobile-nav-foot">
+        <NuxtLink to="/wishlist" class="mobile-nav-foot-link" @click="closeMenu">
+          Wishlist
+          <span v-if="wishlistCount" class="mobile-nav-badge">{{ wishlistCount }}</span>
+        </NuxtLink>
+        <NuxtLink to="/checkout" class="mobile-nav-foot-link" @click="closeMenu">
+          Bag
+          <span v-if="count" class="mobile-nav-badge">{{ count }}</span>
+        </NuxtLink>
+      </div>
     </nav>
   </header>
 </template>
@@ -102,6 +133,7 @@ const searchOpen = ref(false)
 const query = ref('')
 const searchInput = ref(null)
 const router = useRouter()
+const route = useRoute()
 const { count } = useCart()
 const { count: wishlistCount } = useWishlist()
 
@@ -126,6 +158,11 @@ function closeMenu() {
 watch(menuOpen, (open) => {
   if (!import.meta.client) return
   document.body.style.overflow = open ? 'hidden' : ''
+})
+
+watch(() => route.path, () => {
+  closeMenu()
+  searchOpen.value = false
 })
 
 onBeforeUnmount(() => {
@@ -171,7 +208,7 @@ function onSearch() {
 .site-nav {
   position: sticky;
   top: var(--promo-h);
-  z-index: 100;
+  z-index: 130;
   background: rgba(247, 244, 239, 0.94);
   backdrop-filter: blur(18px);
   border-bottom: 1px solid var(--line);
@@ -258,38 +295,37 @@ function onSearch() {
 }
 
 .site-nav-search {
-  padding: 0 0 0.85rem;
+  padding: 0 0 0.55rem;
 }
 
 .search-form {
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 0.85rem;
+  justify-content: center;
   width: 100%;
-  max-width: none;
+  max-width: 380px;
+  margin: 0 auto;
 }
 
 .search-field {
-  flex: 1;
+  width: 100%;
   display: flex;
   align-items: center;
-  gap: 0.65rem;
-  min-height: 46px;
-  padding: 0 0.35rem 0 1rem;
-  border: 1px solid rgba(20, 18, 16, 0.14);
-  background: var(--surface);
-  transition: border-color 0.3s var(--ease), box-shadow 0.3s var(--ease);
+  gap: 0.45rem;
+  min-height: 34px;
+  padding: 0 0.15rem 0.35rem;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  background: transparent;
+  transition: border-color 0.3s var(--ease);
 }
 
 .search-field:focus-within {
-  border-color: var(--ink);
-  box-shadow: 0 8px 24px rgba(20, 18, 16, 0.06);
+  border-bottom-color: var(--ink);
 }
 
-.search-leading-icon {
-  width: 17px;
-  height: 17px;
+.search-icon {
+  width: 14px;
+  height: 14px;
   flex-shrink: 0;
   color: var(--stone);
 }
@@ -303,63 +339,52 @@ function onSearch() {
   border-radius: 0;
   background: transparent;
   font-family: var(--font-body);
-  font-size: 0.86rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
   color: var(--ink);
   outline: none;
 }
 
 .search-field input::placeholder {
   color: var(--stone);
+  font-size: 0.74rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
 .search-field input::-webkit-search-cancel-button {
   display: none;
 }
 
-.search-action {
-  width: 36px;
-  height: 36px;
-  min-height: 36px;
+.search-close-btn {
+  width: 24px;
+  height: 24px;
+  min-height: 24px;
   padding: 0;
-  margin: 4px;
+  margin: 0;
   border: 0;
   border-radius: 0;
-  background: var(--ink);
-  color: var(--surface);
+  background: transparent;
+  color: var(--stone);
   display: grid;
   place-items: center;
   cursor: pointer;
   flex-shrink: 0;
   align-self: auto;
-  transition: opacity 0.3s var(--ease);
+  transition: color 0.3s var(--ease);
 }
 
-.search-action:hover {
-  opacity: 0.82;
-}
-
-.search-action svg {
-  width: 16px;
-  height: 16px;
-}
-
-.search-close {
-  min-height: auto;
-  padding: 0.35rem 0;
-  border: 0;
-  background: transparent;
-  font-family: var(--font-body);
-  font-size: 0.62rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--stone);
-  cursor: pointer;
-  align-self: auto;
-  white-space: nowrap;
-}
-
-.search-close:hover {
+.search-close-btn:hover {
   color: var(--ink);
+}
+
+.search-close-btn svg {
+  width: 14px;
+  height: 14px;
+}
+
+.icon-btn.active {
+  opacity: 0.45;
 }
 
 .site-nav-categories {
@@ -401,24 +426,22 @@ function onSearch() {
   display: none;
 }
 
-.mobile-nav a {
-  text-decoration: none;
-  font-size: 0.72rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--stone);
+.menu-overlay {
+  display: none;
+  position: fixed;
+  top: calc(var(--promo-h) + var(--header-h));
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(20, 18, 16, 0.42);
+  z-index: 110;
+  opacity: 0;
+  transition: opacity 0.35s var(--ease);
 }
 
-@media (max-width: 560px) {
-  .search-form {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0.55rem;
-  }
-
-  .search-close {
-    align-self: flex-end;
-  }
+.menu-overlay.open {
+  display: block;
+  opacity: 1;
 }
 
 @media (max-width: 900px) {
@@ -457,26 +480,156 @@ function onSearch() {
     place-items: center;
   }
 
+  .menu-toggle[aria-expanded='true'] span {
+    background: transparent;
+  }
+
+  .menu-toggle[aria-expanded='true'] span::before {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .menu-toggle[aria-expanded='true'] span::after {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
   .mobile-nav {
     display: flex;
     flex-direction: column;
     position: fixed;
-    top: var(--promo-h);
-    right: 0;
-    width: min(280px, 85vw);
-    height: calc(100vh - var(--promo-h));
-    padding: calc(var(--header-h) + 1rem) 2rem 2rem;
-    background: var(--bg);
-    border-left: 1px solid var(--line);
-    z-index: 95;
-    gap: 1.25rem;
-    transform: translateX(100%);
+    top: calc(var(--promo-h) + var(--header-h));
+    left: 0;
+    width: min(100%, 320px);
+    height: calc(100dvh - var(--promo-h) - var(--header-h));
+    padding: 1.25rem 0;
+    background: var(--surface);
+    border-right: 1px solid var(--line);
+    z-index: 120;
+    transform: translateX(-100%);
     transition: transform 0.4s var(--ease);
-    overflow-y: auto;
+    box-shadow: 12px 0 40px rgba(20, 18, 16, 0.08);
   }
 
   .mobile-nav.open {
     transform: translateX(0);
+  }
+
+  .mobile-nav-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0 1.25rem 1rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .mobile-nav-label {
+    font-size: 0.62rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--stone);
+  }
+
+  .mobile-nav-close {
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    background: transparent;
+    color: var(--ink);
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    transition: border-color 0.3s var(--ease), background 0.3s var(--ease);
+  }
+
+  .mobile-nav-close:hover {
+    border-color: var(--ink);
+    background: var(--bg);
+  }
+
+  .mobile-nav-close svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .mobile-nav-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.25rem 1.25rem 0.75rem;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .mobile-nav-group {
+    margin: 1rem 0 0.65rem;
+    font-size: 0.58rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--stone);
+  }
+
+  .mobile-nav-group:first-child {
+    margin-top: 0;
+  }
+
+  .mobile-nav-link {
+    display: flex;
+    align-items: center;
+    min-height: 46px;
+    padding: 0.35rem 0;
+    border-bottom: 1px solid var(--line);
+    text-decoration: none;
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--ink);
+    transition: color 0.3s var(--ease), padding-left 0.3s var(--ease);
+  }
+
+  .mobile-nav-link:hover,
+  .mobile-nav-link.router-link-active {
+    color: var(--accent);
+    padding-left: 0.35rem;
+  }
+
+  .mobile-nav-foot {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.65rem;
+    padding: 1rem 1.25rem 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .mobile-nav-foot-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    min-height: 44px;
+    border: 1px solid var(--ink);
+    text-decoration: none;
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink);
+    transition: background 0.3s var(--ease), color 0.3s var(--ease);
+  }
+
+  .mobile-nav-foot-link:hover {
+    background: var(--ink);
+    color: var(--surface);
+  }
+
+  .mobile-nav-badge {
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+    border-radius: 999px;
+    background: var(--wine);
+    color: var(--surface);
+    font-size: 0.55rem;
+    line-height: 18px;
+    text-align: center;
   }
 }
 
