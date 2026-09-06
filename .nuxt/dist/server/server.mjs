@@ -1,1 +1,1 @@
-export { default } from "file:///C:/Users/user/Downloads/bloom-atelier/bloom-atelier/node_modules/@nuxt/vite-builder/dist/vite-node-entry.mjs"
+export { default } from "file:///workspaces/bloom-atelier/node_modules/@nuxt/vite-builder/dist/vite-node-entry.mjs"
