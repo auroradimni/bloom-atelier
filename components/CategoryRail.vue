@@ -165,16 +165,49 @@ defineEmits(['select'])
     justify-content: center;
     flex-wrap: wrap;
     overflow-x: visible;
-    gap: 1.25rem 1.5rem;
+    gap: 1.35rem 2rem;
+    padding-bottom: 1.5rem;
   }
 
   .category-circle {
-    width: 96px;
+    width: 132px;
+    gap: 0.7rem;
   }
 
   .circle-image {
-    width: 80px;
-    height: 80px;
+    width: 112px;
+    height: 112px;
+    border-width: 2.5px;
+  }
+
+  .circle-image--all svg {
+    width: 30px;
+    height: 30px;
+  }
+
+  .circle-label {
+    font-size: 0.82rem;
+    letter-spacing: 0.05em;
+  }
+}
+
+@media (min-width: 1280px) {
+  .category-rail {
+    gap: 1.5rem 2.25rem;
+  }
+
+  .category-circle {
+    width: 148px;
+    gap: 0.75rem;
+  }
+
+  .circle-image {
+    width: 128px;
+    height: 128px;
+  }
+
+  .circle-label {
+    font-size: 0.88rem;
   }
 }
 
