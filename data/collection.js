@@ -22,7 +22,13 @@ export const categories = [
   {
     slug: 'accessories',
     title: 'Accessories',
-    subtitle: 'Leather bags and refined everyday essentials'
+    subtitle: 'Leather bags and refined everyday essentials',
+    subcategories: [
+      { slug: 'bags', title: 'Bags', image: '/images/tote-1.jpg' },
+      { slug: 'jewellery', title: 'Jewellery', image: '/images/dress-2.jpg' },
+      { slug: 'belts', title: 'Belts', image: '/images/skirt-2.jpg' },
+      { slug: 'scarves', title: 'Scarves', image: '/images/coat-1.jpg' }
+    ]
   }
 ]
 
@@ -74,6 +80,7 @@ export const products = [
   {
     id: 'tote-1',
     category: 'accessories',
+    subcategory: 'bags',
     name: 'Dark Brown Leather Tote',
     image: '/images/tote-1.jpg',
     description: 'Structured winged tote in smooth chocolate leather with a gold turn-lock closure.',
@@ -109,8 +116,26 @@ export function getCategory(slug) {
   return categories.find((category) => category.slug === slug)
 }
 
-export function getProductsByCategory(slug) {
-  return products.filter((product) => product.category === slug)
+export function getProductsByCategory(slug, subcategory) {
+  let list = products.filter((product) => product.category === slug)
+
+  if (subcategory && subcategory !== 'all') {
+    list = list.filter((product) => product.subcategory === subcategory)
+  }
+
+  return list
+}
+
+export function getCategoryCover(slug) {
+  return getProductsByCategory(slug)[0]?.image || '/images/skirt-2.jpg'
+}
+
+export function getCategoryRailItems() {
+  return categories.map((category) => ({
+    slug: category.slug,
+    title: category.title,
+    image: category.image || getCategoryCover(category.slug)
+  }))
 }
 
 export function getProduct(id) {

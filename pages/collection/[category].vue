@@ -1,11 +1,35 @@
 <template>
   <div class="category-page page-shell page-shell--wide">
-    <NuxtLink v-scroll-reveal to="/collection" class="text-link back">Back</NuxtLink>
+    <CategoryBreadcrumbs
+      v-scroll-reveal
+      :items="breadcrumbs"
+    />
 
     <header v-if="category" v-scroll-reveal="{ delay: 60 }" class="page-head">
       <h1>{{ category.title }}</h1>
-      <p>{{ category.subtitle }}</p>
+      <p class="product-count">
+        {{ categoryTotal }} {{ categoryTotal === 1 ? 'product' : 'products' }}
+      </p>
     </header>
+
+    <CategoryRail
+      v-if="hasSubcategories"
+      v-scroll-reveal="{ delay: 80 }"
+      :items="category.subcategories"
+      :active-slug="subcategoryFilter"
+      aria-label="Filter by type"
+      @select="subcategoryFilter = $event"
+    />
+
+    <CategoryRail
+      v-else
+      v-scroll-reveal="{ delay: 80 }"
+      :items="siblingCategories"
+      :active-slug="slug"
+      :show-all="false"
+      use-links
+      aria-label="Browse categories"
+    />
 
     <ProductToolbar
       v-if="items.length"
@@ -27,17 +51,37 @@
     </div>
 
     <p v-else-if="items.length" v-scroll-reveal class="empty">No products match your filters.</p>
-    <p v-else v-scroll-reveal class="empty">No products in this category.</p>
+    <p v-else v-scroll-reveal class="empty">No products in this category yet.</p>
   </div>
 </template>
 
 <script setup>
-import { getCategory, getProductsByCategory } from '~/data/collection'
+import {
+  getCategory,
+  getCategoryRailItems,
+  getProductsByCategory
+} from '~/data/collection'
 
 const route = useRoute()
 const slug = computed(() => String(route.params.category))
 const category = computed(() => getCategory(slug.value))
-const items = computed(() => getProductsByCategory(slug.value))
+const subcategoryFilter = ref('all')
+
+const hasSubcategories = computed(() => Boolean(category.value?.subcategories?.length))
+
+const categoryTotal = computed(() => getProductsByCategory(slug.value).length)
+
+const items = computed(() =>
+  getProductsByCategory(slug.value, hasSubcategories.value ? subcategoryFilter.value : undefined)
+)
+
+const siblingCategories = computed(() => getCategoryRailItems())
+
+const breadcrumbs = computed(() => [
+  { label: 'Home', to: '/' },
+  { label: 'Collection', to: '/collection' },
+  { label: category.value?.title || 'Category', to: `/collection/${slug.value}` }
+])
 
 const {
   sort,
@@ -49,6 +93,7 @@ const {
 } = useProductFilters(items)
 
 watch(slug, () => {
+  subcategoryFilter.value = 'all'
   resetFilters()
 })
 
@@ -64,47 +109,50 @@ useHead(() => ({
   padding: 1rem 0 3rem;
 }
 
-.back {
-  margin-bottom: 0.65rem;
-}
-
 .page-head {
-  margin-bottom: 0.35rem;
+  text-align: center;
+  margin-bottom: 1rem;
 }
 
 .page-head h1 {
   font-family: var(--font-display);
-  font-size: clamp(2rem, 5vw, 2.8rem);
+  font-size: clamp(1.75rem, 4vw, 2.4rem);
   font-weight: 300;
   line-height: 1.05;
   color: var(--ink);
 }
 
-.page-head p {
-  margin-top: 0.2rem;
-  line-height: 1.4;
-  font-size: 0.9rem;
+.product-count {
+  margin-top: 0.35rem;
+  font-size: 0.88rem;
   color: var(--stone);
 }
 
 .category-page :deep(.product-toolbar) {
-  margin-bottom: 0.65rem;
+  margin-bottom: 0.85rem;
 }
 
 .category-page :deep(.toolbar-bar) {
   padding: 0.45rem 0;
-  border-top: 0;
+  border-top: 1px solid var(--line);
 }
 
 .category-page .product-grid {
   margin-top: 0;
 }
 
-.back::after {
-  content: '←';
-}
-
 .empty {
   color: var(--stone);
+  font-size: 0.88rem;
+}
+
+@media (max-width: 900px) {
+  .category-page {
+    padding-top: 0.85rem;
+  }
+
+  .page-head {
+    margin-bottom: 0.85rem;
+  }
 }
 </style>
