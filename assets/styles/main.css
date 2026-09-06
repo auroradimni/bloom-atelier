@@ -56,8 +56,22 @@ main {
 }
 
 .page-shell {
-  width: min(1320px, calc(100% - 3rem));
+  width: 100%;
+  max-width: 100%;
+  padding-inline: clamp(1rem, 2.5vw, 2rem);
   margin-inline: auto;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.25rem;
+  align-items: start;
+  width: 100%;
+}
+
+.product-grid .product-card {
+  width: 100%;
 }
 
 .eyebrow {

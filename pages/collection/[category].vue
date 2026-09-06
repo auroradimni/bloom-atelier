@@ -66,20 +66,7 @@ useHead(() => ({
 }
 
 .product-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1.5rem 1.25rem;
-  align-items: start;
-}
-
-.product-grid :deep(.product-card) {
-  width: 100%;
-}
-
-@media (max-width: 720px) {
-  .product-grid {
-    grid-template-columns: 1fr;
-  }
 }
 
 .empty {
