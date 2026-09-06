@@ -13,7 +13,15 @@
         class="product-image-link"
         :aria-label="to ? `View ${product.name}` : undefined"
       >
-        <img :src="product.image" :alt="product.name" loading="lazy" />
+        <NuxtImg
+          :src="product.image"
+          :alt="product.name"
+          width="400"
+          height="533"
+          sizes="(max-width: 900px) 50vw, 320px"
+          loading="lazy"
+          decoding="async"
+        />
       </component>
 
       <span v-if="product.isOnSale" class="badge badge--sale">Sale</span>
@@ -115,7 +123,8 @@ function toggleWish() {
   color: inherit;
 }
 
-.product-media img {
+.product-media img,
+.product-media :deep(img) {
   position: absolute;
   inset: 0;
   width: 100%;

@@ -12,11 +12,28 @@
       </NuxtLink>
 
       <NuxtLink v-scroll-reveal="{ delay: 100 }" to="/collection/skirt" class="mosaic-item mosaic-sm">
-        <img src="/images/skirt-3.jpg" alt="Skirt" />
+        <NuxtImg
+          src="/images/skirt-3.jpg"
+          alt="Skirt"
+          width="600"
+          height="800"
+          sizes="(max-width: 900px) 100vw, 33vw"
+          fetchpriority="high"
+          loading="eager"
+          decoding="async"
+        />
       </NuxtLink>
 
       <NuxtLink v-scroll-reveal="{ delay: 160 }" to="/collection/coats" class="mosaic-item mosaic-sm">
-        <img src="/images/coat-1.jpg" alt="Coats" />
+        <NuxtImg
+          src="/images/coat-1.jpg"
+          alt="Coats"
+          width="600"
+          height="800"
+          sizes="(max-width: 900px) 100vw, 33vw"
+          loading="lazy"
+          decoding="async"
+        />
       </NuxtLink>
     </section>
 
@@ -53,7 +70,15 @@
         <NuxtLink to="/collection/coats" class="btn-solid">Explore the Edit</NuxtLink>
       </div>
       <NuxtLink v-scroll-reveal="{ delay: 120 }" to="/collection/coats" class="editorial-media">
-        <img src="/images/coat-1.jpg" alt="Fall edit" />
+        <NuxtImg
+          src="/images/coat-1.jpg"
+          alt="Fall edit"
+          width="800"
+          height="1000"
+          sizes="(max-width: 900px) 100vw, 50vw"
+          loading="lazy"
+          decoding="async"
+        />
       </NuxtLink>
     </section>
 

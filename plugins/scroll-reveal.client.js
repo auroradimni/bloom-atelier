@@ -15,6 +15,11 @@ export default defineNuxtPlugin((nuxtApp) => {
         return
       }
 
+      if (window.matchMedia('(max-width: 900px)').matches) {
+        el.classList.add('is-visible')
+        return
+      }
+
       const observer = new IntersectionObserver(
         ([entry]) => {
           if (entry.isIntersecting) {

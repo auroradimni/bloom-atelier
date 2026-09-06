@@ -23,7 +23,15 @@
         :class="{ active: activeSlug === item.slug }"
       >
         <span class="circle-image">
-          <img :src="item.image" :alt="item.title" loading="lazy" />
+          <NuxtImg
+            :src="item.image"
+            :alt="item.title"
+            width="128"
+            height="128"
+            sizes="(max-width: 900px) 50vw, 128px"
+            loading="lazy"
+            decoding="async"
+          />
         </span>
         <span class="circle-label">{{ item.title }}</span>
       </NuxtLink>
@@ -54,7 +62,15 @@
         @click="$emit('select', item.slug)"
       >
         <span class="circle-image">
-          <img :src="item.image" :alt="item.title" loading="lazy" />
+          <NuxtImg
+            :src="item.image"
+            :alt="item.title"
+            width="128"
+            height="128"
+            sizes="(max-width: 900px) 50vw, 128px"
+            loading="lazy"
+            decoding="async"
+          />
         </span>
         <span class="circle-label">{{ item.title }}</span>
       </button>
@@ -119,7 +135,8 @@ defineEmits(['select'])
   pointer-events: none;
 }
 
-.circle-image img {
+.circle-image img,
+.circle-image :deep(img) {
   width: 100%;
   height: 100%;
   object-fit: cover;

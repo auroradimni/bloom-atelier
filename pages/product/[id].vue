@@ -4,7 +4,16 @@
 
     <div v-if="product" class="product-layout">
       <div v-scroll-reveal class="product-gallery">
-        <img :src="product.image" :alt="product.name" />
+        <NuxtImg
+          :src="product.image"
+          :alt="product.name"
+          width="800"
+          height="1066"
+          sizes="(max-width: 900px) 100vw, 50vw"
+          fetchpriority="high"
+          loading="eager"
+          decoding="async"
+        />
       </div>
 
       <div v-scroll-reveal="{ delay: 80 }" class="product-info">

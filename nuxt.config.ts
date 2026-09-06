@@ -4,7 +4,28 @@ export default defineNuxtConfig({
     port: 3000
   },
   devtools: { enabled: false },
+  modules: ['@nuxt/image'],
   css: ['~/assets/styles/main.css'],
+  image: {
+    quality: 78,
+    format: ['webp', 'jpeg'],
+    screens: {
+      xs: 320,
+      sm: 640,
+      md: 900,
+      lg: 1280
+    }
+  },
+  nitro: {
+    compressPublicAssets: true
+  },
+  routeRules: {
+    '/images/**': {
+      headers: {
+        'cache-control': 'public, max-age=31536000, immutable'
+      }
+    }
+  },
   app: {
     head: {
       title: 'Bloom Atelier',
@@ -22,8 +43,19 @@ export default defineNuxtConfig({
           sizes: 'any'
         },
         {
+          rel: 'preconnect',
+          href: 'https://fonts.googleapis.com'
+        },
+        {
+          rel: 'preconnect',
+          href: 'https://fonts.gstatic.com',
+          crossorigin: ''
+        },
+        {
           rel: 'stylesheet',
-          href: 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@300;400;500&family=Pinyon+Script&display=swap'
+          href: 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Outfit:wght@300;400&family=Pinyon+Script&display=swap',
+          media: 'print',
+          onload: "this.media='all'"
         }
       ]
     }
