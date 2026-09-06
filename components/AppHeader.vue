@@ -114,11 +114,6 @@
           <p class="mobile-nav-group">Shop</p>
           <NuxtLink to="/collection" class="mobile-nav-link" @click="closeMenu">All Products</NuxtLink>
           <NuxtLink to="/collection/new-arrivals" class="mobile-nav-link" @click="closeMenu">New</NuxtLink>
-          <NuxtLink to="/collection/dress" class="mobile-nav-link" @click="closeMenu">Dress</NuxtLink>
-          <NuxtLink to="/collection/skirt" class="mobile-nav-link" @click="closeMenu">Skirt</NuxtLink>
-          <NuxtLink to="/collection/coats" class="mobile-nav-link" @click="closeMenu">Coats</NuxtLink>
-          <NuxtLink to="/collection/denim" class="mobile-nav-link" @click="closeMenu">Denim</NuxtLink>
-          <NuxtLink to="/collection/accessories" class="mobile-nav-link" @click="closeMenu">Accessories</NuxtLink>
           <NuxtLink to="/sale" class="mobile-nav-link mobile-nav-link--sale" @click="closeMenu">Sale</NuxtLink>
           <NuxtLink to="/contact" class="mobile-nav-link" @click="closeMenu">Contact</NuxtLink>
         </div>
