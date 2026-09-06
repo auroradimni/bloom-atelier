@@ -213,19 +213,33 @@ function checkoutNow() {
 .actions .purchase-btn {
   flex: 1;
   min-width: 140px;
+  align-self: stretch;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.actions .btn-solid {
+  background: var(--ink);
+  color: var(--surface);
+  border: 1px solid var(--ink);
+}
+
+.actions .purchase-btn {
+  background: var(--surface);
+  color: var(--ink);
+  border: 1px solid var(--ink);
+}
+
+.actions .purchase-btn:hover:not(:disabled) {
+  background: var(--ink);
+  color: var(--surface);
 }
 
 .actions .btn-solid:disabled,
 .actions .purchase-btn:disabled {
-  opacity: 0.45;
+  opacity: 0.5;
   cursor: not-allowed;
-}
-
-.purchase-btn {
-  min-height: 48px;
-  padding: 0 1.75rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
+  pointer-events: none;
 }
 
 .empty {
