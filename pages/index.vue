@@ -82,19 +82,20 @@
       </NuxtLink>
     </section>
 
-    <section v-scroll-reveal class="most-loved">
+    <section v-scroll-reveal class="handpicked">
       <div class="page-shell">
-        <div class="section-head">
-          <h2>Most Loved</h2>
+        <div class="section-head section-head--handpicked">
+          <h2>Handpicked For You</h2>
         </div>
 
-        <div class="most-loved-grid">
+        <div class="handpicked-grid">
           <ProductCard
-            v-for="(item, index) in loved"
+            v-for="(item, index) in handpicked"
             :key="item.id"
             v-scroll-reveal="{ delay: index * 60 }"
             :product="item"
             :to="`/product/${item.id}`"
+            layout="handpicked"
           />
         </div>
       </div>
@@ -108,7 +109,7 @@ import { getNewArrivals, products } from '~/data/collection'
 useHead({ title: 'Bloom Atelier' })
 
 const newArrivals = products.filter((item) => item.isNew)
-const loved = [...products].reverse()
+const handpicked = [...products].reverse().slice(0, 6)
 </script>
 
 <style scoped>
@@ -328,32 +329,39 @@ const loved = [...products].reverse()
   transform: scale(1.04);
 }
 
-.most-loved {
+.handpicked {
   padding: clamp(2rem, 5vw, 3rem) 0;
-  background: var(--accent-soft);
+  background: var(--surface);
   border-top: 1px solid var(--line);
 }
 
-.most-loved-grid {
+.section-head--handpicked {
+  margin-bottom: 1.5rem;
+}
+
+.section-head--handpicked h2 {
+  font-family: var(--font-body);
+  font-size: clamp(1.15rem, 2.4vw, 1.45rem);
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--ink);
+}
+
+.handpicked-grid {
   display: grid;
-  gap: 1.25rem;
+  gap: clamp(1.25rem, 3vw, 2rem);
   align-items: start;
   width: 100%;
 }
 
 @media (min-width: 901px) {
-  .most-loved-grid {
+  .handpicked-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
-@media (min-width: 1280px) {
-  .most-loved-grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-}
-
-.most-loved-grid :deep(.product-card) {
+.handpicked-grid :deep(.product-card) {
   min-width: 0;
   width: 100%;
 }
@@ -421,18 +429,19 @@ const loved = [...products].reverse()
     aspect-ratio: 3 / 4;
   }
 
-  .most-loved {
-    padding: 1rem 0;
+  .handpicked {
+    padding: 1.25rem 0;
   }
 
-  .most-loved .section-head {
+  .handpicked .section-head--handpicked {
     padding: 0 0.75rem;
+    margin-bottom: 1rem;
   }
 
-  .most-loved-grid {
+  .handpicked-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.5rem;
-    padding: 0 1rem;
+    gap: 0.75rem;
+    padding: 0 0.75rem;
   }
 }
 </style>

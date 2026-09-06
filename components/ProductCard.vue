@@ -3,7 +3,8 @@
     class="product-card"
     :class="{
       compact,
-      'product-card--featured': layout === 'featured'
+      'product-card--featured': layout === 'featured',
+      'product-card--handpicked': layout === 'handpicked'
     }"
   >
     <div class="product-media">
@@ -24,10 +25,11 @@
         />
       </component>
 
-      <span v-if="product.isOnSale" class="badge badge--sale">Sale</span>
-      <span v-else-if="product.isNew" class="badge">New</span>
+      <span v-if="product.isOnSale && layout !== 'handpicked'" class="badge badge--sale">Sale</span>
+      <span v-else-if="product.isNew && layout !== 'handpicked'" class="badge">New</span>
 
       <button
+        v-if="layout !== 'handpicked'"
         type="button"
         class="wishlist"
         :class="{ saved: liked }"
@@ -44,16 +46,26 @@
         </svg>
       </button>
 
-      <NuxtLink v-if="to" :to="to" class="quick-view">View</NuxtLink>
+      <NuxtLink v-if="to && layout !== 'handpicked'" :to="to" class="quick-view">View</NuxtLink>
     </div>
 
     <NuxtLink v-if="to" :to="to" class="product-meta">
+      <p v-if="layout === 'handpicked'" class="product-brand">Bloom Atelier</p>
       <h3>{{ product.name }}</h3>
       <p class="price" :class="{ 'price--sale': product.isOnSale }">
-        <span v-if="product.isOnSale" class="price-original">{{ product.price }}</span>
-        {{ product.isOnSale ? product.salePrice : product.price }}
+        <template v-if="layout === 'handpicked' && product.isOnSale">
+          <span class="price-current">{{ product.salePrice }}</span>
+          <span class="price-original">{{ product.price }}</span>
+        </template>
+        <template v-else-if="product.isOnSale">
+          <span class="price-original">{{ product.price }}</span>
+          {{ product.salePrice }}
+        </template>
+        <template v-else>
+          {{ product.price }}
+        </template>
       </p>
-      <div v-if="product.colors?.length" class="swatches">
+      <div v-if="product.colors?.length && layout !== 'handpicked'" class="swatches">
         <span
           v-for="color in product.colors"
           :key="color"
@@ -63,12 +75,22 @@
     </NuxtLink>
 
     <div v-else class="product-meta">
+      <p v-if="layout === 'handpicked'" class="product-brand">Bloom Atelier</p>
       <h3>{{ product.name }}</h3>
       <p class="price" :class="{ 'price--sale': product.isOnSale }">
-        <span v-if="product.isOnSale" class="price-original">{{ product.price }}</span>
-        {{ product.isOnSale ? product.salePrice : product.price }}
+        <template v-if="layout === 'handpicked' && product.isOnSale">
+          <span class="price-current">{{ product.salePrice }}</span>
+          <span class="price-original">{{ product.price }}</span>
+        </template>
+        <template v-else-if="product.isOnSale">
+          <span class="price-original">{{ product.price }}</span>
+          {{ product.salePrice }}
+        </template>
+        <template v-else>
+          {{ product.price }}
+        </template>
       </p>
-      <div v-if="product.colors?.length" class="swatches">
+      <div v-if="product.colors?.length && layout !== 'handpicked'" class="swatches">
         <span
           v-for="color in product.colors"
           :key="color"
@@ -84,7 +106,7 @@ const props = defineProps({
   product: { type: Object, required: true },
   to: { type: String, default: '' },
   compact: { type: Boolean, default: false },
-  layout: { type: String, default: 'grid' }
+  layout: { type: String, default: 'grid' } // grid | featured | handpicked
 })
 
 const { toggle, isSaved } = useWishlist()
@@ -301,6 +323,67 @@ function toggleWish() {
   font-size: 0.95rem;
 }
 
+.product-card--handpicked .product-media {
+  margin-bottom: 0.65rem;
+  background: #efefef;
+}
+
+.product-card--handpicked:hover .product-media img {
+  transform: none;
+}
+
+.product-card--handpicked .product-meta {
+  padding: 0;
+}
+
+.product-card--handpicked .product-brand {
+  margin: 0 0 0.2rem;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--ink);
+  line-height: 1.3;
+}
+
+.product-card--handpicked .product-meta h3 {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 400;
+  line-height: 1.35;
+  margin-bottom: 0.35rem;
+  color: var(--ink);
+  -webkit-line-clamp: 2;
+}
+
+.product-card--handpicked .price {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.4rem;
+  margin-bottom: 0;
+  font-size: 0.82rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: var(--ink);
+}
+
+.product-card--handpicked .price--sale {
+  color: var(--ink);
+}
+
+.product-card--handpicked .price-current {
+  color: #c2185b;
+  font-weight: 500;
+}
+
+.product-card--handpicked .price-original {
+  color: var(--ink);
+  font-size: 0.82rem;
+  text-decoration: line-through;
+}
+
 @media (max-width: 640px) {
   .product-media {
     padding-top: 133.333%;
@@ -352,6 +435,16 @@ function toggleWish() {
   .wishlist svg {
     width: 12px;
     height: 12px;
+  }
+
+  .product-card--handpicked .product-meta h3,
+  .product-card--handpicked .product-brand,
+  .product-card--handpicked .price {
+    font-size: 0.72rem;
+  }
+
+  .product-card--handpicked .product-media {
+    margin-bottom: 0.45rem;
   }
 }
 
