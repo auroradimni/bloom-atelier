@@ -52,26 +52,28 @@ function getCategoryCover(slug) {
 }
 
 .page-head {
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
 
 .page-head h1 {
   font-family: var(--font-display);
-  font-size: clamp(2rem, 5vw, 2.8rem);
+  font-size: clamp(1.75rem, 4vw, 2.4rem);
   font-weight: 300;
   color: var(--ink);
 }
 
 .page-head p {
-  margin-top: 0.5rem;
+  margin-top: 0.4rem;
+  font-size: 0.92rem;
   color: var(--stone);
 }
 
 .shop-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.65rem;
-  margin-bottom: 3rem;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 150px), 190px));
+  justify-content: start;
+  gap: 0.85rem 0.75rem;
+  margin-bottom: 2.5rem;
 }
 
 .shop-tile {
@@ -82,9 +84,9 @@ function getCategoryCover(slug) {
 
 .shop-tile img {
   width: 100%;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 3 / 4;
   object-fit: cover;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.55rem;
   transition: transform 0.6s var(--ease);
 }
 
@@ -94,14 +96,15 @@ function getCategoryCover(slug) {
 
 .shop-tile h2 {
   font-family: var(--font-display);
-  font-size: 1.35rem;
+  font-size: 1.05rem;
   font-weight: 400;
+  line-height: 1.3;
 }
 
 .shop-tile p {
-  margin-top: 0.2rem;
-  font-size: 0.62rem;
-  letter-spacing: 0.16em;
+  margin-top: 0.15rem;
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--stone);
 }
@@ -119,13 +122,14 @@ function getCategoryCover(slug) {
 
 @media (max-width: 900px) {
   .shop-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.65rem;
   }
 }
 
 @media (max-width: 520px) {
   .shop-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 </style>
