@@ -547,10 +547,4 @@ function getCover(slug) {
     right: 0.15rem;
   }
 }
-
-@media (max-width: 480px) {
-  .shop-grid {
-    grid-template-columns: 1fr;
-  }
-}
 </style>
