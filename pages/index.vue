@@ -228,7 +228,7 @@ const handpicked = [...products].reverse().slice(0, 6)
 
 .new-arrivals-track {
   display: flex;
-  gap: 0.65rem;
+  gap: 2px;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   overscroll-behavior-x: contain;
@@ -254,8 +254,8 @@ const handpicked = [...products].reverse().slice(0, 6)
 
   .new-arrivals-track {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 2px;
     overflow: visible;
     scroll-snap-type: none;
   }
@@ -266,9 +266,10 @@ const handpicked = [...products].reverse().slice(0, 6)
   }
 }
 
-@media (min-width: 901px) and (max-width: 1100px) {
+@media (min-width: 901px) and (max-width: 1180px) {
   .new-arrivals-track {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 2px;
   }
 }
 
@@ -366,7 +367,7 @@ const handpicked = [...products].reverse().slice(0, 6)
 
 .handpicked-grid {
   display: grid;
-  gap: clamp(1.25rem, 3vw, 2rem);
+  gap: 0.5rem;
   align-items: start;
   width: 100%;
 }
@@ -374,6 +375,7 @@ const handpicked = [...products].reverse().slice(0, 6)
 @media (min-width: 901px) {
   .handpicked-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.5rem;
   }
 }
 
@@ -458,7 +460,7 @@ const handpicked = [...products].reverse().slice(0, 6)
 
   .handpicked-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.75rem;
+    gap: 2px;
     padding: 0 0.75rem;
   }
 }
