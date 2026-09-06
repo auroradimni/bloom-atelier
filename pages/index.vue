@@ -234,7 +234,7 @@ const handpicked = [...products].reverse().slice(0, 5)
 
 @media (min-width: 901px) {
   .editorial {
-    min-height: 280px;
+    min-height: 320px;
   }
 }
 
@@ -242,33 +242,39 @@ const handpicked = [...products].reverse().slice(0, 5)
   position: relative;
   z-index: 1;
   background: var(--accent-soft);
-  padding: clamp(1rem, 2vw, 1.35rem);
+  padding: clamp(1.35rem, 3vw, 2.25rem);
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 0.35rem;
-  min-height: 220px;
+  gap: clamp(0.55rem, 1.2vw, 0.85rem);
+  min-height: 240px;
 }
 
 .editorial-copy .eyebrow {
   margin: 0;
-  color: var(--stone);
+  font-size: clamp(0.72rem, 1.1vw, 0.82rem);
+  letter-spacing: 0.32em;
+  font-weight: 500;
+  color: var(--wine);
 }
 
 .editorial-copy h2 {
   font-family: var(--font-display);
-  font-size: clamp(1.15rem, 2.2vw, 1.5rem);
-  font-weight: 300;
-  line-height: 1.2;
+  font-size: clamp(1.75rem, 3.8vw, 2.65rem);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
   color: var(--ink);
   margin: 0;
+  max-width: 14ch;
 }
 
 .editorial-copy .btn-solid {
   align-self: flex-start;
-  margin-top: 0.35rem;
-  padding: 0.55rem 1rem;
-  font-size: 0.58rem;
+  margin-top: clamp(0.35rem, 1vw, 0.65rem);
+  padding: 0.72rem 1.45rem;
+  font-size: 0.66rem;
+  letter-spacing: 0.22em;
 }
 
 .editorial-media {
@@ -293,7 +299,7 @@ const handpicked = [...products].reverse().slice(0, 5)
   .editorial-media,
   .editorial-media img,
   .editorial-media :deep(img) {
-    min-height: 280px;
+    min-height: 320px;
   }
 }
 
@@ -357,7 +363,12 @@ const handpicked = [...products].reverse().slice(0, 5)
 
   .editorial-copy {
     min-height: 0;
-    padding: 1rem 0.85rem;
+    padding: 1.25rem 1rem;
+    gap: 0.65rem;
+  }
+
+  .editorial-copy h2 {
+    max-width: none;
   }
 
   .editorial-media {
