@@ -66,11 +66,9 @@
 
     <div class="trust-payments">
       <ul class="trust-payments__list" aria-label="Accepted payment methods">
-        <li class="trust-payments__badge trust-payments__badge--card">Visa</li>
-        <li class="trust-payments__badge trust-payments__badge--card">Mastercard</li>
         <li class="trust-payments__badge trust-payments__badge--cash">Cash on delivery</li>
       </ul>
-      <p class="trust-payments__note">Secure checkout. Terms apply to promotional offers.</p>
+      <p class="trust-payments__note">Pay when your order arrives. Terms apply to promotional offers.</p>
     </div>
   </div>
 </template>
@@ -188,10 +186,6 @@
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--ink-soft);
-}
-
-.trust-payments__badge--card {
-  background: var(--bg);
 }
 
 .trust-payments__badge--cash {
