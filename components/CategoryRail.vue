@@ -184,7 +184,7 @@ defineEmits(['select'])
     flex-wrap: nowrap;
     overflow-x: visible;
     gap: 0.65rem;
-    padding: 0.15rem 0 0.5rem;
+    padding: 0 0 0.15rem;
     width: 100%;
   }
 

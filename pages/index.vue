@@ -122,7 +122,7 @@ const handpicked = [...products].reverse().slice(0, 6)
   grid-template-columns: 2fr 1fr 1fr;
   gap: 0.5rem;
   align-items: stretch;
-  padding-bottom: clamp(1.5rem, 4vw, 2.5rem);
+  padding-bottom: clamp(0.85rem, 2.5vw, 1.35rem);
 }
 
 .mosaic-item {
@@ -185,13 +185,18 @@ const handpicked = [...products].reverse().slice(0, 6)
 }
 
 .shop-section {
-  padding: clamp(1.15rem, 3vw, 1.75rem) 0;
+  padding: clamp(0.65rem, 1.8vw, 1rem) 0;
   border-top: 1px solid var(--line);
+}
+
+.shop-section + .shop-section {
+  border-top: 0;
+  padding-top: 0.35rem;
 }
 
 .shop-section :deep(.category-rail) {
   margin-bottom: 0;
-  padding-bottom: 0.25rem;
+  padding-bottom: 0;
 }
 
 .section-head {
@@ -199,7 +204,7 @@ const handpicked = [...products].reverse().slice(0, 6)
   align-items: baseline;
   justify-content: space-between;
   gap: 1rem;
-  margin-bottom: 1.25rem;
+  margin-bottom: 0.65rem;
 }
 
 .section-head h2 {
@@ -278,9 +283,9 @@ const handpicked = [...products].reverse().slice(0, 6)
   grid-template-columns: 1fr 1.1fr;
   align-items: stretch;
   gap: 0.5rem;
-  margin: clamp(1rem, 3vw, 1.75rem) auto;
+  margin: clamp(0.65rem, 1.8vw, 1rem) auto;
   border-top: 1px solid var(--line);
-  padding-top: clamp(1rem, 3vw, 1.75rem);
+  padding-top: clamp(0.65rem, 1.8vw, 1rem);
 }
 
 @media (min-width: 901px) {
@@ -347,13 +352,13 @@ const handpicked = [...products].reverse().slice(0, 6)
 }
 
 .handpicked {
-  padding: clamp(2rem, 5vw, 3rem) 0;
+  padding: clamp(1.15rem, 3vw, 1.75rem) 0;
   background: var(--surface);
   border-top: 1px solid var(--line);
 }
 
 .section-head--handpicked {
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.85rem;
 }
 
 .section-head--handpicked h2 {
@@ -400,8 +405,11 @@ const handpicked = [...products].reverse().slice(0, 6)
   }
 
   .shop-section {
-    padding: 1rem 0;
-    border-top: 0;
+    padding: 0.65rem 0;
+  }
+
+  .shop-section + .shop-section {
+    padding-top: 0.25rem;
   }
 
   .shop-section :deep(.shop-page-rails) {
@@ -450,12 +458,12 @@ const handpicked = [...products].reverse().slice(0, 6)
   }
 
   .handpicked {
-    padding: 1.25rem 0;
+    padding: 0.85rem 0;
   }
 
   .handpicked .section-head--handpicked {
     padding: 0 0.75rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.65rem;
   }
 
   .handpicked-grid {
