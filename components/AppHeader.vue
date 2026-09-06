@@ -579,14 +579,18 @@ function onSearch() {
     transform: translateY(-7px) rotate(-45deg);
   }
 
+  .menu-overlay {
+    top: calc(var(--promo-h) + var(--header-h) + var(--mobile-search-h) + var(--nav-cats-h));
+  }
+
   .mobile-nav {
     display: flex;
     flex-direction: column;
     position: fixed;
-    top: calc(var(--promo-h) + var(--header-h));
+    top: calc(var(--promo-h) + var(--header-h) + var(--mobile-search-h) + var(--nav-cats-h));
     left: 0;
     width: min(100%, 320px);
-    height: calc(100dvh - var(--promo-h) - var(--header-h));
+    height: calc(100dvh - var(--promo-h) - var(--header-h) - var(--mobile-search-h) - var(--nav-cats-h));
     padding: 1.25rem 0;
     background: var(--surface);
     border-right: 1px solid var(--line);
