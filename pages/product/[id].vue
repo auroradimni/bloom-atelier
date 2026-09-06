@@ -74,11 +74,6 @@
           Free shipping on orders over 3500 Lek — use code <strong>BLOOM10</strong>
         </p>
 
-        <ul class="delivery-notes">
-          <li>Order within 2 hours for next-day delivery in Tirana</li>
-          <li>Free returns within 14 days</li>
-        </ul>
-
         <p class="field-label">Colour: <span>{{ colorLabel }}</span></p>
 
         <div v-if="product.colors?.length" class="swatches" aria-hidden="true">
@@ -117,6 +112,8 @@
 
           <p v-if="added" class="added-note">Added to your bag.</p>
         </form>
+
+        <ProductTrustPanel />
 
         <p class="description">{{ product.description }}</p>
       </div>
@@ -408,19 +405,6 @@ function checkoutNow() {
 
 .promo-note strong {
   font-weight: 600;
-}
-
-.delivery-notes {
-  margin: 0 0 1.25rem;
-  padding: 0;
-  list-style: none;
-  font-size: 0.78rem;
-  line-height: 1.5;
-  color: var(--ink-soft);
-}
-
-.delivery-notes li + li {
-  margin-top: 0.35rem;
 }
 
 .field-label {
