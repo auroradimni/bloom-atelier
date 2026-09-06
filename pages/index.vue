@@ -341,7 +341,8 @@ const handpicked = [...products].reverse().slice(0, 6)
   display: block;
   overflow: hidden;
   min-height: 0;
-  max-height: 260px;
+  height: 100%;
+  background: #e8e4df;
 }
 
 .editorial-media img,
@@ -349,21 +350,16 @@ const handpicked = [...products].reverse().slice(0, 6)
   display: block;
   width: 100%;
   height: 100%;
-  aspect-ratio: 16 / 10;
-  max-height: 260px;
+  min-height: 220px;
   object-fit: cover;
-  object-position: center 20%;
+  object-position: center center;
   transition: transform 0.7s var(--ease);
 }
 
 @media (min-width: 901px) {
-  .editorial-media,
   .editorial-media img,
   .editorial-media :deep(img) {
-    aspect-ratio: auto;
-    height: 100%;
-    max-height: 260px;
-    min-height: 0;
+    min-height: 280px;
   }
 }
 
@@ -475,14 +471,11 @@ const handpicked = [...products].reverse().slice(0, 6)
     max-height: none;
   }
 
-  .editorial-media {
-    max-height: 220px;
-  }
-
   .editorial-media img,
   .editorial-media :deep(img) {
+    min-height: 220px;
     aspect-ratio: 16 / 10;
-    max-height: 220px;
+    height: auto;
   }
 
   .handpicked {
