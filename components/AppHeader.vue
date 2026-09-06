@@ -84,6 +84,18 @@
       </form>
     </div>
 
+    <nav class="site-nav-shop" aria-label="Shop navigation">
+      <NuxtLink
+        v-for="item in shopNavItems"
+        :key="item.to"
+        :to="item.to"
+        class="shop-nav-pill"
+        :class="{ 'shop-nav-pill--sale': item.sale }"
+      >
+        {{ item.label }}
+      </NuxtLink>
+    </nav>
+
     <div
       class="menu-overlay"
       :class="{ open: menuOpen }"
@@ -144,6 +156,12 @@ const route = useRoute()
 const { count } = useCart()
 const { count: wishlistCount } = useWishlist()
 const { registerFocusSearch } = useMobileSearch()
+
+const shopNavItems = [
+  { label: 'All Products', to: '/collection' },
+  { label: 'New', to: '/collection/new-arrivals' },
+  { label: 'Sale', to: '/sale', sale: true }
+]
 
 function toggleMenu() {
   menuOpen.value = !menuOpen.value
@@ -419,6 +437,53 @@ function onSearch() {
   opacity: 0.45;
 }
 
+.site-nav-shop {
+  display: flex;
+  gap: 0.35rem;
+  overflow-x: auto;
+  padding: 0.55rem clamp(1.25rem, 4vw, 3rem) 0.65rem;
+  scrollbar-width: none;
+  border-top: 1px solid var(--line);
+}
+
+.site-nav-shop::-webkit-scrollbar {
+  display: none;
+}
+
+.shop-nav-pill {
+  flex: 0 0 auto;
+  padding: 0.35rem 0.85rem;
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--ink);
+  white-space: nowrap;
+  transition: opacity 0.3s var(--ease);
+}
+
+.shop-nav-pill:hover,
+.shop-nav-pill.router-link-active {
+  opacity: 0.55;
+}
+
+.shop-nav-pill.router-link-active {
+  border-bottom: 1px solid var(--ink);
+  padding-bottom: calc(0.35rem - 1px);
+}
+
+.shop-nav-pill--sale {
+  color: var(--wine);
+  font-weight: 600;
+}
+
+.shop-nav-pill--sale:hover,
+.shop-nav-pill--sale.router-link-active {
+  opacity: 1;
+  color: var(--wine);
+  border-bottom-color: var(--wine);
+}
+
 .mobile-nav {
   display: none;
 }
@@ -493,6 +558,32 @@ function onSearch() {
     gap: 0;
   }
 
+  .site-nav-shop {
+    display: flex;
+    gap: 0;
+    padding: 0 0 0.5rem;
+    border-top: 0;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .shop-nav-pill {
+    padding: 0.45rem 0.85rem;
+    font-size: 0.58rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    opacity: 1;
+  }
+
+  .shop-nav-pill.router-link-active {
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: calc(0.45rem - 2px);
+    opacity: 1;
+  }
+
+  .shop-nav-pill--sale.router-link-active {
+    border-bottom-color: var(--wine);
+  }
+
   .menu-toggle {
     display: grid;
     place-items: center;
@@ -514,7 +605,8 @@ function onSearch() {
     top: calc(var(--promo-h) + var(--header-h));
   }
 
-  .site-nav.menu-open .site-nav-search--mobile {
+  .site-nav.menu-open .site-nav-search--mobile,
+  .site-nav.menu-open .site-nav-shop {
     display: none;
   }
 
@@ -612,10 +704,14 @@ function onSearch() {
     transition: color 0.3s var(--ease), padding-left 0.3s var(--ease);
   }
 
-  .mobile-nav-link:hover,
-  .mobile-nav-link.router-link-active {
-    color: var(--accent);
+  .mobile-nav-link:hover {
     padding-left: 0.35rem;
+  }
+
+  .mobile-nav-link.router-link-active {
+    color: var(--ink);
+    padding-left: 0.35rem;
+    font-weight: 500;
   }
 
   .mobile-nav-link--sale {
