@@ -8,9 +8,13 @@
       </div>
 
       <div v-scroll-reveal="{ delay: 80 }" class="product-info">
-        <p v-if="product.isNew" class="eyebrow">New</p>
+        <p v-if="product.isOnSale" class="eyebrow sale-eyebrow">Sale</p>
+        <p v-else-if="product.isNew" class="eyebrow">New</p>
         <h1>{{ product.name }}</h1>
-        <p class="price">{{ product.price }}</p>
+        <p class="price" :class="{ 'price--sale': product.isOnSale }">
+          <span v-if="product.isOnSale" class="price-original">{{ product.price }}</span>
+          {{ displayPrice }}
+        </p>
         <p class="description">{{ product.description }}</p>
 
         <div v-if="product.colors?.length" class="swatches">
@@ -67,13 +71,14 @@
 </template>
 
 <script setup>
-import { getProduct, getRelatedProducts } from '~/data/collection'
+import { getDisplayPrice } from '~/data/collection'
 
 const route = useRoute()
 const router = useRouter()
 const { addItem } = useCart()
 
 const product = computed(() => getProduct(String(route.params.id)))
+const displayPrice = computed(() => getDisplayPrice(product.value))
 const relatedProducts = computed(() => getRelatedProducts(String(route.params.id)))
 const size = ref('')
 const added = ref(false)
@@ -139,6 +144,23 @@ function checkoutNow() {
   font-weight: 300;
   color: var(--ink);
   margin: 0.5rem 0 0.75rem;
+}
+
+.sale-eyebrow {
+  color: var(--wine);
+}
+
+.price--sale {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem;
+  color: var(--wine);
+}
+
+.price-original {
+  text-decoration: line-through;
+  color: var(--stone);
 }
 
 .price {

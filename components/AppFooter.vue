@@ -19,6 +19,7 @@
         <p><NuxtLink to="/collection/coats">Coats</NuxtLink></p>
         <p><NuxtLink to="/collection/denim">Denim</NuxtLink></p>
         <p><NuxtLink to="/collection/accessories">Accessories</NuxtLink></p>
+        <p><NuxtLink to="/sale">Sale</NuxtLink></p>
         <p><NuxtLink to="/checkout">Checkout</NuxtLink></p>
       </div>
     </div>

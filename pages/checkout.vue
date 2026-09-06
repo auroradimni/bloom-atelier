@@ -199,6 +199,8 @@
 </template>
 
 <script setup>
+import { getDisplayPrice } from '~/data/collection'
+
 const { cart, removeItem, updateQuantity, clearCart } = useCart()
 
 useHead({ title: 'Checkout - Bloom Atelier' })
@@ -244,7 +246,7 @@ function formatLek(amount) {
 }
 
 function lineTotal(item) {
-  return parsePrice(item.product.price) * item.quantity
+  return parsePrice(getDisplayPrice(item.product)) * item.quantity
 }
 
 const subtotal = computed(() =>

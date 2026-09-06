@@ -16,7 +16,8 @@
         <img :src="product.image" :alt="product.name" loading="lazy" />
       </component>
 
-      <span v-if="product.isNew" class="badge">New</span>
+      <span v-if="product.isOnSale" class="badge badge--sale">Sale</span>
+      <span v-else-if="product.isNew" class="badge">New</span>
 
       <button
         type="button"
@@ -40,7 +41,10 @@
 
     <NuxtLink v-if="to" :to="to" class="product-meta">
       <h3>{{ product.name }}</h3>
-      <p class="price">{{ product.price }}</p>
+      <p class="price" :class="{ 'price--sale': product.isOnSale }">
+        <span v-if="product.isOnSale" class="price-original">{{ product.price }}</span>
+        {{ product.isOnSale ? product.salePrice : product.price }}
+      </p>
       <div v-if="product.colors?.length" class="swatches">
         <span
           v-for="color in product.colors"
@@ -52,7 +56,10 @@
 
     <div v-else class="product-meta">
       <h3>{{ product.name }}</h3>
-      <p class="price">{{ product.price }}</p>
+      <p class="price" :class="{ 'price--sale': product.isOnSale }">
+        <span v-if="product.isOnSale" class="price-original">{{ product.price }}</span>
+        {{ product.isOnSale ? product.salePrice : product.price }}
+      </p>
       <div v-if="product.colors?.length" class="swatches">
         <span
           v-for="color in product.colors"
@@ -220,6 +227,24 @@ function toggleWish() {
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+.badge--sale {
+  background: var(--wine);
+}
+
+.price--sale {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.45rem;
+  color: var(--wine);
+}
+
+.price-original {
+  text-decoration: line-through;
+  color: var(--stone);
+  font-size: 0.82em;
 }
 
 .price {

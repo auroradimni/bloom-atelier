@@ -1,3 +1,5 @@
+import { getDisplayPrice } from '~/data/collection'
+
 export function parseProductPrice(price) {
   return Number.parseInt(String(price).replace(/[^\d]/g, ''), 10) || 0
 }
@@ -9,9 +11,9 @@ export function sortProducts(list, sortKey) {
     case 'newest':
       return items.sort((a, b) => Number(b.isNew) - Number(a.isNew) || a.name.localeCompare(b.name))
     case 'price-asc':
-      return items.sort((a, b) => parseProductPrice(a.price) - parseProductPrice(b.price))
+      return items.sort((a, b) => parseProductPrice(getDisplayPrice(a)) - parseProductPrice(getDisplayPrice(b)))
     case 'price-desc':
-      return items.sort((a, b) => parseProductPrice(b.price) - parseProductPrice(a.price))
+      return items.sort((a, b) => parseProductPrice(getDisplayPrice(b)) - parseProductPrice(getDisplayPrice(a)))
     case 'name-asc':
       return items.sort((a, b) => a.name.localeCompare(b.name))
     default:

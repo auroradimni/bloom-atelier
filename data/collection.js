@@ -44,6 +44,8 @@ export const products = [
     image: '/images/skirt-3.jpg',
     description: 'Red skirt with tailored vest for special occasions.',
     price: '2800 Lek',
+    salePrice: '2240 Lek',
+    isOnSale: true,
     isNew: false,
     colors: ['#8b2635', '#141210']
   },
@@ -64,6 +66,8 @@ export const products = [
     image: '/images/coat-1.jpg',
     description: 'Long wool coat in an oversized urban silhouette.',
     price: '3900 Lek',
+    salePrice: '3120 Lek',
+    isOnSale: true,
     isNew: false,
     colors: ['#9a8f86', '#141210']
   },
@@ -84,6 +88,8 @@ export const products = [
     image: '/images/denim-1.jpg',
     description: 'High-waisted puddle jeans in dark indigo denim with a relaxed wide-leg silhouette.',
     price: '2200 Lek',
+    salePrice: '1760 Lek',
+    isOnSale: true,
     isNew: true,
     colors: ['#1a2744', '#141210']
   },
@@ -109,6 +115,15 @@ export function getProductsByCategory(slug) {
 
 export function getProduct(id) {
   return products.find((product) => product.id === id)
+}
+
+export function getDisplayPrice(product) {
+  if (product?.isOnSale && product?.salePrice) return product.salePrice
+  return product?.price || ''
+}
+
+export function getSaleProducts() {
+  return products.filter((product) => product.isOnSale)
 }
 
 export function getRelatedProducts(id, limit = 4) {

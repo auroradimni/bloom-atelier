@@ -90,6 +90,7 @@
         :key="item.to"
         :to="item.to"
         class="category-pill"
+        :class="{ 'category-pill--sale': item.sale }"
       >
         {{ item.label }}
       </NuxtLink>
@@ -125,6 +126,7 @@
         <NuxtLink to="/collection/coats" class="mobile-nav-link" @click="closeMenu">Coats</NuxtLink>
         <NuxtLink to="/collection/denim" class="mobile-nav-link" @click="closeMenu">Denim</NuxtLink>
         <NuxtLink to="/collection/accessories" class="mobile-nav-link" @click="closeMenu">Accessories</NuxtLink>
+        <NuxtLink to="/sale" class="mobile-nav-link mobile-nav-link--sale" @click="closeMenu">Sale</NuxtLink>
 
         <p class="mobile-nav-group">Explore</p>
         <NuxtLink to="/courses" class="mobile-nav-link" @click="closeMenu">Courses</NuxtLink>
@@ -162,7 +164,7 @@ const navItems = [
   { label: 'Dress', to: '/collection/dress' },
   { label: 'Skirt', to: '/collection/skirt' },
   { label: 'Coats', to: '/collection/coats' },
-  { label: 'Most Loved', to: '/collection/dress' },
+  { label: 'Sale', to: '/sale', sale: true },
   { label: 'Shop Now', to: '/collection' }
 ]
 
@@ -222,6 +224,8 @@ function onSearch() {
     router.push('/collection/denim')
   } else if (term.includes('access') || term.includes('bag') || term.includes('tote')) {
     router.push('/collection/accessories')
+  } else if (term.includes('sale') || term.includes('discount') || term.includes('offer')) {
+    router.push('/sale')
   } else {
     router.push('/collection')
   }
@@ -473,6 +477,18 @@ function onSearch() {
   padding-bottom: calc(0.35rem - 1px);
 }
 
+.category-pill--sale {
+  color: var(--wine);
+  font-weight: 600;
+}
+
+.category-pill--sale:hover,
+.category-pill--sale.router-link-active {
+  opacity: 1;
+  color: var(--wine);
+  border-bottom-color: var(--wine);
+}
+
 .mobile-nav {
   display: none;
 }
@@ -693,6 +709,15 @@ function onSearch() {
   .mobile-nav-link.router-link-active {
     color: var(--accent);
     padding-left: 0.35rem;
+  }
+
+  .mobile-nav-link--sale {
+    color: var(--wine);
+  }
+
+  .mobile-nav-link--sale:hover,
+  .mobile-nav-link--sale.router-link-active {
+    color: var(--wine);
   }
 
   .mobile-nav-foot {
