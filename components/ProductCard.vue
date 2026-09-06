@@ -215,7 +215,7 @@ function toggleWish() {
   font-weight: 400;
   line-height: 1.35;
   margin-bottom: 0.35rem;
-  min-height: 2.7em;
+  min-height: 2.2em;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
