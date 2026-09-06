@@ -7,9 +7,18 @@
       <p>{{ category.subtitle }}</p>
     </header>
 
-    <div v-if="items.length" class="product-grid">
+    <ProductToolbar
+      v-if="items.length"
+      v-model:sort="sort"
+      v-model:filter-new="filterNew"
+      :result-count="resultCount"
+      :has-active-filters="hasActiveFilters"
+      @reset="resetFilters"
+    />
+
+    <div v-if="filteredItems.length" class="product-grid">
       <ProductCard
-        v-for="(item, index) in items"
+        v-for="(item, index) in filteredItems"
         :key="item.id"
         v-scroll-reveal="{ delay: index * 90 }"
         :product="item"
@@ -17,6 +26,7 @@
       />
     </div>
 
+    <p v-else-if="items.length" v-scroll-reveal class="empty">No products match your filters.</p>
     <p v-else v-scroll-reveal class="empty">No products in this category.</p>
   </div>
 </template>
@@ -28,6 +38,19 @@ const route = useRoute()
 const slug = computed(() => String(route.params.category))
 const category = computed(() => getCategory(slug.value))
 const items = computed(() => getProductsByCategory(slug.value))
+
+const {
+  sort,
+  filterNew,
+  filteredItems,
+  resultCount,
+  hasActiveFilters,
+  resetFilters
+} = useProductFilters(items)
+
+watch(slug, () => {
+  resetFilters()
+})
 
 useHead(() => ({
   title: category.value
@@ -50,7 +73,7 @@ useHead(() => ({
 }
 
 .page-head {
-  margin-bottom: 2rem;
+  margin-bottom: 1.25rem;
 }
 
 .page-head h1 {

@@ -23,15 +23,28 @@
 
     <section class="all-products">
       <h2 v-scroll-reveal>All Products</h2>
-      <div class="product-grid">
+
+      <ProductToolbar
+        v-model:sort="sort"
+        v-model:filter-new="filterNew"
+        v-model:category-filter="categoryFilter"
+        :result-count="resultCount"
+        :has-active-filters="hasActiveFilters"
+        show-category-filter
+        @reset="resetFilters"
+      />
+
+      <div v-if="filteredItems.length" class="product-grid">
         <ProductCard
-          v-for="(item, index) in products"
+          v-for="(item, index) in filteredItems"
           :key="item.id"
           v-scroll-reveal="{ delay: index * 70 }"
           :product="item"
           :to="`/product/${item.id}`"
         />
       </div>
+
+      <p v-else class="empty-state">No products match your filters.</p>
     </section>
   </div>
 </template>
@@ -40,6 +53,18 @@
 import { categories, getProductsByCategory, products } from '~/data/collection'
 
 useHead({ title: 'Collection - Bloom Atelier' })
+
+const allProducts = computed(() => products)
+
+const {
+  sort,
+  filterNew,
+  categoryFilter,
+  filteredItems,
+  resultCount,
+  hasActiveFilters,
+  resetFilters
+} = useProductFilters(allProducts, { showCategoryFilter: true })
 
 function getCategoryCover(slug) {
   return getProductsByCategory(slug)[0]?.image || '/images/skirt-2.jpg'
@@ -113,7 +138,12 @@ function getCategoryCover(slug) {
   font-size: 0.68rem;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.empty-state {
+  color: var(--stone);
+  font-size: 0.88rem;
 }
 
 @media (max-width: 900px) {
