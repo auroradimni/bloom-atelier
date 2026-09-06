@@ -146,11 +146,8 @@ const { count: wishlistCount } = useWishlist()
 const { registerFocusSearch } = useMobileSearch()
 
 const navItems = [
-  { label: 'Dress', to: '/collection/dress' },
-  { label: 'Skirt', to: '/collection/skirt' },
-  { label: 'Coats', to: '/collection/coats' },
-  { label: 'Denim', to: '/collection/denim' },
-  { label: 'Accessories', to: '/collection/accessories' },
+  { label: 'All Products', to: '/collection' },
+  { label: 'New', to: '/collection/new-arrivals' },
   { label: 'Sale', to: '/sale', sale: true }
 ]
 
