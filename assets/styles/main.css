@@ -23,6 +23,7 @@
   --nav-cats-h: 36px;
   --mobile-search-h: 0px;
   --mobile-nav-h: 56px;
+  --mobile-menu-bottom: 0px;
   --nav-stack: calc(var(--promo-h) + var(--header-h) + var(--nav-cats-h));
 }
 
@@ -66,8 +67,12 @@ main {
 }
 
 @media (max-width: 900px) {
+  :root {
+    --mobile-menu-bottom: calc(var(--mobile-nav-h) + env(safe-area-inset-bottom, 0px));
+  }
+
   .app-shell main {
-    padding-bottom: calc(var(--mobile-nav-h) + env(safe-area-inset-bottom, 0px));
+    padding-bottom: var(--mobile-menu-bottom);
   }
 }
 
