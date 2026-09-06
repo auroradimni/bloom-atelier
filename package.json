@@ -2,10 +2,10 @@
   "name": "bloom-atelier",
   "private": true,
   "scripts": {
-    "dev": "nuxt dev --host 0.0.0.0",
-    "build": "nuxt build",
-    "preview": "nuxt preview",
-    "postinstall": "chmod +x node_modules/.bin/* 2>/dev/null || true"
+    "dev": "npx nuxt dev --host 0.0.0.0 --port 3000",
+    "build": "npx nuxt build",
+    "preview": "npx nuxt preview",
+    "postinstall": "npx nuxt prepare && node scripts/fix-bin-permissions.cjs"
   },
   "devDependencies": {
     "nuxt": "^3.11.0"
