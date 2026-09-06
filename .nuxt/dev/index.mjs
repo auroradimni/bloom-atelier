@@ -1,42 +1,43 @@
 import process from 'node:process';globalThis._importMeta_={url:import.meta.url,env:process.env};import { tmpdir } from 'node:os';
+import { defineEventHandler, handleCacheHeaders, splitCookiesString, createEvent, fetchWithEvent, isEvent, eventHandler, setHeaders, sendRedirect, proxyRequest, getRequestHeader, setResponseHeaders, setResponseStatus, send, getRequestHeaders, setResponseHeader, appendResponseHeader, getRequestURL, getResponseHeader, removeResponseHeader, createError, getQuery as getQuery$1, readBody, getResponseStatus, lazyEventHandler, fromNodeMiddleware, createApp, createRouter as createRouter$1, toNodeListener, getRouterParam, getResponseStatusText } from 'file:///workspaces/bloom-atelier/node_modules/h3/dist/index.mjs';
 import { Server } from 'node:http';
 import { resolve, dirname, join } from 'node:path';
 import nodeCrypto from 'node:crypto';
 import { parentPort, threadId } from 'node:worker_threads';
-import { defineEventHandler, handleCacheHeaders, splitCookiesString, createEvent, fetchWithEvent, isEvent, eventHandler, setHeaders, sendRedirect, proxyRequest, getRequestHeader, setResponseHeaders, setResponseStatus, send, getRequestHeaders, setResponseHeader, appendResponseHeader, getRequestURL, getResponseHeader, removeResponseHeader, createError, getQuery as getQuery$1, readBody, createApp, createRouter as createRouter$1, toNodeListener, lazyEventHandler, getResponseStatus, getRouterParam, getResponseStatusText } from 'file://C:/Users/user/Downloads/bloom-atelier/bloom-atelier/node_modules/h3/dist/index.mjs';
-import { escapeHtml } from 'file://C:/Users/user/Downloads/bloom-atelier/bloom-atelier/node_modules/@vue/shared/dist/shared.cjs.js';
-import { createRenderer, getRequestDependencies, getPreloadLinks, getPrefetchLinks } from 'file://C:/Users/user/Downloads/bloom-atelier/bloom-atelier/node_modules/vue-bundle-renderer/dist/runtime.mjs';
-import { parseURL, withoutBase, joinURL, getQuery, withQuery, withTrailingSlash, decodePath, withLeadingSlash, withoutTrailingSlash, joinRelativeURL } from 'file://C:/Users/user/Downloads/bloom-atelier/bloom-atelier/node_modules/ufo/dist/index.mjs';
-import { renderToString } from 'file://C:/Users/user/Downloads/bloom-atelier/bloom-atelier/node_modules/vue/server-renderer/index.mjs';
-import { klona } from 'file://C:/Users/user/Downloads/bloom-atelier/bloom-atelier/node_modules/klona/dist/index.mjs';
-import defu, { defuFn } from 'file://C:/Users/user/Downloads/bloom-atelier/bloom-atelier/node_modules/defu/dist/defu.mjs';
-import destr, { destr as destr$1 } from 'file://C:/Users/user/Downloads/bloom-atelier/bloom-atelier/node_modules/destr/dist/index.mjs';
-import { snakeCase } from 'file://C:/Users/user/Downloads/bloom-atelier/bloom-atelier/node_modules/scule/dist/index.mjs';
-import { createHead as createHead$1, propsToString, renderSSRHead } from 'file://C:/Users/user/Downloads/bloom-atelier/bloom-atelier/node_modules/unhead/dist/server.mjs';
-import { stringify, uneval } from 'file://C:/Users/user/Downloads/bloom-atelier/bloom-atelier/node_modules/devalue/index.js';
-import { isVNode, isRef, toValue } from 'file://C:/Users/user/Downloads/bloom-atelier/bloom-atelier/node_modules/vue/index.mjs';
-import { DeprecationsPlugin, PromisesPlugin, TemplateParamsPlugin, AliasSortingPlugin } from 'file://C:/Users/user/Downloads/bloom-atelier/bloom-atelier/node_modules/unhead/dist/plugins.mjs';
-import { createHooks } from 'file://C:/Users/user/Downloads/bloom-atelier/bloom-atelier/node_modules/hookable/dist/index.mjs';
-import { createFetch, Headers as Headers$1 } from 'file://C:/Users/user/Downloads/bloom-atelier/bloom-atelier/node_modules/ofetch/dist/node.mjs';
-import { fetchNodeRequestHandler, callNodeRequestHandler } from 'file://C:/Users/user/Downloads/bloom-atelier/bloom-atelier/node_modules/node-mock-http/dist/index.mjs';
-import { createStorage, prefixStorage } from 'file://C:/Users/user/Downloads/bloom-atelier/bloom-atelier/node_modules/unstorage/dist/index.mjs';
-import unstorage_47drivers_47fs from 'file://C:/Users/user/Downloads/bloom-atelier/bloom-atelier/node_modules/unstorage/drivers/fs.mjs';
-import { digest } from 'file://C:/Users/user/Downloads/bloom-atelier/bloom-atelier/node_modules/ohash/dist/index.mjs';
-import { toRouteMatcher, createRouter } from 'file://C:/Users/user/Downloads/bloom-atelier/bloom-atelier/node_modules/radix3/dist/index.mjs';
+import { escapeHtml } from 'file:///workspaces/bloom-atelier/node_modules/@vue/shared/dist/shared.cjs.js';
+import { createRenderer, getRequestDependencies, getPreloadLinks, getPrefetchLinks } from 'file:///workspaces/bloom-atelier/node_modules/vue-bundle-renderer/dist/runtime.mjs';
+import { parseURL, withoutBase, joinURL, getQuery, withQuery, withTrailingSlash, decodePath, withLeadingSlash, withoutTrailingSlash, joinRelativeURL } from 'file:///workspaces/bloom-atelier/node_modules/ufo/dist/index.mjs';
+import { renderToString } from 'file:///workspaces/bloom-atelier/node_modules/vue/server-renderer/index.mjs';
+import destr, { destr as destr$1 } from 'file:///workspaces/bloom-atelier/node_modules/destr/dist/index.mjs';
+import { createHooks } from 'file:///workspaces/bloom-atelier/node_modules/hookable/dist/index.mjs';
+import { createFetch, Headers as Headers$1 } from 'file:///workspaces/bloom-atelier/node_modules/ofetch/dist/node.mjs';
+import { fetchNodeRequestHandler, callNodeRequestHandler } from 'file:///workspaces/bloom-atelier/node_modules/node-mock-http/dist/index.mjs';
+import { createStorage, prefixStorage } from 'file:///workspaces/bloom-atelier/node_modules/unstorage/dist/index.mjs';
+import unstorage_47drivers_47fs from 'file:///workspaces/bloom-atelier/node_modules/unstorage/drivers/fs.mjs';
+import { digest } from 'file:///workspaces/bloom-atelier/node_modules/ohash/dist/index.mjs';
+import { klona } from 'file:///workspaces/bloom-atelier/node_modules/klona/dist/index.mjs';
+import defu, { defuFn } from 'file:///workspaces/bloom-atelier/node_modules/defu/dist/defu.mjs';
+import { snakeCase } from 'file:///workspaces/bloom-atelier/node_modules/scule/dist/index.mjs';
+import { getContext } from 'file:///workspaces/bloom-atelier/node_modules/unctx/dist/index.mjs';
+import { toRouteMatcher, createRouter } from 'file:///workspaces/bloom-atelier/node_modules/radix3/dist/index.mjs';
 import { readFile } from 'node:fs/promises';
-import consola, { consola as consola$1 } from 'file://C:/Users/user/Downloads/bloom-atelier/bloom-atelier/node_modules/consola/dist/index.mjs';
-import { ErrorParser } from 'file://C:/Users/user/Downloads/bloom-atelier/bloom-atelier/node_modules/youch-core/build/index.js';
-import { Youch } from 'file://C:/Users/user/Downloads/bloom-atelier/bloom-atelier/node_modules/youch/build/index.js';
-import { SourceMapConsumer } from 'file://C:/Users/user/Downloads/bloom-atelier/bloom-atelier/node_modules/source-map/source-map.js';
+import consola, { consola as consola$1 } from 'file:///workspaces/bloom-atelier/node_modules/consola/dist/index.mjs';
+import { ErrorParser } from 'file:///workspaces/bloom-atelier/node_modules/youch-core/build/index.js';
+import { Youch } from 'file:///workspaces/bloom-atelier/node_modules/youch/build/index.js';
+import { SourceMapConsumer } from 'file:///workspaces/bloom-atelier/node_modules/source-map/source-map.js';
 import { AsyncLocalStorage } from 'node:async_hooks';
-import { getContext } from 'file://C:/Users/user/Downloads/bloom-atelier/bloom-atelier/node_modules/unctx/dist/index.mjs';
-import { captureRawStackTrace, parseRawStackTrace } from 'file://C:/Users/user/Downloads/bloom-atelier/bloom-atelier/node_modules/errx/dist/index.js';
+import { stringify, uneval } from 'file:///workspaces/bloom-atelier/node_modules/devalue/index.js';
+import { captureRawStackTrace, parseRawStackTrace } from 'file:///workspaces/bloom-atelier/node_modules/errx/dist/index.mjs';
+import { isVNode, isRef, toValue } from 'file:///workspaces/bloom-atelier/node_modules/vue/index.mjs';
 import { promises } from 'node:fs';
 import { fileURLToPath } from 'node:url';
-import { dirname as dirname$1, resolve as resolve$1 } from 'file://C:/Users/user/Downloads/bloom-atelier/bloom-atelier/node_modules/pathe/dist/index.mjs';
-import { walkResolver } from 'file://C:/Users/user/Downloads/bloom-atelier/bloom-atelier/node_modules/unhead/dist/utils.mjs';
+import { dirname as dirname$1, resolve as resolve$1, isAbsolute } from 'file:///workspaces/bloom-atelier/node_modules/pathe/dist/index.mjs';
+import { createHead as createHead$1, propsToString, renderSSRHead } from 'file:///workspaces/bloom-atelier/node_modules/unhead/dist/server.mjs';
+import { DeprecationsPlugin, PromisesPlugin, TemplateParamsPlugin, AliasSortingPlugin } from 'file:///workspaces/bloom-atelier/node_modules/unhead/dist/plugins.mjs';
+import { walkResolver } from 'file:///workspaces/bloom-atelier/node_modules/unhead/dist/utils.mjs';
+import { ipxFSStorage, ipxHttpStorage, createIPX, createIPXNodeHandler, parseIPXURL } from 'file:///workspaces/bloom-atelier/node_modules/ipx/dist/index.mjs';
 
-const serverAssets = [{"baseName":"server","dir":"C:/Users/user/Downloads/bloom-atelier/bloom-atelier/server/assets"}];
+const serverAssets = [{"baseName":"server","dir":"/workspaces/bloom-atelier/server/assets"}];
 
 const assets$1 = createStorage();
 
@@ -48,11 +49,11 @@ const storage = createStorage({});
 
 storage.mount('/assets', assets$1);
 
-storage.mount('root', unstorage_47drivers_47fs({"driver":"fs","readOnly":true,"base":"C:/Users/user/Downloads/bloom-atelier/bloom-atelier","watchOptions":{"ignored":[null]}}));
-storage.mount('src', unstorage_47drivers_47fs({"driver":"fs","readOnly":true,"base":"C:/Users/user/Downloads/bloom-atelier/bloom-atelier/server","watchOptions":{"ignored":[null]}}));
-storage.mount('build', unstorage_47drivers_47fs({"driver":"fs","readOnly":false,"base":"C:/Users/user/Downloads/bloom-atelier/bloom-atelier/.nuxt"}));
-storage.mount('cache', unstorage_47drivers_47fs({"driver":"fs","readOnly":false,"base":"C:/Users/user/Downloads/bloom-atelier/bloom-atelier/.nuxt/cache"}));
-storage.mount('data', unstorage_47drivers_47fs({"driver":"fs","base":"C:/Users/user/Downloads/bloom-atelier/bloom-atelier/.data/kv"}));
+storage.mount('root', unstorage_47drivers_47fs({"driver":"fs","readOnly":true,"base":"/workspaces/bloom-atelier","watchOptions":{"ignored":[null]}}));
+storage.mount('src', unstorage_47drivers_47fs({"driver":"fs","readOnly":true,"base":"/workspaces/bloom-atelier/server","watchOptions":{"ignored":[null]}}));
+storage.mount('build', unstorage_47drivers_47fs({"driver":"fs","readOnly":false,"base":"/workspaces/bloom-atelier/.nuxt"}));
+storage.mount('cache', unstorage_47drivers_47fs({"driver":"fs","readOnly":false,"base":"/workspaces/bloom-atelier/.nuxt/cache"}));
+storage.mount('data', unstorage_47drivers_47fs({"driver":"fs","base":"/workspaces/bloom-atelier/.data/kv"}));
 
 function useStorage(base = "") {
   return base ? prefixStorage(storage, base) : storage;
@@ -635,6 +636,11 @@ const _inlineRuntimeConfig = {
       "/__nuxt_error": {
         "cache": false
       },
+      "/images/**": {
+        "headers": {
+          "cache-control": "public, max-age=31536000, immutable"
+        }
+      },
       "/_nuxt/builds/meta/**": {
         "headers": {
           "cache-control": "public, max-age=31536000, immutable"
@@ -647,7 +653,19 @@ const _inlineRuntimeConfig = {
       }
     }
   },
-  "public": {}
+  "public": {},
+  "ipx": {
+    "baseURL": "/_ipx",
+    "alias": {},
+    "fs": {
+      "dir": [
+        "/workspaces/bloom-atelier/public"
+      ]
+    },
+    "http": {
+      "domains": []
+    }
+  }
 };
 const envOptions = {
   prefix: "NITRO_",
@@ -691,6 +709,11 @@ new Proxy(/* @__PURE__ */ Object.create(null), {
     }
     return void 0;
   }
+});
+
+getContext("nitro-app", {
+  asyncContext: false,
+  AsyncLocalStorage: void 0
 });
 
 const config = useRuntimeConfig();
@@ -2009,26 +2032,9 @@ async function errorHandler(error, event) {
   // H3 will handle fallback
 }
 
-const script = `
-if (!window.__NUXT_DEVTOOLS_TIME_METRIC__) {
-  Object.defineProperty(window, '__NUXT_DEVTOOLS_TIME_METRIC__', {
-    value: {},
-    enumerable: false,
-    configurable: true,
-  })
-}
-window.__NUXT_DEVTOOLS_TIME_METRIC__.appInit = Date.now()
-`;
+const rootDir = "/workspaces/bloom-atelier";
 
-const _Ztl3VIMEcUMjbuRPFRnhsIKIAxJ31LcTAkqdEdLcrCc = (function(nitro) {
-  nitro.hooks.hook("render:html", (htmlContext) => {
-    htmlContext.head.push(`<script>${script}<\/script>`);
-  });
-});
-
-const rootDir = "C:/Users/user/Downloads/bloom-atelier/bloom-atelier";
-
-const appHead = {"meta":[{"name":"viewport","content":"width=device-width, initial-scale=1"},{"charset":"utf-8"}],"link":[{"rel":"stylesheet","href":"https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap"}],"style":[],"script":[],"noscript":[]};
+const appHead = {"meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1, viewport-fit=cover"},{"name":"description","content":"Bloom Atelier — minimal fashion, dedicated craft, and Albanian elegance. Shop dresses, skirts, coats, denim, and accessories."}],"link":[{"rel":"icon","href":"data:,","sizes":"any"},{"rel":"preconnect","href":"https://fonts.googleapis.com"},{"rel":"preconnect","href":"https://fonts.gstatic.com","crossorigin":""},{"rel":"stylesheet","href":"https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Outfit:wght@300;400&family=Pinyon+Script&display=swap","media":"print","onload":"this.media='all'"}],"style":[],"script":[],"noscript":[],"title":"Bloom Atelier","htmlAttrs":{"lang":"en"}};
 
 const appRootTag = "div";
 
@@ -2051,7 +2057,7 @@ const asyncContext = getContext("nuxt-dev", {
 	asyncContext: true,
 	AsyncLocalStorage
 });
-const _vMOlOikoo3oR7SOXf2gcxMtbgCsTKsXSQaCaMrpKqg = (nitroApp) => {
+const _oN5h8s9j5q8vVJxEWuCT6klVthAhta0Kae0DFZIjGps = (nitroApp) => {
 	const handler = nitroApp.h3App.handler;
 	nitroApp.h3App.handler = (event) => {
 		return asyncContext.callAsync({
@@ -2125,8 +2131,7 @@ function onConsoleLog(callback) {
 }
 
 const plugins = [
-  _Ztl3VIMEcUMjbuRPFRnhsIKIAxJ31LcTAkqdEdLcrCc,
-_vMOlOikoo3oR7SOXf2gcxMtbgCsTKsXSQaCaMrpKqg
+  _oN5h8s9j5q8vVJxEWuCT6klVthAhta0Kae0DFZIjGps
 ];
 
 const assets = {};
@@ -2154,7 +2159,7 @@ function getAsset (id) {
 
 const METHODS = /* @__PURE__ */ new Set(["HEAD", "GET"]);
 const EncodingMap = { gzip: ".gz", br: ".br" };
-const _k7X35E = eventHandler((event) => {
+const _kgEBM5 = eventHandler((event) => {
   if (event.method && !METHODS.has(event.method)) {
     return;
   }
@@ -2296,9 +2301,9 @@ function publicAssetsURL(...path) {
 const APP_ROOT_OPEN_TAG = `<${appRootTag}${propsToString(appRootAttrs)}>`;
 const APP_ROOT_CLOSE_TAG = `</${appRootTag}>`;
 // @ts-expect-error file will be produced after app build
-const getServerEntry = () => import('file://C:/Users/user/Downloads/bloom-atelier/bloom-atelier/.nuxt//dist/server/server.mjs').then((r) => r.default || r);
+const getServerEntry = () => import('file:///workspaces/bloom-atelier/.nuxt//dist/server/server.mjs').then((r) => r.default || r);
 // @ts-expect-error file will be produced after app build
-const getClientManifest = () => import('file://C:/Users/user/Downloads/bloom-atelier/bloom-atelier/.nuxt//dist/server/client.manifest.mjs').then((r) => r.default || r).then((r) => typeof r === "function" ? r() : r);
+const getClientManifest = () => import('file:///workspaces/bloom-atelier/.nuxt//dist/server/client.manifest.mjs').then((r) => r.default || r).then((r) => typeof r === "function" ? r() : r);
 // -- SSR Renderer --
 const getSSRRenderer = lazyCachedFunction(async () => {
 	// Load server bundle
@@ -2578,13 +2583,118 @@ async function getIslandContext(event) {
 	return ctx;
 }
 
-const _lazy_8NBPaY = () => Promise.resolve().then(function () { return renderer$1; });
+function defineRenderHandler(render) {
+  const runtimeConfig = useRuntimeConfig();
+  return eventHandler(async (event) => {
+    const nitroApp = useNitroApp();
+    const ctx = { event, render, response: void 0 };
+    await nitroApp.hooks.callHook("render:before", ctx);
+    if (!ctx.response) {
+      if (event.path === `${runtimeConfig.app.baseURL}favicon.ico`) {
+        setResponseHeader(event, "Content-Type", "image/x-icon");
+        return send(
+          event,
+          "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+        );
+      }
+      ctx.response = await ctx.render(event);
+      if (!ctx.response) {
+        const _currentStatus = getResponseStatus(event);
+        setResponseStatus(event, _currentStatus === 200 ? 500 : _currentStatus);
+        return send(
+          event,
+          "No response returned from render handler: " + event.path
+        );
+      }
+    }
+    await nitroApp.hooks.callHook("render:response", ctx.response, ctx);
+    if (ctx.response.headers) {
+      setResponseHeaders(event, ctx.response.headers);
+    }
+    if (ctx.response.statusCode || ctx.response.statusMessage) {
+      setResponseStatus(
+        event,
+        ctx.response.statusCode,
+        ctx.response.statusMessage
+      );
+    }
+    return ctx.response.body;
+  });
+}
+
+const scheduledTasks = false;
+
+const tasks = {
+  
+};
+
+const __runningTasks__ = {};
+async function runTask(name, {
+  payload = {},
+  context = {}
+} = {}) {
+  if (__runningTasks__[name]) {
+    return __runningTasks__[name];
+  }
+  if (!(name in tasks)) {
+    throw createError({
+      message: `Task \`${name}\` is not available!`,
+      statusCode: 404
+    });
+  }
+  if (!tasks[name].resolve) {
+    throw createError({
+      message: `Task \`${name}\` is not implemented!`,
+      statusCode: 501
+    });
+  }
+  const handler = await tasks[name].resolve();
+  const taskEvent = { name, payload, context };
+  __runningTasks__[name] = handler.run(taskEvent);
+  try {
+    const res = await __runningTasks__[name];
+    return res;
+  } finally {
+    delete __runningTasks__[name];
+  }
+}
+
+const _0UH5Y8 = lazyEventHandler(() => {
+  const opts = useRuntimeConfig().ipx || {};
+  const fsDir = opts?.fs?.dir ? (Array.isArray(opts.fs.dir) ? opts.fs.dir : [opts.fs.dir]).map((dir) => isAbsolute(dir) ? dir : fileURLToPath(new URL(dir, globalThis._importMeta_.url))) : void 0;
+  const fsStorage = opts.fs?.dir ? ipxFSStorage({ ...opts.fs, dir: fsDir }) : void 0;
+  const httpStorage = opts.http?.domains ? ipxHttpStorage({ ...opts.http }) : void 0;
+  if (!fsStorage && !httpStorage) {
+    throw new Error("IPX storage is not configured!");
+  }
+  const ipxOptions = {
+    ...opts,
+    storage: fsStorage || httpStorage,
+    httpStorage
+  };
+  const baseURL = (opts.baseURL || "/_ipx").replace(/\/+$/, "");
+  const ipx = createIPX(ipxOptions);
+  const nodeHandler = createIPXNodeHandler(ipx, {
+    parseURL(url) {
+      const parsedURL = new URL(url);
+      let pathname = parsedURL.pathname;
+      if (baseURL && (pathname === baseURL || pathname.startsWith(`${baseURL}/`))) {
+        pathname = pathname.slice(baseURL.length) || "/";
+      }
+      return parseIPXURL(parsedURL.origin + pathname + parsedURL.search);
+    }
+  });
+  return fromNodeMiddleware(nodeHandler);
+});
+
+const _lazy_Ggs9qs = () => Promise.resolve().then(function () { return renderer$1; });
 
 const handlers = [
-  { route: '', handler: _k7X35E, lazy: false, middleware: true, method: undefined },
-  { route: '/__nuxt_error', handler: _lazy_8NBPaY, lazy: true, middleware: false, method: undefined },
+  { route: '', handler: _kgEBM5, lazy: false, middleware: true, method: undefined },
+  { route: '/__nuxt_error', handler: _lazy_Ggs9qs, lazy: true, middleware: false, method: undefined },
   { route: '/__nuxt_island/**', handler: _SxA8c9, lazy: false, middleware: false, method: undefined },
-  { route: '/**', handler: _lazy_8NBPaY, lazy: true, middleware: false, method: undefined }
+  { route: '/_ipx/**', handler: _0UH5Y8, lazy: false, middleware: false, method: undefined },
+  { route: '/**', handler: _lazy_Ggs9qs, lazy: true, middleware: false, method: undefined }
 ];
 
 function createNitroApp() {
@@ -2727,82 +2837,6 @@ function useNitroApp() {
   return nitroApp$1;
 }
 runNitroPlugins(nitroApp$1);
-
-function defineRenderHandler(render) {
-  const runtimeConfig = useRuntimeConfig();
-  return eventHandler(async (event) => {
-    const nitroApp = useNitroApp();
-    const ctx = { event, render, response: void 0 };
-    await nitroApp.hooks.callHook("render:before", ctx);
-    if (!ctx.response) {
-      if (event.path === `${runtimeConfig.app.baseURL}favicon.ico`) {
-        setResponseHeader(event, "Content-Type", "image/x-icon");
-        return send(
-          event,
-          "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-        );
-      }
-      ctx.response = await ctx.render(event);
-      if (!ctx.response) {
-        const _currentStatus = getResponseStatus(event);
-        setResponseStatus(event, _currentStatus === 200 ? 500 : _currentStatus);
-        return send(
-          event,
-          "No response returned from render handler: " + event.path
-        );
-      }
-    }
-    await nitroApp.hooks.callHook("render:response", ctx.response, ctx);
-    if (ctx.response.headers) {
-      setResponseHeaders(event, ctx.response.headers);
-    }
-    if (ctx.response.statusCode || ctx.response.statusMessage) {
-      setResponseStatus(
-        event,
-        ctx.response.statusCode,
-        ctx.response.statusMessage
-      );
-    }
-    return ctx.response.body;
-  });
-}
-
-const scheduledTasks = false;
-
-const tasks = {
-  
-};
-
-const __runningTasks__ = {};
-async function runTask(name, {
-  payload = {},
-  context = {}
-} = {}) {
-  if (__runningTasks__[name]) {
-    return __runningTasks__[name];
-  }
-  if (!(name in tasks)) {
-    throw createError({
-      message: `Task \`${name}\` is not available!`,
-      statusCode: 404
-    });
-  }
-  if (!tasks[name].resolve) {
-    throw createError({
-      message: `Task \`${name}\` is not implemented!`,
-      statusCode: 501
-    });
-  }
-  const handler = await tasks[name].resolve();
-  const taskEvent = { name, payload, context };
-  __runningTasks__[name] = handler.run(taskEvent);
-  try {
-    const res = await __runningTasks__[name];
-    return res;
-  } finally {
-    delete __runningTasks__[name];
-  }
-}
 
 if (!globalThis.crypto) {
   globalThis.crypto = nodeCrypto.webcrypto;

@@ -54,7 +54,7 @@
         "../node_modules/unplugin-vue-router/client"
       ],
       "@nuxt/schema": [
-        "../node_modules/@nuxt/schema"
+        "../node_modules/nuxt/node_modules/@nuxt/schema"
       ],
       "nuxt": [
         "../node_modules/nuxt"
@@ -143,7 +143,7 @@
   "exclude": [
     "../node_modules",
     "../node_modules/nuxt/node_modules",
-    "../node_modules/@nuxt/devtools/node_modules",
+    "../node_modules/@nuxt/image/node_modules",
     "../node_modules/@nuxt/telemetry/node_modules",
     "../dist"
   ]

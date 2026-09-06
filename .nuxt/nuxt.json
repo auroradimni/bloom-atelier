@@ -1,7 +1,7 @@
 {
-  "_hash": "sVFZVmqRWXcEuDCQojlA4HkqWl5po7JPPZxi9Dzsa1U",
+  "_hash": "KqKfgl2XhHu6qkbX5DBasLE9dBdznsLi3Ttrqlw3V4I",
   "project": {
-    "rootDir": "C:/Users/user/Downloads/bloom-atelier/bloom-atelier"
+    "rootDir": "/workspaces/bloom-atelier"
   },
   "versions": {
     "nuxt": "3.21.1"
