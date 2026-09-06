@@ -96,55 +96,57 @@
       </NuxtLink>
     </nav>
 
-    <div
-      class="menu-overlay"
-      :class="{ open: menuOpen }"
-      aria-hidden="true"
-      @click="closeMenu"
-    ></div>
+    <Teleport to="body">
+      <div
+        class="menu-overlay"
+        :class="{ open: menuOpen }"
+        aria-hidden="true"
+        @click="closeMenu"
+      ></div>
 
-    <nav
-      class="mobile-nav"
-      :class="{ open: menuOpen }"
-      aria-label="Mobile navigation"
-      :aria-hidden="!menuOpen"
-    >
-      <div class="mobile-nav-head">
-        <p class="mobile-nav-label">Menu</p>
-        <button type="button" class="mobile-nav-close" aria-label="Close menu" @click="closeMenu">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path fill="none" stroke="currentColor" stroke-width="1.5" d="M6 6l12 12M18 6L6 18" />
-          </svg>
-        </button>
-      </div>
+      <nav
+        class="mobile-nav"
+        :class="{ open: menuOpen }"
+        aria-label="Mobile navigation"
+        :aria-hidden="!menuOpen"
+      >
+        <div class="mobile-nav-head">
+          <p class="mobile-nav-label">Menu</p>
+          <button type="button" class="mobile-nav-close" aria-label="Close menu" @click="closeMenu">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path fill="none" stroke="currentColor" stroke-width="1.5" d="M6 6l12 12M18 6L6 18" />
+            </svg>
+          </button>
+        </div>
 
-      <div class="mobile-nav-body">
-        <p class="mobile-nav-group">Shop</p>
-        <NuxtLink to="/collection" class="mobile-nav-link" @click="closeMenu">All Products</NuxtLink>
-        <NuxtLink to="/collection/new-arrivals" class="mobile-nav-link" @click="closeMenu">New Arrivals</NuxtLink>
-        <NuxtLink to="/collection/dress" class="mobile-nav-link" @click="closeMenu">Dress</NuxtLink>
-        <NuxtLink to="/collection/skirt" class="mobile-nav-link" @click="closeMenu">Skirt</NuxtLink>
-        <NuxtLink to="/collection/coats" class="mobile-nav-link" @click="closeMenu">Coats</NuxtLink>
-        <NuxtLink to="/collection/denim" class="mobile-nav-link" @click="closeMenu">Denim</NuxtLink>
-        <NuxtLink to="/collection/accessories" class="mobile-nav-link" @click="closeMenu">Accessories</NuxtLink>
-        <NuxtLink to="/sale" class="mobile-nav-link mobile-nav-link--sale" @click="closeMenu">Sale</NuxtLink>
+        <div class="mobile-nav-body">
+          <p class="mobile-nav-group">Shop</p>
+          <NuxtLink to="/collection" class="mobile-nav-link" @click="closeMenu">All Products</NuxtLink>
+          <NuxtLink to="/collection/new-arrivals" class="mobile-nav-link" @click="closeMenu">New Arrivals</NuxtLink>
+          <NuxtLink to="/collection/dress" class="mobile-nav-link" @click="closeMenu">Dress</NuxtLink>
+          <NuxtLink to="/collection/skirt" class="mobile-nav-link" @click="closeMenu">Skirt</NuxtLink>
+          <NuxtLink to="/collection/coats" class="mobile-nav-link" @click="closeMenu">Coats</NuxtLink>
+          <NuxtLink to="/collection/denim" class="mobile-nav-link" @click="closeMenu">Denim</NuxtLink>
+          <NuxtLink to="/collection/accessories" class="mobile-nav-link" @click="closeMenu">Accessories</NuxtLink>
+          <NuxtLink to="/sale" class="mobile-nav-link mobile-nav-link--sale" @click="closeMenu">Sale</NuxtLink>
 
-        <p class="mobile-nav-group">Explore</p>
-        <NuxtLink to="/courses" class="mobile-nav-link" @click="closeMenu">Courses</NuxtLink>
-        <NuxtLink to="/contact" class="mobile-nav-link" @click="closeMenu">Contact</NuxtLink>
-      </div>
+          <p class="mobile-nav-group">Explore</p>
+          <NuxtLink to="/courses" class="mobile-nav-link" @click="closeMenu">Courses</NuxtLink>
+          <NuxtLink to="/contact" class="mobile-nav-link" @click="closeMenu">Contact</NuxtLink>
+        </div>
 
-      <div class="mobile-nav-foot">
-        <NuxtLink to="/wishlist" class="mobile-nav-foot-link" @click="closeMenu">
-          Wishlist
-          <span v-if="wishlistCount" class="mobile-nav-badge">{{ wishlistCount }}</span>
-        </NuxtLink>
-        <NuxtLink to="/checkout" class="mobile-nav-foot-link" @click="closeMenu">
-          Bag
-          <span v-if="count" class="mobile-nav-badge">{{ count }}</span>
-        </NuxtLink>
-      </div>
-    </nav>
+        <div class="mobile-nav-foot">
+          <NuxtLink to="/wishlist" class="mobile-nav-foot-link" @click="closeMenu">
+            Wishlist
+            <span v-if="wishlistCount" class="mobile-nav-badge">{{ wishlistCount }}</span>
+          </NuxtLink>
+          <NuxtLink to="/checkout" class="mobile-nav-foot-link" @click="closeMenu">
+            Bag
+            <span v-if="count" class="mobile-nav-badge">{{ count }}</span>
+          </NuxtLink>
+        </div>
+      </nav>
+    </Teleport>
   </header>
 </template>
 
@@ -499,17 +501,19 @@ function onSearch() {
   position: fixed;
   top: calc(var(--promo-h) + var(--header-h));
   right: 0;
-  bottom: 0;
+  bottom: var(--mobile-menu-bottom, 0px);
   left: 0;
   background: rgba(20, 18, 16, 0.42);
   z-index: 110;
   opacity: 0;
   transition: opacity 0.35s var(--ease);
+  pointer-events: none;
 }
 
 .menu-overlay.open {
   display: block;
   opacity: 1;
+  pointer-events: auto;
 }
 
 @media (max-width: 900px) {
@@ -605,6 +609,7 @@ function onSearch() {
 
   .menu-overlay {
     top: calc(var(--promo-h) + var(--header-h));
+    bottom: var(--mobile-menu-bottom);
   }
 
   .site-nav.menu-open .site-nav-search--mobile,
@@ -617,9 +622,10 @@ function onSearch() {
     flex-direction: column;
     position: fixed;
     top: calc(var(--promo-h) + var(--header-h));
+    bottom: var(--mobile-menu-bottom);
     left: 0;
     width: min(100%, 320px);
-    height: calc(100dvh - var(--promo-h) - var(--header-h));
+    max-height: none;
     padding: 0;
     background: var(--surface);
     border-right: 1px solid var(--line);
@@ -627,6 +633,7 @@ function onSearch() {
     transform: translateX(-100%);
     transition: transform 0.4s var(--ease);
     box-shadow: 12px 0 40px rgba(20, 18, 16, 0.08);
+    overflow: hidden;
   }
 
   .mobile-nav.open {
@@ -673,7 +680,8 @@ function onSearch() {
   }
 
   .mobile-nav-body {
-    flex: 1;
+    flex: 1 1 auto;
+    min-height: 0;
     overflow-y: auto;
     padding: 0.85rem 1.25rem 0.75rem;
     -webkit-overflow-scrolling: touch;
@@ -722,11 +730,13 @@ function onSearch() {
   }
 
   .mobile-nav-foot {
+    flex-shrink: 0;
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 0.65rem;
-    padding: 1rem 1.25rem 0;
+    padding: 1rem 1.25rem calc(1rem + env(safe-area-inset-bottom, 0px));
     border-top: 1px solid var(--line);
+    background: var(--surface);
   }
 
   .mobile-nav-foot-link {
