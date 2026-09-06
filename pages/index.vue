@@ -55,7 +55,7 @@
           <ProductCard
             v-for="(item, index) in newArrivals"
             :key="item.id"
-            v-scroll-reveal="{ delay: index * 70, variant: 'scale' }"
+            v-scroll-reveal="{ delay: index * 70 }"
             :product="item"
             :to="`/product/${item.id}`"
           />
@@ -228,13 +228,14 @@ const handpicked = [...products].reverse().slice(0, 6)
 
 .new-arrivals-track {
   display: flex;
-  gap: 2px;
+  gap: 0;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   overscroll-behavior-x: contain;
   scrollbar-width: none;
-  padding: 0.15rem 0 0.35rem;
+  padding: 0;
   -webkit-overflow-scrolling: touch;
+  width: 100%;
 }
 
 .new-arrivals-track::-webkit-scrollbar {
@@ -247,29 +248,28 @@ const handpicked = [...products].reverse().slice(0, 6)
   min-width: 0;
 }
 
+.new-arrivals-track :deep(.product-card.scroll-reveal),
+.new-arrivals-track :deep(.product-card.scroll-reveal--scale) {
+  transform: none;
+}
+
 @media (min-width: 901px) {
   .new-arrivals-scroll {
     overflow: visible;
   }
 
   .new-arrivals-track {
-    display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-    gap: 2px;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 0;
     overflow: visible;
     scroll-snap-type: none;
   }
 
   .new-arrivals-track :deep(.product-card) {
-    flex: unset;
-    width: 100%;
-  }
-}
-
-@media (min-width: 901px) and (max-width: 1180px) {
-  .new-arrivals-track {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 2px;
+    flex: 1 1 0;
+    min-width: 0;
+    width: auto;
   }
 }
 
@@ -424,7 +424,7 @@ const handpicked = [...products].reverse().slice(0, 6)
   .new-arrivals-track {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 2px;
+    gap: 0;
     overflow: visible;
     scroll-snap-type: none;
     padding: 0;
