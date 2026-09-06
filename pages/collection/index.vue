@@ -138,7 +138,16 @@ function getCategoryCover(slug) {
   font-size: 0.68rem;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  margin-bottom: 1rem;
+  margin-bottom: 0.65rem;
+}
+
+.all-products :deep(.product-toolbar) {
+  margin-bottom: 0.65rem;
+}
+
+.all-products :deep(.toolbar-bar) {
+  padding: 0.45rem 0;
+  border-top: 0;
 }
 
 .empty-state {

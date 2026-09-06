@@ -61,31 +61,47 @@ useHead(() => ({
 
 <style scoped>
 .category-page {
-  padding: 1.25rem 0 4rem;
+  padding: 1rem 0 3rem;
 }
 
 .back {
-  margin-bottom: 1.5rem;
-}
-
-.back::after {
-  content: '←';
+  margin-bottom: 0.65rem;
 }
 
 .page-head {
-  margin-bottom: 1.25rem;
+  margin-bottom: 0.35rem;
 }
 
 .page-head h1 {
   font-family: var(--font-display);
   font-size: clamp(2rem, 5vw, 2.8rem);
   font-weight: 300;
+  line-height: 1.05;
   color: var(--ink);
 }
 
 .page-head p {
-  margin-top: 0.5rem;
+  margin-top: 0.2rem;
+  line-height: 1.4;
+  font-size: 0.9rem;
   color: var(--stone);
+}
+
+.category-page :deep(.product-toolbar) {
+  margin-bottom: 0.65rem;
+}
+
+.category-page :deep(.toolbar-bar) {
+  padding: 0.45rem 0;
+  border-top: 0;
+}
+
+.category-page .product-grid {
+  margin-top: 0;
+}
+
+.back::after {
+  content: '←';
 }
 
 .empty {

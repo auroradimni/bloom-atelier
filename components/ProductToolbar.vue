@@ -195,7 +195,7 @@ onBeforeUnmount(() => {
 
 <style scoped>
 .product-toolbar {
-  margin-bottom: 1.25rem;
+  margin-bottom: 0.75rem;
 }
 
 .toolbar-bar {
@@ -203,7 +203,7 @@ onBeforeUnmount(() => {
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  padding: 0.85rem 0;
+  padding: 0.55rem 0;
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
 }
