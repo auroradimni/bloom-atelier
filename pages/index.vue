@@ -277,14 +277,20 @@ const handpicked = [...products].reverse().slice(0, 6)
   grid-template-columns: 1fr 1.1fr;
   align-items: stretch;
   gap: 0.5rem;
-  margin: clamp(1.5rem, 4vw, 2.5rem) auto;
+  margin: clamp(1rem, 3vw, 1.75rem) auto;
   border-top: 1px solid var(--line);
-  padding-top: clamp(1.5rem, 4vw, 2.5rem);
+  padding-top: clamp(1rem, 3vw, 1.75rem);
+}
+
+@media (min-width: 901px) {
+  .editorial {
+    max-height: 360px;
+  }
 }
 
 .editorial-copy {
   background: var(--accent-soft);
-  padding: clamp(1.25rem, 3vw, 2rem);
+  padding: clamp(1rem, 2vw, 1.35rem);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -293,11 +299,11 @@ const handpicked = [...products].reverse().slice(0, 6)
 
 .editorial-copy h2 {
   font-family: var(--font-display);
-  font-size: clamp(1.5rem, 3.2vw, 2.1rem);
+  font-size: clamp(1.25rem, 2.4vw, 1.65rem);
   font-weight: 300;
   line-height: 1.15;
   color: var(--ink);
-  margin: 0.5rem 0 1rem;
+  margin: 0.35rem 0 0.75rem;
 }
 
 .editorial-copy .eyebrow {
@@ -316,13 +322,23 @@ const handpicked = [...products].reverse().slice(0, 6)
   min-height: 0;
 }
 
-.editorial-media img {
+.editorial-media img,
+.editorial-media :deep(img) {
   display: block;
   width: 100%;
   height: 100%;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 4 / 3;
   object-fit: cover;
   transition: transform 0.7s var(--ease);
+}
+
+@media (min-width: 901px) {
+  .editorial-media img,
+  .editorial-media :deep(img) {
+    aspect-ratio: auto;
+    max-height: 360px;
+    min-height: 0;
+  }
 }
 
 .editorial-media:hover img {
@@ -425,8 +441,10 @@ const handpicked = [...products].reverse().slice(0, 6)
     gap: 2px;
   }
 
-  .editorial-media img {
+  .editorial-media img,
+  .editorial-media :deep(img) {
     aspect-ratio: 3 / 4;
+    max-height: none;
   }
 
   .handpicked {
