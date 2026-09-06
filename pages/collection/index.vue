@@ -168,18 +168,12 @@ function getCategoryCover(slug) {
 
   .shop-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 2px;
-    width: calc(100% + 1.5rem);
-    margin-inline: -0.75rem;
+    gap: 0.5rem;
     margin-bottom: 1.75rem;
   }
 
   .shop-tile img {
     margin-bottom: 0.45rem;
-  }
-
-  .shop-tile div {
-    padding-inline: 0.75rem;
   }
 }
 
