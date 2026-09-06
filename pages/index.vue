@@ -501,7 +501,12 @@ function getCover(slug) {
   }
 
   .shop-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem;
+  }
+
+  .shop-tile img {
+    aspect-ratio: 4 / 5;
   }
 
   .editorial {
@@ -555,12 +560,6 @@ function getCover(slug) {
 
   .carousel-arrow--next {
     right: 0.15rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .shop-grid {
-    grid-template-columns: 1fr;
   }
 }
 </style>
