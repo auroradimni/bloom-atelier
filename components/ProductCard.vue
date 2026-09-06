@@ -8,11 +8,11 @@
     }"
   >
     <div class="product-media">
-      <component
-        :is="to ? 'NuxtLink' : 'div'"
-        :to="to || undefined"
+      <NuxtLink
+        v-if="to"
+        :to="to"
         class="product-image-link"
-        :aria-label="to ? `View ${product.name}` : undefined"
+        :aria-label="`View ${product.name}`"
       >
         <NuxtImg
           :src="product.image"
@@ -23,7 +23,18 @@
           loading="lazy"
           decoding="async"
         />
-      </component>
+      </NuxtLink>
+      <div v-else class="product-image-link">
+        <NuxtImg
+          :src="product.image"
+          :alt="product.name"
+          width="400"
+          height="533"
+          sizes="(max-width: 900px) 50vw, 320px"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
 
       <span v-if="product.isOnSale && layout !== 'handpicked'" class="badge badge--sale">Sale</span>
       <span v-else-if="product.isNew && layout !== 'handpicked'" class="badge">New</span>
