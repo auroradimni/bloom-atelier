@@ -34,9 +34,14 @@
     <ProductToolbar
       v-if="items.length"
       v-model:sort="sort"
-      v-model:filter-new="filterNew"
+      v-model:color-filter="colorFilter"
+      v-model:size-filter="sizeFilter"
+      v-model:price-filter="priceFilter"
       :result-count="resultCount"
       :has-active-filters="hasActiveFilters"
+      :available-colors="availableColors"
+      :available-sizes="availableSizes"
+      :available-price-ranges="availablePriceRanges"
       @reset="resetFilters"
     />
 
@@ -85,7 +90,12 @@ const breadcrumbs = computed(() => [
 
 const {
   sort,
-  filterNew,
+  colorFilter,
+  sizeFilter,
+  priceFilter,
+  availableColors,
+  availableSizes,
+  availablePriceRanges,
   filteredItems,
   resultCount,
   hasActiveFilters,

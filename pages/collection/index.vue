@@ -15,10 +15,15 @@
 
     <ProductToolbar
       v-model:sort="sort"
-      v-model:filter-new="filterNew"
       v-model:category-filter="categoryFilter"
+      v-model:color-filter="colorFilter"
+      v-model:size-filter="sizeFilter"
+      v-model:price-filter="priceFilter"
       :result-count="resultCount"
       :has-active-filters="hasActiveFilters"
+      :available-colors="availableColors"
+      :available-sizes="availableSizes"
+      :available-price-ranges="availablePriceRanges"
       show-category-filter
       @reset="resetFilters"
     />
@@ -48,8 +53,13 @@ const railItems = computed(() => getCategoryRailItems())
 
 const {
   sort,
-  filterNew,
   categoryFilter,
+  colorFilter,
+  sizeFilter,
+  priceFilter,
+  availableColors,
+  availableSizes,
+  availablePriceRanges,
   filteredItems,
   resultCount,
   hasActiveFilters,

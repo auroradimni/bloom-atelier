@@ -1,4 +1,4 @@
-import { getDisplayPrice } from '~/data/collection'
+import { filterColors, filterSizes, getDisplayPrice, getPriceRange, priceRanges } from '~/data/collection'
 
 export function parseProductPrice(price) {
   return Number.parseInt(String(price).replace(/[^\d]/g, ''), 10) || 0
@@ -23,18 +23,59 @@ export function sortProducts(list, sortKey) {
 
 export function useProductFilters(sourceItems, { showCategoryFilter = false } = {}) {
   const sort = ref('featured')
-  const filterNew = ref(false)
   const categoryFilter = ref('all')
+  const colorFilter = ref('all')
+  const sizeFilter = ref('all')
+  const priceFilter = ref('all')
+
+  const availableColors = computed(() => {
+    const slugs = new Set(
+      (unref(sourceItems) || []).flatMap((item) => item.colorTags || [])
+    )
+    return filterColors.filter((color) => slugs.has(color.slug))
+  })
+
+  const availableSizes = computed(() => {
+    const sizes = new Set(
+      (unref(sourceItems) || []).flatMap((item) => item.sizes || [])
+    )
+    return filterSizes.filter((size) => sizes.has(size))
+  })
+
+  const availablePriceRanges = computed(() => {
+    const items = unref(sourceItems) || []
+    if (!items.length) return priceRanges
+
+    return priceRanges.filter((range) => {
+      if (range.slug === 'all') return true
+      return items.some((item) => {
+        const price = parseProductPrice(getDisplayPrice(item))
+        return price >= range.min && price <= range.max
+      })
+    })
+  })
 
   const filteredItems = computed(() => {
     let list = [...(unref(sourceItems) || [])]
 
-    if (filterNew.value) {
-      list = list.filter((item) => item.isNew)
-    }
-
     if (showCategoryFilter && categoryFilter.value !== 'all') {
       list = list.filter((item) => item.category === categoryFilter.value)
+    }
+
+    if (colorFilter.value !== 'all') {
+      list = list.filter((item) => item.colorTags?.includes(colorFilter.value))
+    }
+
+    if (sizeFilter.value !== 'all') {
+      list = list.filter((item) => item.sizes?.includes(sizeFilter.value))
+    }
+
+    if (priceFilter.value !== 'all') {
+      const range = getPriceRange(priceFilter.value)
+      list = list.filter((item) => {
+        const price = parseProductPrice(getDisplayPrice(item))
+        return price >= range.min && price <= range.max
+      })
     }
 
     return sortProducts(list, sort.value)
@@ -43,19 +84,32 @@ export function useProductFilters(sourceItems, { showCategoryFilter = false } = 
   const resultCount = computed(() => filteredItems.value.length)
 
   const hasActiveFilters = computed(() => {
-    return filterNew.value || (showCategoryFilter && categoryFilter.value !== 'all') || sort.value !== 'featured'
+    return (
+      (showCategoryFilter && categoryFilter.value !== 'all')
+      || colorFilter.value !== 'all'
+      || sizeFilter.value !== 'all'
+      || priceFilter.value !== 'all'
+      || sort.value !== 'featured'
+    )
   })
 
   function resetFilters() {
     sort.value = 'featured'
-    filterNew.value = false
     categoryFilter.value = 'all'
+    colorFilter.value = 'all'
+    sizeFilter.value = 'all'
+    priceFilter.value = 'all'
   }
 
   return {
     sort,
-    filterNew,
     categoryFilter,
+    colorFilter,
+    sizeFilter,
+    priceFilter,
+    availableColors,
+    availableSizes,
+    availablePriceRanges,
     filteredItems,
     resultCount,
     hasActiveFilters,

@@ -32,6 +32,26 @@ export const categories = [
   }
 ]
 
+export const filterColors = [
+  { slug: 'cream', label: 'Cream', hex: '#f7f4ef' },
+  { slug: 'brown', label: 'Brown', hex: '#3d2419' },
+  { slug: 'red', label: 'Red', hex: '#8b2635' },
+  { slug: 'white', label: 'White', hex: '#ffffff' },
+  { slug: 'grey', label: 'Grey', hex: '#9a8f86' },
+  { slug: 'black', label: 'Black', hex: '#141210' },
+  { slug: 'indigo', label: 'Indigo', hex: '#1a2744' },
+  { slug: 'champagne', label: 'Champagne', hex: '#e8d5a3' }
+]
+
+export const filterSizes = ['XS', 'S', 'M', 'L', 'XL', 'One Size']
+
+export const priceRanges = [
+  { slug: 'all', label: 'All prices', min: 0, max: Infinity },
+  { slug: 'under-2500', label: 'Under 2500 Lek', min: 0, max: 2499 },
+  { slug: '2500-3500', label: '2500 – 3500 Lek', min: 2500, max: 3500 },
+  { slug: 'over-3500', label: 'Over 3500 Lek', min: 3501, max: Infinity }
+]
+
 export const products = [
   {
     id: 'skirt-2',
@@ -41,7 +61,9 @@ export const products = [
     description: 'Cream pleated skirt with asymmetric details.',
     price: '2400 Lek',
     isNew: true,
-    colors: ['#f7f4ef', '#b07a66']
+    colors: ['#f7f4ef', '#b07a66'],
+    colorTags: ['cream', 'brown'],
+    sizes: ['XS', 'S', 'M', 'L']
   },
   {
     id: 'skirt-3',
@@ -53,7 +75,9 @@ export const products = [
     salePrice: '2240 Lek',
     isOnSale: true,
     isNew: false,
-    colors: ['#8b2635', '#141210']
+    colors: ['#8b2635', '#141210'],
+    colorTags: ['red', 'black'],
+    sizes: ['S', 'M', 'L']
   },
   {
     id: 'dress-1',
@@ -63,7 +87,9 @@ export const products = [
     description: 'White dress with pleated ruffle hem from the spring collection.',
     price: '3200 Lek',
     isNew: true,
-    colors: ['#ffffff']
+    colors: ['#ffffff'],
+    colorTags: ['white'],
+    sizes: ['XS', 'S', 'M', 'L']
   },
   {
     id: 'coat-1',
@@ -75,7 +101,9 @@ export const products = [
     salePrice: '3120 Lek',
     isOnSale: true,
     isNew: false,
-    colors: ['#9a8f86', '#141210']
+    colors: ['#9a8f86', '#141210'],
+    colorTags: ['grey', 'black'],
+    sizes: ['S', 'M', 'L', 'XL']
   },
   {
     id: 'tote-1',
@@ -86,7 +114,9 @@ export const products = [
     description: 'Structured winged tote in smooth chocolate leather with a gold turn-lock closure.',
     price: '3500 Lek',
     isNew: true,
-    colors: ['#3d2419', '#141210']
+    colors: ['#3d2419', '#141210'],
+    colorTags: ['brown', 'black'],
+    sizes: ['One Size']
   },
   {
     id: 'denim-1',
@@ -98,7 +128,9 @@ export const products = [
     salePrice: '1760 Lek',
     isOnSale: true,
     isNew: true,
-    colors: ['#1a2744', '#141210']
+    colors: ['#1a2744', '#141210'],
+    colorTags: ['indigo', 'black'],
+    sizes: ['XS', 'S', 'M', 'L', 'XL']
   },
   {
     id: 'dress-2',
@@ -108,7 +140,9 @@ export const products = [
     description: 'Floor-length slip dress in shimmering champagne silk with a deep V-neck and gathered bust.',
     price: '3600 Lek',
     isNew: true,
-    colors: ['#e8d5a3', '#141210']
+    colors: ['#e8d5a3', '#141210'],
+    colorTags: ['champagne', 'black'],
+    sizes: ['S', 'M', 'L']
   }
 ]
 
@@ -149,6 +183,14 @@ export function getDisplayPrice(product) {
 
 export function getSaleProducts() {
   return products.filter((product) => product.isOnSale)
+}
+
+export function getFilterColor(slug) {
+  return filterColors.find((color) => color.slug === slug)
+}
+
+export function getPriceRange(slug) {
+  return priceRanges.find((range) => range.slug === slug) || priceRanges[0]
 }
 
 export function getRelatedProducts(id, limit = 4) {

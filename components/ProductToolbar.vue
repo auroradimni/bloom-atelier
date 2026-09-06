@@ -65,24 +65,67 @@
     <Transition name="panel">
       <div v-if="filtersOpen" class="toolbar-panel">
         <div class="panel-grid">
-          <div class="filter-group">
-            <p class="filter-label">Availability</p>
+          <div v-if="availableColors.length" class="filter-group">
+            <p class="filter-label">Colour</p>
             <div class="filter-options">
               <button
                 type="button"
                 class="filter-chip"
-                :class="{ active: !filterNew }"
-                @click="filterNew = false"
+                :class="{ active: colorFilter === 'all' }"
+                @click="colorFilter = 'all'"
               >
-                All items
+                All
               </button>
+              <button
+                v-for="color in availableColors"
+                :key="color.slug"
+                type="button"
+                class="filter-chip filter-chip--color"
+                :class="{ active: colorFilter === color.slug }"
+                @click="colorFilter = color.slug"
+              >
+                <span class="color-swatch" :style="{ background: color.hex }"></span>
+                {{ color.label }}
+              </button>
+            </div>
+          </div>
+
+          <div v-if="availableSizes.length" class="filter-group">
+            <p class="filter-label">Size</p>
+            <div class="filter-options">
               <button
                 type="button"
                 class="filter-chip"
-                :class="{ active: filterNew }"
-                @click="filterNew = true"
+                :class="{ active: sizeFilter === 'all' }"
+                @click="sizeFilter = 'all'"
               >
-                New arrivals
+                All
+              </button>
+              <button
+                v-for="size in availableSizes"
+                :key="size"
+                type="button"
+                class="filter-chip filter-chip--size"
+                :class="{ active: sizeFilter === size }"
+                @click="sizeFilter = size"
+              >
+                {{ size }}
+              </button>
+            </div>
+          </div>
+
+          <div class="filter-group">
+            <p class="filter-label">Price</p>
+            <div class="filter-options filter-options--scroll">
+              <button
+                v-for="range in availablePriceRanges"
+                :key="range.slug"
+                type="button"
+                class="filter-chip"
+                :class="{ active: priceFilter === range.slug }"
+                @click="priceFilter = range.slug"
+              >
+                {{ range.label }}
               </button>
             </div>
           </div>
@@ -131,14 +174,19 @@ import { categories } from '~/data/collection'
 defineProps({
   resultCount: { type: Number, required: true },
   hasActiveFilters: { type: Boolean, default: false },
-  showCategoryFilter: { type: Boolean, default: false }
+  showCategoryFilter: { type: Boolean, default: false },
+  availableColors: { type: Array, default: () => [] },
+  availableSizes: { type: Array, default: () => [] },
+  availablePriceRanges: { type: Array, default: () => [] }
 })
 
 defineEmits(['reset'])
 
 const sort = defineModel('sort', { type: String, required: true })
-const filterNew = defineModel('filterNew', { type: Boolean, required: true })
 const categoryFilter = defineModel('categoryFilter', { type: String, default: 'all' })
+const colorFilter = defineModel('colorFilter', { type: String, default: 'all' })
+const sizeFilter = defineModel('sizeFilter', { type: String, default: 'all' })
+const priceFilter = defineModel('priceFilter', { type: String, default: 'all' })
 
 const sortOptions = [
   { value: 'featured', label: 'Featured' },
@@ -154,7 +202,9 @@ const toolbarRef = ref(null)
 
 const activeFilterCount = computed(() => {
   let count = 0
-  if (filterNew.value) count += 1
+  if (colorFilter.value !== 'all') count += 1
+  if (sizeFilter.value !== 'all') count += 1
+  if (priceFilter.value !== 'all') count += 1
   if (categoryFilter.value && categoryFilter.value !== 'all') count += 1
   return count
 })
@@ -371,6 +421,12 @@ onBeforeUnmount(() => {
   gap: 1.15rem;
 }
 
+@media (min-width: 768px) {
+  .panel-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 .filter-group {
   display: grid;
   gap: 0.7rem;
@@ -402,6 +458,9 @@ onBeforeUnmount(() => {
 
 .filter-chip {
   flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
   min-height: 38px;
   padding: 0 1rem;
   border: 1px solid rgba(20, 18, 16, 0.1);
@@ -416,6 +475,21 @@ onBeforeUnmount(() => {
   transition: border-color 0.3s var(--ease), background 0.3s var(--ease), color 0.3s var(--ease), transform 0.3s var(--ease);
 }
 
+.filter-chip--size {
+  min-width: 44px;
+  justify-content: center;
+  padding-inline: 0.75rem;
+  letter-spacing: 0.08em;
+}
+
+.color-swatch {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1px solid rgba(20, 18, 16, 0.12);
+  flex-shrink: 0;
+}
+
 .filter-chip:hover {
   border-color: rgba(20, 18, 16, 0.22);
   color: var(--ink);
@@ -425,6 +499,10 @@ onBeforeUnmount(() => {
   border-color: var(--ink);
   background: var(--ink);
   color: var(--surface);
+}
+
+.filter-chip.active .color-swatch {
+  border-color: rgba(255, 255, 255, 0.35);
 }
 
 .clear-btn {
@@ -485,6 +563,10 @@ onBeforeUnmount(() => {
     left: 0;
     right: 0;
     min-width: 0;
+  }
+
+  .panel-grid {
+    grid-template-columns: 1fr;
   }
 }
 
