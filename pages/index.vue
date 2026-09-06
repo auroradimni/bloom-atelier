@@ -74,45 +74,14 @@
           <h2>Most Loved</h2>
         </div>
 
-        <div class="most-loved-carousel">
-          <button
-            type="button"
-            class="carousel-arrow carousel-arrow--prev"
-            :class="{ visible: canScrollPrev }"
-            aria-label="Previous products"
-            @click="scrollTrack(-1)"
-          >
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path fill="none" stroke="currentColor" stroke-width="1.5" d="M15 6l-6 6 6 6" />
-            </svg>
-          </button>
-
-          <div
-            ref="trackRef"
-            class="most-loved-track"
-            @scroll="updateScrollState"
-          >
-            <ProductCard
-              v-for="(item, index) in loved"
-              :key="item.id"
-              v-scroll-reveal="{ delay: index * 60 }"
-              :product="item"
-              :to="`/product/${item.id}`"
-              compact
-            />
-          </div>
-
-          <button
-            type="button"
-            class="carousel-arrow carousel-arrow--next"
-            :class="{ visible: canScrollNext }"
-            aria-label="Next products"
-            @click="scrollTrack(1)"
-          >
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path fill="none" stroke="currentColor" stroke-width="1.5" d="M9 6l6 6-6 6" />
-            </svg>
-          </button>
+        <div class="most-loved-grid">
+          <ProductCard
+            v-for="(item, index) in loved"
+            :key="item.id"
+            v-scroll-reveal="{ delay: index * 60 }"
+            :product="item"
+            :to="`/product/${item.id}`"
+          />
         </div>
       </div>
     </section>
@@ -126,45 +95,6 @@ useHead({ title: 'Bloom Atelier' })
 
 const newArrivals = products.filter((item) => item.isNew)
 const loved = [...products].reverse()
-
-const trackRef = ref(null)
-const canScrollPrev = ref(false)
-const canScrollNext = ref(false)
-
-function updateScrollState() {
-  const track = trackRef.value
-  if (!track) return
-
-  const maxScroll = track.scrollWidth - track.clientWidth
-  canScrollPrev.value = track.scrollLeft > 8
-  canScrollNext.value = track.scrollLeft < maxScroll - 8
-}
-
-function scrollTrack(direction) {
-  const track = trackRef.value
-  if (!track) return
-
-  const card = track.querySelector('.product-card')
-  const gap = 20
-  const step = card ? card.offsetWidth + gap : track.clientWidth * 0.85
-  track.scrollBy({ left: direction * step, behavior: 'smooth' })
-  window.setTimeout(updateScrollState, 350)
-}
-
-onMounted(() => {
-  nextTick(() => {
-    updateScrollState()
-    window.addEventListener('resize', onResize)
-  })
-})
-
-onBeforeUnmount(() => {
-  window.removeEventListener('resize', onResize)
-})
-
-function onResize() {
-  updateScrollState()
-}
 
 function getCover(slug) {
   return getProductsByCategory(slug)[0]?.image || '/images/skirt-2.jpg'
@@ -371,90 +301,28 @@ function getCover(slug) {
   border-top: 1px solid var(--line);
 }
 
-.most-loved-carousel {
-  position: relative;
-  overflow: hidden;
-}
-
-.most-loved-track {
+.most-loved-grid {
   display: grid;
-  gap: 1rem;
+  gap: 1.25rem;
   align-items: start;
   width: 100%;
 }
 
 @media (min-width: 901px) {
-  .most-loved-track {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-}
-
-@media (min-width: 901px) and (max-width: 1100px) {
-  .most-loved-track {
+  .most-loved-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
-.most-loved-track :deep(.product-card) {
+@media (min-width: 1280px) {
+  .most-loved-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.most-loved-grid :deep(.product-card) {
   min-width: 0;
-}
-
-.most-loved-track :deep(.product-card .product-media) {
-  height: 0;
-  padding-top: 133.333%;
-  aspect-ratio: unset;
-  max-height: none;
-}
-
-.most-loved-track :deep(.product-card .product-meta h3) {
-  font-size: clamp(0.88rem, 1.1vw, 1rem);
-  min-height: 2.4em;
-}
-
-.most-loved-track :deep(.product-card .price) {
-  font-size: 0.82rem;
-}
-
-.carousel-arrow {
-  position: absolute;
-  top: 38%;
-  z-index: 2;
-  width: 42px;
-  height: 42px;
-  border: 1px solid var(--line);
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.92);
-  color: var(--ink);
-  display: grid;
-  place-items: center;
-  cursor: pointer;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s var(--ease), border-color 0.3s var(--ease), transform 0.3s var(--ease);
-  box-shadow: 0 8px 24px rgba(20, 18, 16, 0.08);
-}
-
-.carousel-arrow.visible {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.carousel-arrow:hover {
-  border-color: var(--ink);
-  transform: translateY(-1px);
-}
-
-.carousel-arrow svg {
-  width: 18px;
-  height: 18px;
-}
-
-.carousel-arrow--prev {
-  left: -0.35rem;
-}
-
-.carousel-arrow--next {
-  right: -0.35rem;
+  width: 100%;
 }
 
 .editorial {
@@ -575,30 +443,10 @@ function getCover(slug) {
     padding: 0 0.75rem;
   }
 
-  .most-loved-carousel {
-    overflow: visible;
-  }
-
-  .most-loved-track {
-    display: grid;
+  .most-loved-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 2px;
-    overflow: visible;
-    scroll-snap-type: none;
-    padding: 0;
-  }
-
-  .most-loved-track :deep(.product-card) {
-    flex: unset;
-    width: 100%;
-  }
-
-  .most-loved-track :deep(.product-card .product-media) {
-    padding-top: 133.333%;
-  }
-
-  .carousel-arrow {
-    display: none;
+    gap: 0.5rem;
+    padding: 0 1rem;
   }
 }
 </style>
