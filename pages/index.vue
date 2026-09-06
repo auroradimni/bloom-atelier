@@ -90,7 +90,6 @@
           <div
             ref="trackRef"
             class="most-loved-track"
-            :style="{ gridTemplateColumns: `repeat(${loved.length}, minmax(0, 1fr))` }"
             @scroll="updateScrollState"
           >
             <ProductCard
@@ -348,9 +347,8 @@ function getCover(slug) {
 
   .new-arrivals-track {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 240px));
-    justify-content: start;
-    gap: 0.75rem;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
     overflow: visible;
     scroll-snap-type: none;
   }
@@ -358,6 +356,12 @@ function getCover(slug) {
   .new-arrivals-track :deep(.product-card) {
     flex: unset;
     width: 100%;
+  }
+}
+
+@media (min-width: 901px) and (max-width: 1100px) {
+  .new-arrivals-track {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
@@ -374,9 +378,21 @@ function getCover(slug) {
 
 .most-loved-track {
   display: grid;
-  gap: 0.65rem;
+  gap: 1rem;
   align-items: start;
   width: 100%;
+}
+
+@media (min-width: 901px) {
+  .most-loved-track {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 901px) and (max-width: 1100px) {
+  .most-loved-track {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
 .most-loved-track :deep(.product-card) {
