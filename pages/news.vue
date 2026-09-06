@@ -13,13 +13,13 @@
         <p><NuxtLink to="/collection">More info</NuxtLink></p>
       </div>
       <div class="event">
-        <h3>Courses for Future Stylists</h3>
+        <h3>Spring Preview Evening</h3>
         <p>
-          We offer online courses for aspiring stylists.
-          Register to learn advanced techniques and creativity in fashion design.
+          An intimate preview of new silhouettes, textures, and accessories
+          from the Bloom Atelier studio.
         </p>
-        <p><strong>Start date:</strong> June 1, 2026</p>
-        <p><NuxtLink to="/courses">More info</NuxtLink></p>
+        <p><strong>Date:</strong> June 1, 2026</p>
+        <p><NuxtLink to="/collection">View collection</NuxtLink></p>
       </div>
     </div>
   </section>
