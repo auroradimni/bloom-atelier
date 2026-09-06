@@ -1,5 +1,5 @@
 <template>
-  <header class="site-nav">
+  <header class="site-nav" :class="{ 'menu-open': menuOpen }">
     <div class="site-nav-top page-shell">
       <div class="nav-left">
         <button
@@ -587,18 +587,23 @@ function onSearch() {
   }
 
   .menu-overlay {
-    top: calc(var(--promo-h) + var(--header-h) + var(--mobile-search-h) + var(--nav-cats-h));
+    top: calc(var(--promo-h) + var(--header-h));
+  }
+
+  .site-nav.menu-open .site-nav-search--mobile,
+  .site-nav.menu-open .site-nav-categories {
+    display: none;
   }
 
   .mobile-nav {
     display: flex;
     flex-direction: column;
     position: fixed;
-    top: calc(var(--promo-h) + var(--header-h) + var(--mobile-search-h) + var(--nav-cats-h));
+    top: calc(var(--promo-h) + var(--header-h));
     left: 0;
     width: min(100%, 320px);
-    height: calc(100dvh - var(--promo-h) - var(--header-h) - var(--mobile-search-h) - var(--nav-cats-h));
-    padding: 1.25rem 0;
+    height: calc(100dvh - var(--promo-h) - var(--header-h));
+    padding: 0;
     background: var(--surface);
     border-right: 1px solid var(--line);
     z-index: 120;
@@ -616,7 +621,7 @@ function onSearch() {
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
-    padding: 0 1.25rem 1rem;
+    padding: 0.75rem 1.25rem;
     border-bottom: 1px solid var(--line);
   }
 
@@ -653,7 +658,7 @@ function onSearch() {
   .mobile-nav-body {
     flex: 1;
     overflow-y: auto;
-    padding: 1.25rem 1.25rem 0.75rem;
+    padding: 0.85rem 1.25rem 0.75rem;
     -webkit-overflow-scrolling: touch;
   }
 
