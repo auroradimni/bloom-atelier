@@ -28,7 +28,7 @@
             :alt="item.title"
             width="200"
             height="200"
-            sizes="(max-width: 900px) 50vw, 20vw"
+            sizes="96px"
             loading="lazy"
             decoding="async"
           />
@@ -67,7 +67,7 @@
             :alt="item.title"
             width="200"
             height="200"
-            sizes="(max-width: 900px) 50vw, 20vw"
+            sizes="96px"
             loading="lazy"
             decoding="async"
           />

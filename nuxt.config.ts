@@ -35,6 +35,10 @@ export default defineNuxtConfig({
         {
           name: 'viewport',
           content: 'width=device-width, initial-scale=1, viewport-fit=cover'
+        },
+        {
+          name: 'description',
+          content: 'Bloom Atelier — minimal fashion, dedicated craft, and Albanian elegance. Shop dresses, skirts, coats, denim, and accessories.'
         }
       ],
       link: [

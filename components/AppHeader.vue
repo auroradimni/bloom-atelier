@@ -222,8 +222,7 @@ function onSearch() {
   position: sticky;
   top: var(--promo-h);
   z-index: 130;
-  background: rgba(247, 244, 239, 0.94);
-  backdrop-filter: blur(18px);
+  background: var(--bg);
   border-bottom: 1px solid var(--line);
 }
 

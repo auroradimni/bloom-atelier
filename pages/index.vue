@@ -17,7 +17,7 @@
           alt="Skirt"
           width="600"
           height="800"
-          sizes="(max-width: 900px) 100vw, 33vw"
+          sizes="(max-width: 900px) 100vw, 420px"
           fetchpriority="high"
           loading="eager"
           decoding="async"
@@ -30,7 +30,7 @@
           alt="Coats"
           width="600"
           height="800"
-          sizes="(max-width: 900px) 100vw, 33vw"
+          sizes="(max-width: 900px) 100vw, 420px"
           loading="lazy"
           decoding="async"
         />
@@ -69,11 +69,12 @@
         <NuxtLink to="/collection/coats" class="btn-solid">Explore the Edit</NuxtLink>
       </div>
       <NuxtLink v-scroll-reveal="{ delay: 120 }" to="/collection/coats" class="editorial-media">
-        <img
+        <NuxtImg
           src="/images/coat-1.jpg"
           alt="Fall edit"
           width="800"
           height="520"
+          sizes="800px"
           loading="lazy"
           decoding="async"
         />

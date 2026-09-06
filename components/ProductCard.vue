@@ -14,21 +14,23 @@
         class="product-image-link"
         :aria-label="`View ${product.name}`"
       >
-        <img
+        <NuxtImg
           :src="product.image"
           :alt="product.name"
           width="400"
           height="533"
+          sizes="320px"
           loading="lazy"
           decoding="async"
         />
       </NuxtLink>
       <div v-else class="product-image-link">
-        <img
+        <NuxtImg
           :src="product.image"
           :alt="product.name"
           width="400"
           height="533"
+          sizes="320px"
           loading="lazy"
           decoding="async"
         />
