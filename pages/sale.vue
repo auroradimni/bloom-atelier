@@ -1,21 +1,14 @@
 <template>
   <div class="sale-page page-shell page-shell--wide">
-    <header v-scroll-reveal class="page-head">
+    <ShopPageRails v-scroll-reveal />
+
+    <header v-scroll-reveal="{ delay: 60 }" class="page-head">
       <p class="sale-eyebrow">Limited time</p>
       <h1>Sale</h1>
       <p class="product-count">
         {{ totalProducts }} {{ totalProducts === 1 ? 'offer' : 'offers' }} · up to 20% off
       </p>
     </header>
-
-    <CategoryRail
-      v-scroll-reveal="{ delay: 80 }"
-      :items="shopRailItems"
-      :active-slug="shopRailActive"
-      :show-all="false"
-      use-links
-      aria-label="Browse shop"
-    />
 
     <ProductToolbar
       v-model:sort="sort"
@@ -47,15 +40,12 @@
 </template>
 
 <script setup>
-import { getSaleProducts, getShopRailActiveSlug, getShopRailItems } from '~/data/collection'
+import { getSaleProducts } from '~/data/collection'
 
 useHead({ title: 'Sale - Bloom Atelier' })
 
-const route = useRoute()
 const saleProducts = computed(() => getSaleProducts())
 const totalProducts = computed(() => saleProducts.value.length)
-const shopRailItems = computed(() => getShopRailItems())
-const shopRailActive = computed(() => getShopRailActiveSlug(route.path))
 
 const {
   sort,

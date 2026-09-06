@@ -5,7 +5,9 @@
       :items="breadcrumbs"
     />
 
-    <header v-if="category" v-scroll-reveal="{ delay: 60 }" class="page-head">
+    <ShopPageRails v-scroll-reveal="{ delay: 60 }" />
+
+    <header v-if="category" v-scroll-reveal="{ delay: 80 }" class="page-head">
       <h1>{{ category.title }}</h1>
       <p class="product-count">
         {{ categoryTotal }} {{ categoryTotal === 1 ? 'product' : 'products' }}
@@ -14,20 +16,11 @@
 
     <CategoryRail
       v-if="hasSubcategories"
-      v-scroll-reveal="{ delay: 80 }"
+      v-scroll-reveal="{ delay: 100 }"
       :items="category.subcategories"
       :active-slug="subcategoryFilter"
       aria-label="Filter by type"
       @select="subcategoryFilter = $event"
-    />
-
-    <CategoryRail
-      v-scroll-reveal="{ delay: 80 }"
-      :items="shopRailItems"
-      :active-slug="shopRailActive"
-      :show-all="false"
-      use-links
-      aria-label="Browse shop"
     />
 
     <ProductToolbar
@@ -62,17 +55,13 @@
 <script setup>
 import {
   getCategory,
-  getProductsByCategory,
-  getShopRailActiveSlug,
-  getShopRailItems
+  getProductsByCategory
 } from '~/data/collection'
 
 const route = useRoute()
 const slug = computed(() => String(route.params.category))
 const category = computed(() => getCategory(slug.value))
 const subcategoryFilter = ref('all')
-const shopRailItems = computed(() => getShopRailItems())
-const shopRailActive = computed(() => getShopRailActiveSlug(route.path))
 
 const hasSubcategories = computed(() => Boolean(category.value?.subcategories?.length))
 

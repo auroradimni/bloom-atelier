@@ -22,16 +22,11 @@
 
     <section v-scroll-reveal class="shop-section page-shell">
       <div class="section-head">
-        <h2>Shop by Category</h2>
+        <h2>Shop</h2>
         <NuxtLink to="/collection" class="section-link">View All</NuxtLink>
       </div>
 
-      <CategoryRail
-        :items="categoryRailItems"
-        :show-all="false"
-        use-links
-        aria-label="Shop by category"
-      />
+      <ShopPageRails />
     </section>
 
     <section v-scroll-reveal class="shop-section page-shell">
@@ -83,11 +78,10 @@
 </template>
 
 <script setup>
-import { getCategoryRailItems, products } from '~/data/collection'
+import { getNewArrivals, products } from '~/data/collection'
 
 useHead({ title: 'Bloom Atelier' })
 
-const categoryRailItems = getCategoryRailItems()
 const newArrivals = products.filter((item) => item.isNew)
 const loved = [...products].reverse()
 </script>

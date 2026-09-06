@@ -182,7 +182,7 @@ export const shopRailItems = [
   },
   {
     slug: 'new-arrivals',
-    title: 'New Arrivals',
+    title: 'New',
     to: '/collection/new-arrivals',
     image: '/images/skirt-2.jpg'
   },
@@ -203,6 +203,13 @@ export function getShopRailActiveSlug(path) {
   if (path === '/collection/new-arrivals') return 'new-arrivals'
   if (path === '/collection') return 'all-products'
   return ''
+}
+
+export function getCategoryActiveSlug(path) {
+  if (!path.startsWith('/collection/')) return ''
+  const slug = path.replace('/collection/', '').split('/')[0]
+  if (slug === 'new-arrivals') return ''
+  return categories.some((category) => category.slug === slug) ? slug : ''
 }
 
 export function getNewArrivals() {

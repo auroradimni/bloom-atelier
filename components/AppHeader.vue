@@ -84,18 +84,6 @@
       </form>
     </div>
 
-    <nav class="site-nav-categories" aria-label="Shop categories">
-      <NuxtLink
-        v-for="item in navItems"
-        :key="item.to"
-        :to="item.to"
-        class="category-pill"
-        :class="{ 'category-pill--sale': item.sale }"
-      >
-        {{ item.label }}
-      </NuxtLink>
-    </nav>
-
     <div
       class="menu-overlay"
       :class="{ open: menuOpen }"
@@ -121,7 +109,7 @@
       <div class="mobile-nav-body">
         <p class="mobile-nav-group">Shop</p>
         <NuxtLink to="/collection" class="mobile-nav-link" @click="closeMenu">All Products</NuxtLink>
-        <NuxtLink to="/collection/new-arrivals" class="mobile-nav-link" @click="closeMenu">New Arrivals</NuxtLink>
+        <NuxtLink to="/collection/new-arrivals" class="mobile-nav-link" @click="closeMenu">New</NuxtLink>
         <NuxtLink to="/collection/dress" class="mobile-nav-link" @click="closeMenu">Dress</NuxtLink>
         <NuxtLink to="/collection/skirt" class="mobile-nav-link" @click="closeMenu">Skirt</NuxtLink>
         <NuxtLink to="/collection/coats" class="mobile-nav-link" @click="closeMenu">Coats</NuxtLink>
@@ -159,15 +147,6 @@ const route = useRoute()
 const { count } = useCart()
 const { count: wishlistCount } = useWishlist()
 const { registerFocusSearch } = useMobileSearch()
-
-const navItems = [
-  { label: 'Dress', to: '/collection/dress' },
-  { label: 'Skirt', to: '/collection/skirt' },
-  { label: 'Coats', to: '/collection/coats' },
-  { label: 'Denim', to: '/collection/denim' },
-  { label: 'Accessories', to: '/collection/accessories' },
-  { label: 'Sale', to: '/sale', sale: true }
-]
 
 function toggleMenu() {
   menuOpen.value = !menuOpen.value
@@ -443,53 +422,6 @@ function onSearch() {
   opacity: 0.45;
 }
 
-.site-nav-categories {
-  display: flex;
-  gap: 0.35rem;
-  overflow-x: auto;
-  padding: 0.55rem clamp(1.25rem, 4vw, 3rem) 0.65rem;
-  scrollbar-width: none;
-  border-top: 1px solid var(--line);
-}
-
-.site-nav-categories::-webkit-scrollbar {
-  display: none;
-}
-
-.category-pill {
-  flex: 0 0 auto;
-  padding: 0.35rem 0.85rem;
-  font-size: 0.62rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  text-decoration: none;
-  color: var(--ink);
-  white-space: nowrap;
-  transition: opacity 0.3s var(--ease);
-}
-
-.category-pill:hover,
-.category-pill.router-link-active {
-  opacity: 0.55;
-}
-
-.category-pill.router-link-active {
-  border-bottom: 1px solid var(--ink);
-  padding-bottom: calc(0.35rem - 1px);
-}
-
-.category-pill--sale {
-  color: var(--wine);
-  font-weight: 600;
-}
-
-.category-pill--sale:hover,
-.category-pill--sale.router-link-active {
-  opacity: 1;
-  color: var(--wine);
-  border-bottom-color: var(--wine);
-}
-
 .mobile-nav {
   display: none;
 }
@@ -564,28 +496,6 @@ function onSearch() {
     gap: 0;
   }
 
-  .site-nav-categories {
-    display: flex;
-    gap: 0;
-    padding: 0 0 0.5rem;
-    border-top: 0;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .category-pill {
-    padding: 0.45rem 0.85rem;
-    font-size: 0.58rem;
-    font-weight: 600;
-    letter-spacing: 0.14em;
-    opacity: 1;
-  }
-
-  .category-pill.router-link-active {
-    border-bottom: 2px solid var(--ink);
-    padding-bottom: calc(0.45rem - 2px);
-    opacity: 1;
-  }
-
   .menu-toggle {
     display: grid;
     place-items: center;
@@ -607,8 +517,7 @@ function onSearch() {
     top: calc(var(--promo-h) + var(--header-h));
   }
 
-  .site-nav.menu-open .site-nav-search--mobile,
-  .site-nav.menu-open .site-nav-categories {
+  .site-nav.menu-open .site-nav-search--mobile {
     display: none;
   }
 
