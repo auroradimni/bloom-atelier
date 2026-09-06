@@ -8,7 +8,7 @@
           Join us at our upcoming fashion show where we will present
           the latest collection of dresses and accessories for the new season.
         </p>
-        <p><strong>Date:</strong> May 15, 2025</p>
+        <p><strong>Date:</strong> May 15, 2026</p>
         <p><strong>Location:</strong> Palace of Culture, Tirana</p>
         <p><NuxtLink to="/collection">More info</NuxtLink></p>
       </div>
@@ -18,7 +18,7 @@
           Bloom Atelier is looking for new and creative stylists to join
           our team. Apply now and become part of our unique style!
         </p>
-        <p><strong>Application deadline:</strong> April 30, 2025</p>
+        <p><strong>Application deadline:</strong> April 30, 2026</p>
         <p><NuxtLink to="/stylists">Apply here</NuxtLink></p>
       </div>
       <div class="event">
@@ -27,7 +27,7 @@
           We offer online courses for aspiring stylists.
           Register to learn advanced techniques and creativity in fashion design.
         </p>
-        <p><strong>Start date:</strong> June 1, 2025</p>
+        <p><strong>Start date:</strong> June 1, 2026</p>
         <p><NuxtLink to="/courses">More info</NuxtLink></p>
       </div>
     </div>

@@ -23,7 +23,7 @@
       </div>
     </div>
 
-    <div class="footer-bottom page-shell">© 2025 Bloom Atelier</div>
+    <div class="footer-bottom page-shell">© 2026 Bloom Atelier</div>
   </footer>
 </template>
 

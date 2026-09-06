@@ -7,7 +7,7 @@
     </p>
 
     <aside>
-      <strong>Application deadline:</strong> April 30, 2025
+      <strong>Application deadline:</strong> April 30, 2026
       <br />
       Accepted: CV, portfolio, design photos, cover letter (pdf, jpg, png).
     </aside>
