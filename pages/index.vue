@@ -2,7 +2,6 @@
   <div class="home">
     <section class="mosaic page-shell">
       <NuxtLink
-        v-scroll-reveal
         to="/collection"
         class="mosaic-item mosaic-promo"
       >
@@ -11,33 +10,37 @@
         <span class="promo-link">Shop Now</span>
       </NuxtLink>
 
-      <NuxtLink v-scroll-reveal="{ delay: 100 }" to="/collection/skirt" class="mosaic-item mosaic-sm">
-        <NuxtImg
-          src="/images/skirt-3.jpg"
-          alt="Skirt"
-          width="600"
-          height="800"
-          sizes="(max-width: 900px) 100vw, 33vw"
-          fetchpriority="high"
-          loading="eager"
-          decoding="async"
-        />
+      <NuxtLink to="/collection/skirt" class="mosaic-item mosaic-sm">
+        <picture>
+          <source srcset="/images/skirt-3-hero.webp" type="image/webp" />
+          <img
+            src="/images/skirt-3.jpg"
+            alt="Skirt"
+            width="640"
+            height="853"
+            fetchpriority="high"
+            loading="eager"
+            decoding="async"
+          />
+        </picture>
       </NuxtLink>
 
-      <NuxtLink v-scroll-reveal="{ delay: 160 }" to="/collection/coats" class="mosaic-item mosaic-sm">
-        <NuxtImg
-          src="/images/coat-1.jpg"
-          alt="Coats"
-          width="600"
-          height="800"
-          sizes="(max-width: 900px) 100vw, 33vw"
-          loading="lazy"
-          decoding="async"
-        />
+      <NuxtLink to="/collection/coats" class="mosaic-item mosaic-sm">
+        <picture>
+          <source srcset="/images/coat-1-mosaic.webp" type="image/webp" />
+          <img
+            src="/images/coat-1.jpg"
+            alt="Coats"
+            width="480"
+            height="640"
+            loading="lazy"
+            decoding="async"
+          />
+        </picture>
       </NuxtLink>
     </section>
 
-    <section v-scroll-reveal class="shop-section page-shell">
+    <section class="shop-section page-shell">
       <div class="section-head">
         <h2>Shop by Category</h2>
         <NuxtLink to="/collection" class="section-link">View All</NuxtLink>
@@ -46,16 +49,15 @@
       <ShopPageRails />
     </section>
 
-    <section v-scroll-reveal class="shop-section page-shell">
+    <section class="shop-section page-shell">
       <div class="section-head">
         <h2>New Arrivals</h2>
       </div>
       <div class="new-arrivals-scroll">
         <div class="new-arrivals-track">
           <ProductCard
-            v-for="(item, index) in newArrivals"
+            v-for="item in newArrivals"
             :key="item.id"
-            v-scroll-reveal="{ delay: index * 70, variant: 'scale' }"
             :product="item"
             :to="`/product/${item.id}`"
           />
@@ -63,26 +65,28 @@
       </div>
     </section>
 
-    <section v-scroll-reveal class="editorial page-shell">
+    <section class="editorial page-shell">
       <div class="editorial-copy">
         <p class="eyebrow">The Fall Edit</p>
         <h2>Refined layers for the new season</h2>
         <NuxtLink to="/collection/coats" class="btn-solid">Explore the Edit</NuxtLink>
       </div>
-      <NuxtLink v-scroll-reveal="{ delay: 120 }" to="/collection/coats" class="editorial-media">
-        <NuxtImg
-          src="/images/coat-1.jpg"
-          alt="Fall edit"
-          width="800"
-          height="1000"
-          sizes="(max-width: 900px) 100vw, 50vw"
-          loading="lazy"
-          decoding="async"
-        />
+      <NuxtLink to="/collection/coats" class="editorial-media">
+        <picture>
+          <source srcset="/images/coat-1-editorial.webp" type="image/webp" />
+          <img
+            src="/images/coat-1.jpg"
+            alt="Fall edit"
+            width="720"
+            height="468"
+            loading="lazy"
+            decoding="async"
+          />
+        </picture>
       </NuxtLink>
     </section>
 
-    <section v-scroll-reveal class="handpicked">
+    <section class="handpicked">
       <div class="page-shell">
         <div class="section-head section-head--handpicked">
           <h2>Handpicked For You</h2>
@@ -90,9 +94,8 @@
 
         <div class="handpicked-grid">
           <ProductCard
-            v-for="(item, index) in handpicked"
+            v-for="item in handpicked"
             :key="item.id"
-            v-scroll-reveal="{ delay: index * 60 }"
             :product="item"
             :to="`/product/${item.id}`"
             layout="handpicked"
@@ -104,7 +107,7 @@
 </template>
 
 <script setup>
-import { getNewArrivals, products } from '~/data/collection'
+import { products } from '~/data/collection'
 
 useHead({ title: 'Bloom Atelier' })
 
@@ -132,7 +135,9 @@ const handpicked = [...products].reverse().slice(0, 6)
   min-height: 0;
 }
 
-.mosaic-item img {
+.mosaic-item img,
+.mosaic-item picture,
+.mosaic-item picture img {
   display: block;
   width: 100%;
   height: 100%;
@@ -278,67 +283,83 @@ const handpicked = [...products].reverse().slice(0, 6)
   grid-template-columns: 1fr 1.1fr;
   align-items: stretch;
   gap: 0.5rem;
-  margin: clamp(1rem, 3vw, 1.75rem) auto;
+  margin: clamp(0.65rem, 1.8vw, 1rem) auto;
   border-top: 1px solid var(--line);
-  padding-top: clamp(1rem, 3vw, 1.75rem);
+  padding-top: clamp(0.65rem, 1.8vw, 1rem);
 }
 
 @media (min-width: 901px) {
   .editorial {
-    max-height: 360px;
+    min-height: 320px;
   }
 }
 
 .editorial-copy {
+  position: relative;
+  z-index: 1;
   background: var(--accent-soft);
-  padding: clamp(1rem, 2vw, 1.35rem);
+  padding: clamp(1.35rem, 3vw, 2.25rem);
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-height: 0;
+  gap: clamp(0.55rem, 1.2vw, 0.85rem);
+  min-height: 240px;
+}
+
+.editorial-copy .eyebrow {
+  margin: 0;
+  font-size: clamp(0.72rem, 1.1vw, 0.82rem);
+  letter-spacing: 0.32em;
+  font-weight: 500;
+  color: var(--wine);
 }
 
 .editorial-copy h2 {
   font-family: var(--font-display);
-  font-size: clamp(1.25rem, 2.4vw, 1.65rem);
-  font-weight: 300;
-  line-height: 1.15;
+  font-size: clamp(1.75rem, 3.8vw, 2.65rem);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
   color: var(--ink);
-  margin: 0.35rem 0 0.75rem;
-}
-
-.editorial-copy .eyebrow {
-  margin-bottom: 0;
+  margin: 0;
+  max-width: 14ch;
 }
 
 .editorial-copy .btn-solid {
   align-self: flex-start;
-  padding: 0.65rem 1.25rem;
-  font-size: 0.62rem;
+  margin-top: clamp(0.35rem, 1vw, 0.65rem);
+  padding: 0.72rem 1.45rem;
+  font-size: 0.66rem;
+  letter-spacing: 0.22em;
 }
 
 .editorial-media {
   display: block;
   overflow: hidden;
-  min-height: 0;
+  min-height: 220px;
+  background: #e8e4df;
 }
 
 .editorial-media img,
+.editorial-media picture,
+.editorial-media picture img,
 .editorial-media :deep(img) {
   display: block;
   width: 100%;
   height: 100%;
-  aspect-ratio: 4 / 3;
+  min-height: 220px;
   object-fit: cover;
+  object-position: center center;
   transition: transform 0.7s var(--ease);
 }
 
 @media (min-width: 901px) {
+  .editorial-media,
   .editorial-media img,
+  .editorial-media picture,
+  .editorial-media picture img,
   .editorial-media :deep(img) {
-    aspect-ratio: auto;
-    max-height: 360px;
-    min-height: 0;
+    min-height: 320px;
   }
 }
 
@@ -348,7 +369,6 @@ const handpicked = [...products].reverse().slice(0, 6)
 
 .handpicked {
   padding: clamp(2rem, 5vw, 3rem) 0;
-  background: var(--surface);
   border-top: 1px solid var(--line);
 }
 
@@ -438,15 +458,33 @@ const handpicked = [...products].reverse().slice(0, 6)
   .editorial {
     grid-template-columns: 1fr;
     margin: 0;
-    padding: 1rem 0.75rem;
+    padding: 0.65rem 0.75rem;
     border-top: 0;
     gap: 2px;
   }
 
+  .editorial-copy {
+    min-height: 0;
+    padding: 1.25rem 1rem;
+    gap: 0.65rem;
+  }
+
+  .editorial-copy h2 {
+    max-width: none;
+  }
+
+  .editorial-media {
+    aspect-ratio: 16 / 10;
+    min-height: 0;
+  }
+
   .editorial-media img,
+  .editorial-media picture,
+  .editorial-media picture img,
   .editorial-media :deep(img) {
-    aspect-ratio: 3 / 4;
-    max-height: none;
+    min-height: 0;
+    height: 100%;
+    aspect-ratio: 16 / 10;
   }
 
   .handpicked {
