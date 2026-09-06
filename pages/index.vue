@@ -359,6 +359,7 @@ function getCover(slug) {
 
 .most-loved-carousel {
   position: relative;
+  overflow: hidden;
 }
 
 .most-loved-track {
@@ -479,23 +480,42 @@ function getCover(slug) {
 
 @media (max-width: 900px) {
   .mosaic {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
+    gap: 0.65rem;
+    padding-bottom: 1.5rem;
   }
 
   .mosaic-promo,
   .mosaic-sm {
-    grid-column: span 2;
+    grid-column: span 1;
     grid-row: span 1;
-    min-height: 260px;
+    min-height: 220px;
   }
 
   .mosaic-promo {
-    min-height: 260px;
+    min-height: 280px;
   }
 
-  .shop-grid,
+  .script {
+    font-size: clamp(2rem, 10vw, 2.6rem);
+  }
+
+  .shop-section {
+    padding: 1.75rem 0;
+  }
+
+  .shop-grid {
+    grid-template-columns: 1fr;
+  }
+
   .editorial {
     grid-template-columns: 1fr;
+    margin: 1.75rem auto;
+    padding-top: 1.75rem;
+  }
+
+  .most-loved {
+    padding: 1.75rem 0;
   }
 
   .most-loved-track {
@@ -506,6 +526,7 @@ function getCover(slug) {
     overscroll-behavior-x: contain;
     scrollbar-width: none;
     padding: 0.15rem 0 0.35rem;
+    -webkit-overflow-scrolling: touch;
   }
 
   .most-loved-track::-webkit-scrollbar {
@@ -513,12 +534,12 @@ function getCover(slug) {
   }
 
   .most-loved-track :deep(.product-card) {
-    flex: 0 0 min(42vw, 200px);
+    flex: 0 0 min(68vw, 220px);
     scroll-snap-align: start;
   }
 
   .most-loved-track :deep(.product-card--featured) {
-    flex: 0 0 min(62vw, 280px);
+    flex: 0 0 min(78vw, 260px);
     scroll-snap-align: center;
   }
 
@@ -526,12 +547,23 @@ function getCover(slug) {
     padding-top: 133.333%;
   }
 
+  .carousel-arrow {
+    width: 36px;
+    height: 36px;
+  }
+
   .carousel-arrow--prev {
-    left: 0.25rem;
+    left: 0.15rem;
   }
 
   .carousel-arrow--next {
-    right: 0.25rem;
+    right: 0.15rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .shop-grid {
+    grid-template-columns: 1fr;
   }
 }
 </style>

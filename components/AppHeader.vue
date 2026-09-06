@@ -123,6 +123,15 @@ function closeMenu() {
   menuOpen.value = false
 }
 
+watch(menuOpen, (open) => {
+  if (!import.meta.client) return
+  document.body.style.overflow = open ? 'hidden' : ''
+})
+
+onBeforeUnmount(() => {
+  if (import.meta.client) document.body.style.overflow = ''
+})
+
 function toggleSearch() {
   searchOpen.value = !searchOpen.value
   if (searchOpen.value) {
@@ -413,6 +422,36 @@ function onSearch() {
 }
 
 @media (max-width: 900px) {
+  .site-nav-top {
+    gap: 0.35rem;
+  }
+
+  .nav-left {
+    flex: 0 0 44px;
+  }
+
+  .brand {
+    position: static;
+    transform: none;
+    flex: 1;
+    min-width: 0;
+    text-align: center;
+    font-size: clamp(0.58rem, 2.8vw, 0.72rem);
+    letter-spacing: clamp(0.14em, 1.2vw, 0.22em);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .header-actions {
+    flex: 0 0 auto;
+    gap: 0;
+  }
+
+  .site-nav-categories {
+    display: none;
+  }
+
   .menu-toggle {
     display: grid;
     place-items: center;
@@ -426,13 +465,14 @@ function onSearch() {
     right: 0;
     width: min(280px, 85vw);
     height: calc(100vh - var(--promo-h));
-    padding: calc(var(--header-h) + var(--nav-cats-h) + 1rem) 2rem 2rem;
+    padding: calc(var(--header-h) + 1rem) 2rem 2rem;
     background: var(--bg);
     border-left: 1px solid var(--line);
     z-index: 95;
     gap: 1.25rem;
     transform: translateX(100%);
     transition: transform 0.4s var(--ease);
+    overflow-y: auto;
   }
 
   .mobile-nav.open {

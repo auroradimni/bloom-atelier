@@ -698,12 +698,26 @@ function submitOrder() {
     grid-template-columns: 1fr;
   }
 
+  .option-card {
+    grid-template-columns: auto 1fr;
+  }
+
+  .option-price {
+    grid-column: 2;
+    justify-self: start;
+    margin-top: 0.15rem;
+  }
+
   .line-item {
     grid-template-columns: 64px minmax(0, 1fr);
   }
 
   .line-price {
     grid-column: 2;
+  }
+
+  .checkout-header h2 {
+    font-size: clamp(1.8rem, 8vw, 2.4rem);
   }
 }
 </style>

@@ -26,6 +26,8 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  overflow-x: clip;
 }
 
 body {
@@ -35,6 +37,8 @@ body {
   font-weight: 300;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+  min-width: 0;
 }
 
 ::selection {
@@ -492,8 +496,35 @@ aside {
 }
 
 @media (max-width: 900px) {
+  :root {
+    --header-h: 52px;
+    --nav-cats-h: 0px;
+  }
+
+  .page-shell,
+  .section {
+    width: min(1320px, calc(100% - 1.25rem));
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.85rem 0.65rem;
+  }
+
   .menu-toggle {
     display: grid;
     place-items: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-shell,
+  .section {
+    width: min(1320px, calc(100% - 1rem));
+  }
+
+  .product-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
   }
 }

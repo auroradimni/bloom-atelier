@@ -148,6 +148,7 @@ function checkoutNow() {
 
 .purchase-form {
   max-width: 360px;
+  width: 100%;
 }
 
 .size-field {
