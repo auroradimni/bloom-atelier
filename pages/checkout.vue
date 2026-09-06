@@ -642,10 +642,19 @@ function submitOrder() {
   color: var(--ink);
 }
 
-.order-success,
-.empty-state {
+.order-success {
   max-width: 640px;
   padding: 1rem 0 2rem;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 22rem;
+  margin: 0 auto;
+  padding: clamp(1.5rem, 6vh, 3rem) 0 2rem;
 }
 
 .order-success h2,
@@ -654,14 +663,39 @@ function submitOrder() {
   font-size: clamp(2rem, 5vw, 3rem);
   font-weight: 300;
   color: var(--ink);
+}
+
+.order-success h2 {
   margin: 0.35rem 0 0.75rem;
+}
+
+.empty-state h2 {
+  margin: 0.15rem 0 0.35rem;
+  line-height: 1.05;
 }
 
 .success-copy,
 .empty-copy {
   color: var(--stone);
+}
+
+.success-copy {
   margin-bottom: 1.5rem;
   line-height: 1.7;
+}
+
+.empty-copy {
+  margin: 0 0 1rem;
+  line-height: 1.4;
+  font-size: 0.9rem;
+}
+
+.empty-state .eyebrow {
+  margin: 0;
+}
+
+.empty-state .btn-solid {
+  min-width: 12rem;
 }
 
 .success-copy strong {
