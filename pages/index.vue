@@ -395,7 +395,7 @@ const handpicked = [...products].reverse().slice(0, 6)
 
 @media (min-width: 901px) {
   .handpicked-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: 2px;
   }
 }
