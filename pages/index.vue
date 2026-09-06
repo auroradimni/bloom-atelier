@@ -341,6 +341,26 @@ function getCover(slug) {
   min-width: 0;
 }
 
+@media (min-width: 901px) {
+  .new-arrivals-scroll {
+    overflow: visible;
+  }
+
+  .new-arrivals-track {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 240px));
+    justify-content: start;
+    gap: 0.75rem;
+    overflow: visible;
+    scroll-snap-type: none;
+  }
+
+  .new-arrivals-track :deep(.product-card) {
+    flex: unset;
+    width: 100%;
+  }
+}
+
 .most-loved {
   padding: clamp(2rem, 5vw, 3rem) 0;
   background: var(--accent-soft);
