@@ -27,12 +27,12 @@
 
         <div class="product-gallery-main">
           <span v-if="product.isOnSale" class="sale-badge">Sale</span>
-          <NuxtImg
+          <img
+            :key="galleryImages[activeImage]"
             :src="galleryImages[activeImage]"
             :alt="product.name"
             width="800"
             height="1066"
-            sizes="(max-width: 900px) 100vw, 55vw"
             fetchpriority="high"
             loading="eager"
             decoding="async"
@@ -281,7 +281,9 @@ function checkoutNow() {
 
 .product-gallery-main {
   position: relative;
-  background: #efefef;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background: var(--surface);
   line-height: 0;
 }
 
@@ -289,9 +291,8 @@ function checkoutNow() {
 .product-gallery-main :deep(img) {
   display: block;
   width: 100%;
-  height: auto;
-  max-height: min(82vh, 820px);
-  object-fit: contain;
+  height: 100%;
+  object-fit: cover;
   object-position: center center;
 }
 
@@ -593,11 +594,13 @@ function checkoutNow() {
     display: none;
   }
 
+  .product-gallery-main {
+    aspect-ratio: 4 / 5;
+  }
+
   .product-gallery-main img,
   .product-gallery-main :deep(img) {
-    max-height: none;
-    aspect-ratio: 4 / 5;
-    object-fit: cover;
+    aspect-ratio: auto;
   }
 
   .product-buy-box {
