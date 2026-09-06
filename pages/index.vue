@@ -304,7 +304,8 @@ const handpicked = [...products].reverse().slice(0, 6)
 
 @media (min-width: 901px) {
   .editorial {
-    max-height: 260px;
+    min-height: 280px;
+    max-height: 280px;
   }
 }
 
