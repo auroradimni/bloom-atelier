@@ -90,7 +90,6 @@
       <NuxtLink to="/collection/denim" @click="closeMenu">Denim</NuxtLink>
       <NuxtLink to="/collection/accessories" @click="closeMenu">Accessories</NuxtLink>
       <NuxtLink to="/courses" @click="closeMenu">Courses</NuxtLink>
-      <NuxtLink to="/stylists" @click="closeMenu">Stylists</NuxtLink>
       <NuxtLink to="/contact" @click="closeMenu">Contact</NuxtLink>
     </nav>
   </header>

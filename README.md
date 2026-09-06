@@ -8,7 +8,6 @@ Website i Bloom Atelier ndërtuar me **Nuxt.js 3** dhe **Vue 3**.
 |-------|-------|
 | `/` | Home |
 | `/collection` | Koleksioni i Fundit |
-| `/stylists` | Thirrje për Stiliste |
 | `/courses` | Kurset |
 | `/contact` | Kontakti / Porosia |
 | `/news` | Njoftime dhe Evente |
