@@ -95,6 +95,7 @@ main {
 
 .product-grid .product-card {
   width: 100%;
+  height: auto;
 }
 
 .product-grid--showcase {
@@ -108,7 +109,6 @@ main {
 .product-grid--showcase .product-card .product-meta h3 {
   font-size: clamp(1rem, 1.15vw, 1.12rem);
   line-height: 1.3;
-  min-height: 2.5em;
 }
 
 .product-grid--showcase .product-card .price {
@@ -590,8 +590,14 @@ aside {
   }
 
   .product-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.5rem;
+    display: block;
+    columns: 2;
+    column-gap: 2px;
+  }
+
+  .product-grid .product-card {
+    break-inside: avoid;
+    margin-bottom: 2px;
   }
 
   .menu-toggle {
@@ -602,7 +608,6 @@ aside {
 
 @media (max-width: 480px) {
   .product-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.5rem;
+    column-gap: 2px;
   }
 }
