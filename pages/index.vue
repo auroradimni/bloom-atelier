@@ -53,9 +53,8 @@
       <div class="new-arrivals-scroll">
         <div class="new-arrivals-track">
           <ProductCard
-            v-for="(item, index) in newArrivals"
+            v-for="item in newArrivals"
             :key="item.id"
-            v-scroll-reveal="{ delay: index * 70 }"
             :product="item"
             :to="`/product/${item.id}`"
           />
@@ -82,22 +81,18 @@
       </NuxtLink>
     </section>
 
-    <section v-scroll-reveal class="handpicked">
-      <div class="page-shell">
-        <div class="section-head section-head--handpicked">
-          <h2>Handpicked For You</h2>
-        </div>
-
-        <div class="new-arrivals-scroll">
-          <div class="new-arrivals-track">
-            <ProductCard
-              v-for="(item, index) in handpicked"
-              :key="item.id"
-              v-scroll-reveal="{ delay: index * 60 }"
-              :product="item"
-              :to="`/product/${item.id}`"
-            />
-          </div>
+    <section v-scroll-reveal class="shop-section page-shell handpicked-section">
+      <div class="section-head section-head--handpicked">
+        <h2>Handpicked For You</h2>
+      </div>
+      <div class="new-arrivals-scroll">
+        <div class="new-arrivals-track">
+          <ProductCard
+            v-for="item in handpicked"
+            :key="item.id"
+            :product="item"
+            :to="`/product/${item.id}`"
+          />
         </div>
       </div>
     </section>
@@ -110,7 +105,7 @@ import { getNewArrivals, products } from '~/data/collection'
 useHead({ title: 'Bloom Atelier' })
 
 const newArrivals = products.filter((item) => item.isNew)
-const handpicked = [...products].reverse().slice(0, 6)
+const handpicked = [...products].reverse().slice(0, 5)
 </script>
 
 <style scoped>
@@ -304,14 +299,8 @@ const handpicked = [...products].reverse().slice(0, 6)
   transform: scale(1.04);
 }
 
-.handpicked {
-  padding: clamp(1.15rem, 3vw, 1.75rem) 0;
+.handpicked-section {
   background: var(--surface);
-  border-top: 1px solid var(--line);
-}
-
-.section-head--handpicked {
-  margin-bottom: 0.85rem;
 }
 
 .section-head--handpicked h2 {
@@ -374,15 +363,6 @@ const handpicked = [...products].reverse().slice(0, 6)
     min-height: 220px;
     aspect-ratio: 16 / 10;
     height: auto;
-  }
-
-  .handpicked {
-    padding: 0.85rem 0;
-  }
-
-  .handpicked .section-head--handpicked {
-    padding: 0 0.75rem;
-    margin-bottom: 0.65rem;
   }
 }
 </style>
