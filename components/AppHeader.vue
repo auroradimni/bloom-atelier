@@ -116,9 +116,6 @@
         <NuxtLink to="/collection/denim" class="mobile-nav-link" @click="closeMenu">Denim</NuxtLink>
         <NuxtLink to="/collection/accessories" class="mobile-nav-link" @click="closeMenu">Accessories</NuxtLink>
         <NuxtLink to="/sale" class="mobile-nav-link mobile-nav-link--sale" @click="closeMenu">Sale</NuxtLink>
-
-        <p class="mobile-nav-group">Explore</p>
-        <NuxtLink to="/courses" class="mobile-nav-link" @click="closeMenu">Courses</NuxtLink>
         <NuxtLink to="/contact" class="mobile-nav-link" @click="closeMenu">Contact</NuxtLink>
       </div>
 
