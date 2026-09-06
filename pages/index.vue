@@ -7,7 +7,7 @@
         class="mosaic-item mosaic-promo"
       >
         <p class="script">Timeless elegance</p>
-        <p class="promo-label">Spring Collection 2026 ♥</p>
+        <p class="promo-label">Fall Collection 2026 ♥</p>
         <span class="promo-link">Shop Now</span>
       </NuxtLink>
 
