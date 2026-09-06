@@ -123,14 +123,15 @@
 
     <section v-if="product && relatedProducts.length" class="related-section">
       <h2>Handpicked For You</h2>
-      <div class="related-grid">
-        <ProductCard
-          v-for="item in relatedProducts"
-          :key="item.id"
-          :product="item"
-          :to="`/product/${item.id}`"
-          layout="handpicked"
-        />
+      <div class="new-arrivals-scroll">
+        <div class="new-arrivals-track">
+          <ProductCard
+            v-for="item in relatedProducts"
+            :key="item.id"
+            :product="item"
+            :to="`/product/${item.id}`"
+          />
+        </div>
       </div>
     </section>
   </div>
@@ -569,17 +570,6 @@ function checkoutNow() {
   color: var(--ink);
 }
 
-.related-grid {
-  display: grid;
-  gap: clamp(1.25rem, 3vw, 2rem);
-}
-
-@media (min-width: 901px) {
-  .related-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-}
-
 @media (max-width: 900px) {
   .product-page {
     padding-inline: 0;
@@ -617,11 +607,6 @@ function checkoutNow() {
 
   .related-section {
     padding-inline: 0.75rem;
-  }
-
-  .related-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.75rem;
   }
 }
 </style>

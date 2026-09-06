@@ -88,15 +88,16 @@
           <h2>Handpicked For You</h2>
         </div>
 
-        <div class="handpicked-grid">
-          <ProductCard
-            v-for="(item, index) in handpicked"
-            :key="item.id"
-            v-scroll-reveal="{ delay: index * 60 }"
-            :product="item"
-            :to="`/product/${item.id}`"
-            layout="handpicked"
-          />
+        <div class="new-arrivals-scroll">
+          <div class="new-arrivals-track">
+            <ProductCard
+              v-for="(item, index) in handpicked"
+              :key="item.id"
+              v-scroll-reveal="{ delay: index * 60 }"
+              :product="item"
+              :to="`/product/${item.id}`"
+            />
+          </div>
         </div>
       </div>
     </section>
@@ -227,70 +228,6 @@ const handpicked = [...products].reverse().slice(0, 6)
   color: var(--ink);
 }
 
-.new-arrivals-scroll {
-  overflow: hidden;
-}
-
-.new-arrivals-track {
-  display: flex;
-  gap: 0;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  overscroll-behavior-x: contain;
-  scrollbar-width: none;
-  padding: 0;
-  -webkit-overflow-scrolling: touch;
-  width: 100%;
-}
-
-.new-arrivals-track::-webkit-scrollbar {
-  display: none;
-}
-
-.new-arrivals-track :deep(.product-card) {
-  flex: 0 0 min(46vw, 168px);
-  scroll-snap-align: start;
-  min-width: 0;
-  margin: 0;
-  padding: 0;
-  width: 100%;
-}
-
-.new-arrivals-track :deep(.product-media) {
-  margin-bottom: 0.5rem;
-}
-
-.new-arrivals-track :deep(.price) {
-  margin-bottom: 0.35rem;
-}
-
-.new-arrivals-track :deep(.product-card.scroll-reveal),
-.new-arrivals-track :deep(.product-card.scroll-reveal--scale) {
-  transform: none;
-}
-
-@media (min-width: 901px) {
-  .new-arrivals-scroll {
-    overflow: visible;
-  }
-
-  .new-arrivals-track {
-    display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-    gap: 2px;
-    overflow: visible;
-    scroll-snap-type: none;
-  }
-
-  .new-arrivals-track :deep(.product-card) {
-    flex: unset;
-    width: 100%;
-    max-width: none;
-    margin: 0;
-    padding: 0;
-  }
-}
-
 .editorial {
   display: grid;
   grid-template-columns: 1fr 1.1fr;
@@ -386,27 +323,6 @@ const handpicked = [...products].reverse().slice(0, 6)
   color: var(--ink);
 }
 
-.handpicked-grid {
-  display: grid;
-  gap: 2px;
-  align-items: start;
-  width: 100%;
-}
-
-@media (min-width: 901px) {
-  .handpicked-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 2px;
-  }
-}
-
-.handpicked-grid :deep(.product-card) {
-  min-width: 0;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-}
-
 @media (max-width: 900px) {
   .mosaic {
     grid-template-columns: 1fr;
@@ -444,24 +360,6 @@ const handpicked = [...products].reverse().slice(0, 6)
     margin-bottom: 0.65rem;
   }
 
-  .new-arrivals-scroll {
-    overflow: visible;
-  }
-
-  .new-arrivals-track {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0;
-    overflow: visible;
-    scroll-snap-type: none;
-    padding: 0;
-  }
-
-  .new-arrivals-track :deep(.product-card) {
-    flex: unset;
-    width: 100%;
-  }
-
   .editorial {
     grid-template-columns: 1fr;
     margin: 0;
@@ -485,12 +383,6 @@ const handpicked = [...products].reverse().slice(0, 6)
   .handpicked .section-head--handpicked {
     padding: 0 0.75rem;
     margin-bottom: 0.65rem;
-  }
-
-  .handpicked-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 2px;
-    padding: 0 0.75rem;
   }
 }
 </style>
