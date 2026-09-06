@@ -80,7 +80,7 @@
 </template>
 
 <script setup>
-import { getDisplayPrice } from '~/data/collection'
+import { getDisplayPrice, getProduct, getRelatedProducts } from '~/data/collection'
 
 const route = useRoute()
 const router = useRouter()

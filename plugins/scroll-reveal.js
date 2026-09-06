@@ -1,5 +1,15 @@
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.directive('scroll-reveal', {
+    getSSRProps(binding) {
+      const options = typeof binding.value === 'object' ? binding.value : {}
+      const variant = options.variant || 'up'
+      const delay = options.delay || 0
+
+      return {
+        class: ['scroll-reveal', `scroll-reveal--${variant}`, 'is-visible'],
+        style: delay ? { transitionDelay: `${delay}ms` } : undefined
+      }
+    },
     mounted(el, binding) {
       const options = typeof binding.value === 'object' ? binding.value : {}
       const variant = options.variant || 'up'
@@ -19,6 +29,8 @@ export default defineNuxtPlugin((nuxtApp) => {
         el.classList.add('is-visible')
         return
       }
+
+      el.classList.remove('is-visible')
 
       const observer = new IntersectionObserver(
         ([entry]) => {
