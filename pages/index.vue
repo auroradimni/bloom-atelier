@@ -44,14 +44,16 @@
       <div class="section-head">
         <h2>New Arrivals</h2>
       </div>
-      <div class="product-grid">
-        <ProductCard
-          v-for="(item, index) in newArrivals"
-          :key="item.id"
-          v-scroll-reveal="{ delay: index * 70, variant: 'scale' }"
-          :product="item"
-          :to="`/product/${item.id}`"
-        />
+      <div class="new-arrivals-scroll">
+        <div class="new-arrivals-track">
+          <ProductCard
+            v-for="(item, index) in newArrivals"
+            :key="item.id"
+            v-scroll-reveal="{ delay: index * 70, variant: 'scale' }"
+            :product="item"
+            :to="`/product/${item.id}`"
+          />
+        </div>
       </div>
     </section>
 
@@ -346,8 +348,35 @@ function getCover(slug) {
   text-transform: uppercase;
 }
 
-.product-grid {
-  gap: 0.85rem;
+.new-arrivals-scroll {
+  overflow: hidden;
+}
+
+.new-arrivals-track {
+  display: flex;
+  gap: 0.75rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  padding: 0.15rem 0 0.35rem;
+  -webkit-overflow-scrolling: touch;
+}
+
+.new-arrivals-track::-webkit-scrollbar {
+  display: none;
+}
+
+.new-arrivals-track :deep(.product-card) {
+  flex: 0 0 min(72vw, 240px);
+  scroll-snap-align: start;
+  min-width: 0;
+}
+
+@media (min-width: 901px) {
+  .new-arrivals-track :deep(.product-card) {
+    flex: 0 0 260px;
+  }
 }
 
 .most-loved {
