@@ -347,7 +347,7 @@ function getCover(slug) {
 }
 
 .product-grid {
-  gap: 1.25rem;
+  gap: 0.85rem;
 }
 
 .most-loved {
