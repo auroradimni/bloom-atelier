@@ -62,19 +62,18 @@
       </div>
     </section>
 
-    <section v-scroll-reveal class="editorial page-shell">
+    <section class="editorial page-shell">
       <div class="editorial-copy">
         <p class="eyebrow">The Fall Edit</p>
         <h2>Refined layers for the new season</h2>
         <NuxtLink to="/collection/coats" class="btn-solid">Explore the Edit</NuxtLink>
       </div>
-      <NuxtLink v-scroll-reveal="{ delay: 120 }" to="/collection/coats" class="editorial-media">
-        <NuxtImg
+      <NuxtLink to="/collection/coats" class="editorial-media">
+        <img
           src="/images/coat-1.jpg"
           alt="Fall edit"
           width="800"
           height="520"
-          sizes="800px"
           loading="lazy"
           decoding="async"
         />
@@ -231,40 +230,43 @@ const handpicked = [...products].reverse().slice(0, 5)
   margin: clamp(0.65rem, 1.8vw, 1rem) auto;
   border-top: 1px solid var(--line);
   padding-top: clamp(0.65rem, 1.8vw, 1rem);
-  overflow: hidden;
 }
 
 @media (min-width: 901px) {
   .editorial {
     min-height: 280px;
-    max-height: 280px;
   }
 }
 
 .editorial-copy {
+  position: relative;
+  z-index: 1;
   background: var(--accent-soft);
-  padding: clamp(0.75rem, 1.5vw, 1rem);
+  padding: clamp(1rem, 2vw, 1.35rem);
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-height: 0;
+  gap: 0.35rem;
+  min-height: 220px;
+}
+
+.editorial-copy .eyebrow {
+  margin: 0;
+  color: var(--stone);
 }
 
 .editorial-copy h2 {
   font-family: var(--font-display);
-  font-size: clamp(1.05rem, 2vw, 1.35rem);
+  font-size: clamp(1.15rem, 2.2vw, 1.5rem);
   font-weight: 300;
-  line-height: 1.15;
+  line-height: 1.2;
   color: var(--ink);
-  margin: 0.25rem 0 0.55rem;
-}
-
-.editorial-copy .eyebrow {
-  margin-bottom: 0;
+  margin: 0;
 }
 
 .editorial-copy .btn-solid {
   align-self: flex-start;
+  margin-top: 0.35rem;
   padding: 0.55rem 1rem;
   font-size: 0.58rem;
 }
@@ -273,22 +275,24 @@ const handpicked = [...products].reverse().slice(0, 5)
   display: block;
   overflow: hidden;
   min-height: 220px;
-  height: 100%;
   background: #e8e4df;
 }
 
-.editorial-media img {
+.editorial-media img,
+.editorial-media :deep(img) {
   display: block;
   width: 100%;
   height: 100%;
-  min-height: inherit;
+  min-height: 220px;
   object-fit: cover;
   object-position: center center;
   transition: transform 0.7s var(--ease);
 }
 
 @media (min-width: 901px) {
-  .editorial-media {
+  .editorial-media,
+  .editorial-media img,
+  .editorial-media :deep(img) {
     min-height: 280px;
   }
 }
@@ -349,19 +353,23 @@ const handpicked = [...products].reverse().slice(0, 5)
     padding: 0.65rem 0.75rem;
     border-top: 0;
     gap: 2px;
-    max-height: none;
+  }
+
+  .editorial-copy {
     min-height: 0;
+    padding: 1rem 0.85rem;
   }
 
   .editorial-media {
-    min-height: 220px;
     aspect-ratio: 16 / 10;
+    min-height: 0;
   }
 
-  .editorial-media img {
-    min-height: 220px;
+  .editorial-media img,
+  .editorial-media :deep(img) {
+    min-height: 0;
+    height: 100%;
     aspect-ratio: 16 / 10;
-    height: auto;
   }
 }
 </style>
