@@ -26,9 +26,9 @@
           <NuxtImg
             :src="item.image"
             :alt="item.title"
-            width="80"
-            height="80"
-            sizes="(max-width: 900px) 50vw, 80px"
+            width="96"
+            height="96"
+            sizes="(max-width: 900px) 50vw, 96px"
             loading="lazy"
             decoding="async"
           />
@@ -65,9 +65,9 @@
           <NuxtImg
             :src="item.image"
             :alt="item.title"
-            width="80"
-            height="80"
-            sizes="(max-width: 900px) 50vw, 80px"
+            width="96"
+            height="96"
+            sizes="(max-width: 900px) 50vw, 96px"
             loading="lazy"
             decoding="async"
           />
@@ -98,8 +98,8 @@ defineEmits(['select'])
   gap: 1rem;
   overflow-x: auto;
   scrollbar-width: none;
-  padding: 0.25rem 0 1.25rem;
-  margin-bottom: 0.35rem;
+  padding: 0.15rem 0 0.75rem;
+  margin-bottom: 0.2rem;
   -webkit-overflow-scrolling: touch;
 }
 
@@ -112,8 +112,8 @@ defineEmits(['select'])
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.55rem;
-  width: 88px;
+  gap: 0.6rem;
+  width: 96px;
   padding: 0;
   border: 0;
   background: transparent;
@@ -126,8 +126,8 @@ defineEmits(['select'])
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 72px;
-  height: 72px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   overflow: hidden;
   border: 2px solid transparent;
@@ -182,29 +182,29 @@ defineEmits(['select'])
     justify-content: center;
     flex-wrap: wrap;
     overflow-x: visible;
-    gap: 1rem 1.35rem;
-    padding-bottom: 1.15rem;
+    gap: 1.15rem 1.75rem;
+    padding: 0.15rem 0 0.5rem;
   }
 
   .category-circle {
-    width: 84px;
-    gap: 0.5rem;
+    width: 112px;
+    gap: 0.65rem;
   }
 
   .circle-image {
-    width: 72px;
-    height: 72px;
+    width: 96px;
+    height: 96px;
     border-width: 2px;
   }
 
   .circle-image--all svg {
-    width: 24px;
-    height: 24px;
+    width: 28px;
+    height: 28px;
   }
 
   .circle-label {
-    font-size: 0.72rem;
-    letter-spacing: 0.04em;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
   }
 }
 

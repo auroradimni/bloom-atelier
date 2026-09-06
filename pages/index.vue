@@ -185,13 +185,13 @@ const handpicked = [...products].reverse().slice(0, 6)
 }
 
 .shop-section {
-  padding: clamp(1.5rem, 4vw, 2.5rem) 0;
+  padding: clamp(1.15rem, 3vw, 1.75rem) 0;
   border-top: 1px solid var(--line);
 }
 
 .shop-section :deep(.category-rail) {
   margin-bottom: 0;
-  padding-bottom: 0.5rem;
+  padding-bottom: 0.25rem;
 }
 
 .section-head {
