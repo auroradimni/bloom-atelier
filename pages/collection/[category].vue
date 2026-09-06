@@ -65,10 +65,6 @@ useHead(() => ({
   color: var(--stone);
 }
 
-.product-grid {
-  gap: 1.5rem 1.25rem;
-}
-
 .empty {
   color: var(--stone);
 }

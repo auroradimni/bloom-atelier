@@ -346,10 +346,6 @@ function getCover(slug) {
   text-transform: uppercase;
 }
 
-.product-grid {
-  gap: 0.85rem;
-}
-
 .most-loved {
   padding: clamp(2rem, 5vw, 3rem) 0;
   background: var(--accent-soft);
