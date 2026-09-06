@@ -271,47 +271,56 @@ function toggleWish() {
 
 @media (max-width: 640px) {
   .product-media {
-    padding-top: 118%;
-    margin-bottom: 0.5rem;
-  }
-
-  .product-meta h3 {
-    font-size: 0.82rem;
-    min-height: 2.2em;
-    margin-bottom: 0.2rem;
-  }
-
-  .price {
-    font-size: 0.78rem;
+    padding-top: 133.333%;
     margin-bottom: 0.35rem;
   }
 
+  .product-meta {
+    padding: 0 0.45rem 0.5rem;
+  }
+
+  .product-meta h3 {
+    font-size: 0.72rem;
+    min-height: 2.4em;
+    margin-bottom: 0.15rem;
+    line-height: 1.3;
+  }
+
+  .price {
+    font-size: 0.68rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .swatches {
+    gap: 0.3rem;
+  }
+
   .swatches span {
-    width: 10px;
-    height: 10px;
-    min-width: 10px;
-    min-height: 10px;
+    width: 8px;
+    height: 8px;
+    min-width: 8px;
+    min-height: 8px;
   }
 
   .badge {
-    top: 0.45rem;
-    left: 0.45rem;
-    padding: 0.22rem 0.4rem;
-    font-size: 0.48rem;
+    top: 0.35rem;
+    left: 0.35rem;
+    padding: 0.18rem 0.35rem;
+    font-size: 0.45rem;
   }
 
   .wishlist {
-    width: 28px;
-    height: 28px;
-    min-width: 28px;
-    min-height: 28px;
-    top: 0.4rem;
-    right: 0.4rem;
+    width: 26px;
+    height: 26px;
+    min-width: 26px;
+    min-height: 26px;
+    top: 0.35rem;
+    right: 0.35rem;
   }
 
   .wishlist svg {
-    width: 13px;
-    height: 13px;
+    width: 12px;
+    height: 12px;
   }
 }
 

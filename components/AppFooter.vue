@@ -74,10 +74,20 @@
   color: var(--stone);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
+  .site-footer {
+    margin-top: 2rem;
+    padding-bottom: calc(var(--mobile-nav-h) + 1rem);
+  }
+
   .footer-grid {
     grid-template-columns: 1fr;
-    gap: 2.5rem;
+    gap: 2rem;
+    padding-inline: 0.75rem;
+  }
+
+  .footer-bottom {
+    padding-inline: 0.75rem;
   }
 }
 </style>

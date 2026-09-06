@@ -17,7 +17,7 @@
       <div class="header-actions">
         <button
           type="button"
-          class="icon-btn"
+          class="icon-btn icon-btn--search-desktop"
           :class="{ active: searchOpen }"
           aria-label="Search"
           :aria-expanded="searchOpen"
@@ -43,7 +43,7 @@
       </div>
     </div>
 
-    <div v-if="searchOpen" class="site-nav-search page-shell">
+    <div v-if="searchOpen" class="site-nav-search site-nav-search--desktop page-shell">
       <form class="search-form" @submit.prevent="onSearch">
         <div class="search-field">
           <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true">
@@ -62,6 +62,24 @@
               <path fill="none" stroke="currentColor" stroke-width="1.5" d="M6 6l12 12M18 6L6 18" />
             </svg>
           </button>
+        </div>
+      </form>
+    </div>
+
+    <div class="site-nav-search site-nav-search--mobile page-shell">
+      <form class="search-form search-form--mobile" @submit.prevent="onSearch">
+        <div class="search-field search-field--mobile">
+          <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <path d="M16 16l5 5" fill="none" stroke="currentColor" stroke-width="1.5" />
+          </svg>
+          <input
+            ref="mobileSearchInput"
+            v-model="query"
+            type="search"
+            placeholder="Search collection..."
+            aria-label="Search products"
+          />
         </div>
       </form>
     </div>
@@ -132,10 +150,12 @@ const menuOpen = ref(false)
 const searchOpen = ref(false)
 const query = ref('')
 const searchInput = ref(null)
+const mobileSearchInput = ref(null)
 const router = useRouter()
 const route = useRoute()
 const { count } = useCart()
 const { count: wishlistCount } = useWishlist()
+const { registerFocusSearch } = useMobileSearch()
 
 const navItems = [
   { label: 'New Arrivals', to: '/collection' },
@@ -167,6 +187,12 @@ watch(() => route.path, () => {
 
 onBeforeUnmount(() => {
   if (import.meta.client) document.body.style.overflow = ''
+})
+
+onMounted(() => {
+  registerFocusSearch(() => {
+    mobileSearchInput.value?.focus()
+  })
 })
 
 function toggleSearch() {
@@ -383,6 +409,31 @@ function onSearch() {
   height: 14px;
 }
 
+.site-nav-search--mobile {
+  display: none;
+}
+
+.site-nav-search--desktop {
+  display: block;
+}
+
+.search-form--mobile {
+  max-width: none;
+}
+
+.search-field--mobile {
+  min-height: 40px;
+  padding: 0 0.85rem;
+  border: 1px solid rgba(20, 18, 16, 0.12);
+  border-radius: 999px;
+  border-bottom: 1px solid rgba(20, 18, 16, 0.12);
+  background: var(--surface);
+}
+
+.search-field--mobile:focus-within {
+  border-color: var(--ink);
+}
+
 .icon-btn.active {
   opacity: 0.45;
 }
@@ -445,8 +496,26 @@ function onSearch() {
 }
 
 @media (max-width: 900px) {
+  .site-nav-top.page-shell,
+  .site-nav-search--mobile.page-shell {
+    padding-inline: 0.75rem;
+  }
+
   .site-nav-top {
     gap: 0.35rem;
+  }
+
+  .icon-btn--search-desktop {
+    display: none;
+  }
+
+  .site-nav-search--desktop {
+    display: none;
+  }
+
+  .site-nav-search--mobile {
+    display: block;
+    padding: 0 0.75rem 0.55rem;
   }
 
   .nav-left {
@@ -472,7 +541,25 @@ function onSearch() {
   }
 
   .site-nav-categories {
-    display: none;
+    display: flex;
+    gap: 0;
+    padding: 0 0 0.5rem;
+    border-top: 0;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .category-pill {
+    padding: 0.45rem 0.85rem;
+    font-size: 0.58rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    opacity: 1;
+  }
+
+  .category-pill.router-link-active {
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: calc(0.45rem - 2px);
+    opacity: 1;
   }
 
   .menu-toggle {
@@ -637,6 +724,10 @@ function onSearch() {
   .menu-toggle {
     visibility: hidden;
     pointer-events: none;
+  }
+
+  .site-nav-search--mobile {
+    display: none;
   }
 }
 </style>

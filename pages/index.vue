@@ -487,8 +487,8 @@ function getCover(slug) {
 @media (max-width: 900px) {
   .mosaic {
     grid-template-columns: 1fr;
-    gap: 0.65rem;
-    padding-bottom: 1.5rem;
+    gap: 2px;
+    padding-bottom: 0;
   }
 
   .mosaic-promo,
@@ -507,47 +507,74 @@ function getCover(slug) {
   }
 
   .shop-section {
-    padding: 1.75rem 0;
+    padding: 1rem 0;
+    border-top: 0;
+  }
+
+  .section-head {
+    padding: 0 0.75rem;
+    margin-bottom: 0.65rem;
   }
 
   .shop-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.5rem;
+    gap: 2px;
   }
 
   .shop-tile img {
-    aspect-ratio: 4 / 5;
+    aspect-ratio: 3 / 4;
+  }
+
+  .new-arrivals-scroll {
+    overflow: visible;
+  }
+
+  .new-arrivals-track {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2px;
+    overflow: visible;
+    scroll-snap-type: none;
+    padding: 0;
+  }
+
+  .new-arrivals-track :deep(.product-card) {
+    flex: unset;
+    width: 100%;
   }
 
   .editorial {
     grid-template-columns: 1fr;
-    margin: 1.75rem auto;
-    padding-top: 1.75rem;
+    margin: 0;
+    padding: 1rem 0.75rem;
+    border-top: 0;
+    gap: 2px;
   }
 
   .most-loved {
-    padding: 1.75rem 0;
+    padding: 1rem 0;
+  }
+
+  .most-loved .section-head {
+    padding: 0 0.75rem;
+  }
+
+  .most-loved-carousel {
+    overflow: visible;
   }
 
   .most-loved-track {
-    display: flex;
-    grid-template-columns: none;
-    gap: 0.75rem;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    overscroll-behavior-x: contain;
-    scrollbar-width: none;
-    padding: 0.15rem 0 0.35rem;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .most-loved-track::-webkit-scrollbar {
-    display: none;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2px;
+    overflow: visible;
+    scroll-snap-type: none;
+    padding: 0;
   }
 
   .most-loved-track :deep(.product-card) {
-    flex: 0 0 min(46vw, 168px);
-    scroll-snap-align: start;
+    flex: unset;
+    width: 100%;
   }
 
   .most-loved-track :deep(.product-card .product-media) {
@@ -555,16 +582,7 @@ function getCover(slug) {
   }
 
   .carousel-arrow {
-    width: 36px;
-    height: 36px;
-  }
-
-  .carousel-arrow--prev {
-    left: 0.15rem;
-  }
-
-  .carousel-arrow--next {
-    right: 0.15rem;
+    display: none;
   }
 }
 </style>

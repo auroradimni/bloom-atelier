@@ -21,6 +21,8 @@
   --promo-h: 32px;
   --header-h: 56px;
   --nav-cats-h: 42px;
+  --mobile-search-h: 0px;
+  --mobile-nav-h: 56px;
   --nav-stack: calc(var(--promo-h) + var(--header-h) + var(--nav-cats-h));
 }
 
@@ -57,6 +59,16 @@ img {
 
 main {
   min-height: calc(100vh - var(--header-h));
+}
+
+.app-shell main {
+  padding-bottom: 0;
+}
+
+@media (max-width: 900px) {
+  .app-shell main {
+    padding-bottom: calc(var(--mobile-nav-h) + env(safe-area-inset-bottom, 0px));
+  }
 }
 
 .page-shell {
@@ -492,18 +504,38 @@ aside {
 
 @media (max-width: 900px) {
   :root {
-    --header-h: 52px;
-    --nav-cats-h: 0px;
+    --header-h: 48px;
+    --nav-cats-h: 36px;
+    --mobile-search-h: 52px;
   }
 
   .page-shell,
   .section {
-    width: min(1320px, calc(100% - 1.25rem));
+    width: 100%;
+    max-width: none;
+    margin-inline: 0;
+    padding-inline: 0;
+  }
+
+  .collection-page,
+  .category-page,
+  .wishlist-page,
+  .product-page,
+  .checkout-page,
+  .contact-page {
+    padding-inline: 0.75rem;
+  }
+
+  .collection-page .product-grid,
+  .category-page .product-grid,
+  .wishlist-page .product-grid {
+    width: calc(100% + 1.5rem);
+    margin-inline: -0.75rem;
   }
 
   .product-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.5rem;
+    gap: 2px;
   }
 
   .menu-toggle {
@@ -513,13 +545,8 @@ aside {
 }
 
 @media (max-width: 480px) {
-  .page-shell,
-  .section {
-    width: min(1320px, calc(100% - 1rem));
-  }
-
   .product-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.45rem;
+    gap: 2px;
   }
 }
